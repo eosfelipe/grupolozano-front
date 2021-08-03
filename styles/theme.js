@@ -1,9 +1,48 @@
 import { extendTheme } from '@chakra-ui/react'
-const colors = {
-  brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac'
+import { ButtonStyles as Button } from './components/ButtonStyles'
+
+const styles = {
+  global: {
+    'html, body': {
+      background: '#191919',
+      color: '#F5F5F5',
+      lineHeight: 'tall'
+    },
+    a: {
+      color: '#F5F5F5'
+    }
   }
 }
-export const theme = extendTheme({ colors })
+
+const fonts = {
+  body: 'Noto Sans JP',
+  mono: 'monospace'
+}
+
+const fontWeights = {
+  light: 100,
+  normal: 400,
+  bold: 700
+}
+
+const colors = {
+  dark: '#191919',
+  light: '#F5F5F5',
+  highlight: '#D01F28'
+}
+
+const config = {
+  initialColorMode: 'dark',
+  useSystemColorMode: true
+}
+
+export const theme = extendTheme({
+  styles,
+  fonts,
+  fontWeights,
+  colors,
+  config,
+  components: {
+    Button
+  }
+})
