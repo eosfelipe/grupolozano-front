@@ -4,12 +4,12 @@ import { ButtonStyles as Button } from './components/ButtonStyles'
 const styles = {
   global: {
     'html, body': {
-      background: '#191919',
-      color: '#F5F5F5',
+      background: '#f5f5f5',
+      color: '#191919',
       lineHeight: 'tall'
     },
     a: {
-      color: '#F5F5F5'
+      color: '#191919'
     }
   }
 }
@@ -32,8 +32,8 @@ const colors = {
 }
 
 const config = {
-  initialColorMode: 'dark',
-  useSystemColorMode: true
+  initialColorMode: 'light',
+  useSystemColorMode: false
 }
 
 export const theme = extendTheme({

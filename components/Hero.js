@@ -1,8 +1,7 @@
-import { Button, Flex, Heading, Image, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
-import { darken, mode, whiten } from '@chakra-ui/theme-tools'
+import { Box, Button, Flex, Heading, Image, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
 const Hero = () => {
   return (
-    <Stack h={'500px'} direction={{ base: 'column', md: 'row' }}>
+    <Stack h={'500px'} direction={{ base: 'column', md: 'row' }} bg={'dark'} color={'light'} borderBottomLeftRadius={'200px'}>
       <Flex flex={1} align={'center'} justify={'center'}>
         <Stack spacing={6} w={'full'} maxW={'lg'}>
           <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
@@ -33,9 +32,13 @@ const Hero = () => {
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button variant={'primary'}>Create project</Button>
-            <Button variant={'primary'}>How It Works</Button>
           </Stack>
         </Stack>
+        <Flex flexDirection={'row'} position={'absolute'} bottom={-20} justify={'space-between'} spacing={6}>
+          <Box bg={'white'} w={'120px'} h={'150px'}borderRadius={'lg'} mx={4} boxShadow={'xl'}><Text>Mex</Text></Box>
+          <Box bg={'white'} w={'120px'} h={'150px'}borderRadius={'lg'} mx={4} boxShadow={'xl'}><Text>Usa</Text></Box>
+          <Box bg={'white'} w={'120px'} h={'150px'}borderRadius={'lg'} mx={4} boxShadow={'xl'}><Text>España</Text></Box>
+        </Flex>
       </Flex>
       <Flex flex={1}>
         <Image

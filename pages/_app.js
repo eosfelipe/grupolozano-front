@@ -10,7 +10,6 @@ function MyApp({ Component, pageProps }) {
         className="appLayout"
         flexDirection={'column'}
         py={0}
-        px={{ base: '3rem', lg: '2rem', md: '1.5rem', sm: '1rem' }}
       >
         <Component {...pageProps} />
       </Flex>
