@@ -1,7 +1,35 @@
-import { Box, Button, Flex, Heading, Image, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
+import { Button, Flex, Heading, Image, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
+import CountryCard from './CountryCard'
+
+const countries = [
+  {
+    id: 1,
+    name: 'Netherlands',
+    brand: 'Firesland Campina DMV'
+  },
+  {
+    id: 2,
+    name: 'Switzerland',
+    brand: 'Lustenberger'
+  },
+  {
+    id: 3,
+    name: 'Denmark',
+    brand: 'Arla Foods'
+  }
+]
+
 const Hero = () => {
   return (
-    <Stack h={'500px'} direction={{ base: 'column', md: 'row' }} bg={'dark'} color={'light'} borderBottomLeftRadius={'200px'}>
+    <Stack
+      h={'500px'}
+      direction={{ base: 'column', md: 'row' }}
+      bg={'dark'}
+      color={'light'}
+      borderBottomLeftRadius={'200px'}
+      position={'relative'}
+      mb={'100px'}
+    >
       <Flex flex={1} align={'center'} justify={'center'}>
         <Stack spacing={6} w={'full'} maxW={'lg'}>
           <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
@@ -31,13 +59,15 @@ const Hero = () => {
             moonlighters.
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-            <Button variant={'primary'}>Create project</Button>
+            <Button as={'a'} href={'/dashboard'} variant={'primary'}>
+              Create project
+            </Button>
           </Stack>
         </Stack>
         <Flex flexDirection={'row'} position={'absolute'} bottom={-20} justify={'space-between'} spacing={6}>
-          <Box bg={'white'} w={'120px'} h={'150px'}borderRadius={'lg'} mx={4} boxShadow={'xl'}><Text>Mex</Text></Box>
-          <Box bg={'white'} w={'120px'} h={'150px'}borderRadius={'lg'} mx={4} boxShadow={'xl'}><Text>Usa</Text></Box>
-          <Box bg={'white'} w={'120px'} h={'150px'}borderRadius={'lg'} mx={4} boxShadow={'xl'}><Text>España</Text></Box>
+          {countries.map(country => (
+            <CountryCard key={country.id} name={country.name} brand={country.brand} />
+          ))}
         </Flex>
       </Flex>
       <Flex flex={1}>

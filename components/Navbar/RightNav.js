@@ -37,10 +37,11 @@ const RightNav = ({ open }) => {
         <LinkBox as={'li'} key={link.id}>
           <NextLink href={link.href} passHref>
             <LinkOverlay
-            color={'light'}
+              color={'light'}
               _hover={{
                 color: 'highlight'
               }}
+              transition={'color 0.3s ease-in-out'}
             >
               {link.name}
             </LinkOverlay>
