@@ -2,22 +2,24 @@ import { useBreakpointValue } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 
 export const Nav = styled.nav`
-  background: transparent;
+  background: ${({ show, theme, color }) => (show ? theme.colors.dark : color ? theme.colors.dark : 'transparent')};
   display: flex;
   font-family: 'Noto Sans JP';
   font-size: 0.85rem;
   font-weight: 400;
   justify-content: space-between;
+  height: ${({ show }) => (show ? '70px' : '')};
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
-  padding-inline-start: ${props => useBreakpointValue({ base: '3rem', lg: '2rem', md: '1.5rem', sm: '1rem' })};
-  padding-inline-end: ${props => useBreakpointValue({ base: '3rem', lg: '2rem', md: '1.5rem', sm: '1rem' })};
+  z-index: 1101;
+  padding-inline-start: ${props => useBreakpointValue({ base: '1rem', lg: '4rem', md: '1.5rem', sm: '1rem' })};
+  padding-inline-end: ${props => useBreakpointValue({ base: '1rem', lg: '4rem', md: '1.5rem', sm: '1rem' })};
+  transition: all 0.5s ease;
 
   .logo {
-    padding: 18px 10px;
+    padding: ${({ show }) => (show ? '0px 10px' : '18px 10px')};
     height: auto;
   }
 `
@@ -30,12 +32,12 @@ export const UL = styled.ul`
   align-items: center;
 
   li {
-    padding: 18px 10px;
+    padding: 10px;
   }
 
   @media (max-width: 768px) {
     flex-flow: column nowrap;
-    background-color: #0d2538;
+    background-color: ${({ theme }) => theme.colors.dark};
     position: fixed;
     transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
     top: 0;
@@ -47,7 +49,7 @@ export const UL = styled.ul`
 
     li {
       color: #f5f5f5;
-      font-size: 1.8rem;
+      font-size: 1rem;
     }
   }
 `
@@ -71,7 +73,7 @@ export const StyledBurger = styled.div`
   div {
     width: 2rem;
     height: 0.25rem;
-    background-color: ${({ open }) => (open ? '#ccc' : '#333')};
+    background-color: ${({ theme }) => theme.colors.light};
     border-radius: 10px;
     transform-origin: 1px;
     transition: all 0.3s linear;

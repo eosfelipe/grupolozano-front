@@ -22,7 +22,7 @@ const countries = [
 const Hero = () => {
   return (
     <Stack
-      h={'500px'}
+      h={{ base: '100%', md: '500px' }}
       direction={{ base: 'column', md: 'row' }}
       bg={'dark'}
       color={'light'}
@@ -30,8 +30,8 @@ const Hero = () => {
       position={'relative'}
       mb={'100px'}
     >
-      <Flex flex={1} align={'center'} justify={'center'}>
-        <Stack spacing={6} w={'full'} maxW={'lg'}>
+      <Flex flex={1} align={'center'} justify={'center'} mt={{ base: '100px', md: 0 }}>
+        <Stack spacing={6} w={'full'} maxW={'lg'} p={8}>
           <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
             <Text
               as={'span'}
@@ -64,7 +64,14 @@ const Hero = () => {
             </Button>
           </Stack>
         </Stack>
-        <Flex flexDirection={'row'} position={'absolute'} bottom={-20} justify={'space-between'} spacing={6}>
+        <Flex
+          flexDirection={'row'}
+          position={'absolute'}
+          bottom={-20}
+          justify={'space-between'}
+          spacing={6}
+          zIndex={'sticky'}
+        >
           {countries.map(country => (
             <CountryCard key={country.id} name={country.name} brand={country.brand} />
           ))}

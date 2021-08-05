@@ -1,7 +1,7 @@
 import { Container } from '@chakra-ui/react'
 import Article from './Article'
 
-const data = [
+const dataHome = [
   {
     id: 1,
     imgStart: true,
@@ -30,19 +30,30 @@ const data = [
     buttonLabel: 'More information'
   }
 ]
-const ArticleList = () => {
+const ArticleList = ({ data = null }) => {
   return (
     <Container maxW={'7xl'} p={'12'}>
-      {data.map(item => (
-        <Article
-          key={item.id}
-          imgStart={item.imgStart}
-          imgSrc={item.imgSrc}
-          heading={item.heading}
-          text={item.text}
-          buttonLabel={item.buttonLabel}
-        />
-      ))}
+      {data
+        ? data.map(item => (
+            <Article
+              key={item.id}
+              imgStart={item.imgStart}
+              imgSrc={item.imgSrc}
+              heading={item.heading}
+              text={item.text}
+              buttonLabel={item.buttonLabel}
+            />
+          ))
+        : dataHome.map(item => (
+            <Article
+              key={item.id}
+              imgStart={item.imgStart}
+              imgSrc={item.imgSrc}
+              heading={item.heading}
+              text={item.text}
+              buttonLabel={item.buttonLabel}
+            />
+          ))}
     </Container>
   )
 }
