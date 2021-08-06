@@ -37,7 +37,7 @@ const Article = ({ imgStart = false, imgSrc, heading, text, buttonLabel }) => {
         marginTop={{ base: '3', sm: '0' }}
       >
         <Heading mb={5}>{heading}</Heading>
-        <Text as={'p'} mt={5} color={useColorModeValue('light', 'dark')} fontSize={'md'}>
+        <Text as={'p'} mt={5} color={'dark'} fontSize={'md'}>
           {text}
         </Text>
         <Button as={'a'} href={`/${string_to_slug(heading)}`} variant={'primary'} mt={5}>

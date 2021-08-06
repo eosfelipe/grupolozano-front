@@ -26,7 +26,7 @@ const Hero = () => {
       direction={{ base: 'column', md: 'row' }}
       bg={'dark'}
       color={'light'}
-      borderBottomLeftRadius={'200px'}
+      borderBottomLeftRadius={{ base: '0', md: '200px' }}
       position={'relative'}
       mb={'100px'}
     >
@@ -64,6 +64,7 @@ const Hero = () => {
           </Stack>
         </Stack>
         <Flex
+          display={{ base: 'none', md: 'flex' }}
           flexDirection={'row'}
           position={'absolute'}
           bottom={-20}
@@ -82,7 +83,7 @@ const Hero = () => {
           objectFit={'cover'}
           opacity={'0.4'}
           src={
-            'https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+            'https://images.unsplash.com/photo-1551790629-9d5c2d781d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1399&q=80'
           }
         />
       </Flex>

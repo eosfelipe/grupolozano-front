@@ -1,4 +1,4 @@
-import { Container, Heading } from '@chakra-ui/react'
+import { Container, Heading, useTheme } from '@chakra-ui/react'
 import Navbar from '../../components/Navbar'
 import ArticleList from '../../components/ArticleList'
 import Footer from '../../components/Footer'
@@ -8,8 +8,8 @@ const data = [
     id: 1,
     imgStart: true,
     imgSrc:
-      'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80',
-    heading: 'Milk Partners',
+      'https://images.unsplash.com/photo-1495020689067-958852a7765e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
+    heading: 'Title',
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
     buttonLabel: 'More information'
   },
@@ -17,8 +17,8 @@ const data = [
     id: 2,
     imgStart: true,
     imgSrc:
-      'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80',
-    heading: 'Cheesse Partners',
+      'https://images.unsplash.com/photo-1495020689067-958852a7765e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
+    heading: 'Title',
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
     buttonLabel: 'More information'
   },
@@ -26,14 +26,16 @@ const data = [
     id: 3,
     imgStart: true,
     imgSrc:
-      'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80',
-    heading: 'Casein Partners',
+      'https://images.unsplash.com/photo-1495020689067-958852a7765e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
+    heading: 'Title',
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
     buttonLabel: 'More information'
   }
 ]
 
 export default function News() {
+  const theme = useTheme()
+  console.log(theme)
   return (
     <>
       <Navbar color={1} />

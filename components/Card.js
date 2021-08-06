@@ -1,6 +1,7 @@
-import { Box, Button, Center, Heading, Image, Stack, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Button, Center, Heading, Image, Stack, Text } from '@chakra-ui/react'
+import { string_to_slug } from '../utils'
 
-const Card = ({ img }) => {
+const Card = ({ img, name }) => {
   return (
     <Center py={12} mr={5}>
       <Box
@@ -8,7 +9,7 @@ const Card = ({ img }) => {
         p={6}
         maxW={'330px'}
         w={'full'}
-        bg={useColorModeValue('dark', 'light')}
+        bg={'light'}
         boxShadow={'2xl'}
         rounded={'lg'}
         pos={'relative'}
@@ -41,13 +42,13 @@ const Card = ({ img }) => {
         </Box>
         <Stack pt={10}>
           <Heading color={'dark'} fontSize={'2xl'} fontWeight={'normal'}>
-            Nice Chair, pink
+            {name}
           </Heading>
           <Text color={'dark'} fontSize={'sm'} my={5}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, expedita?
           </Text>
           <Stack direction={'row'} align={'center'} justifyContent={'center'}>
-            <Button as={'a'} href={'/product-detail'} variant={'primary'} my={5}>
+            <Button as={'a'} href={`/${string_to_slug(name)}`} variant={'primary'} my={5}>
               More information
             </Button>
           </Stack>

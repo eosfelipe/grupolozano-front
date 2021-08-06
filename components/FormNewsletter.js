@@ -128,7 +128,7 @@ const FormNewsletter = () => {
         <IconButton
           type={'submit'}
           bg={'highlight'}
-          color={useColorModeValue('dark', 'light')}
+          color={'light'}
           _hover={{
             bg: mode(darken('highlight', 20), whiten('highlight', 20))
           }}

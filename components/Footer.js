@@ -7,7 +7,6 @@ import {
   Stack,
   Text,
   VisuallyHidden,
-  useColorModeValue,
   useBreakpointValue
 } from '@chakra-ui/react'
 import { socialMedia } from '../config'
@@ -16,11 +15,7 @@ import FormNewsletter from './FormNewsletter'
 
 const Footer = () => {
   return (
-    <Box
-      px={useBreakpointValue({ base: 10, md: 20 })}
-      bg={useColorModeValue('light', 'dark')}
-      color={useColorModeValue('dark', 'light')}
-    >
+    <Box px={useBreakpointValue({ base: 10, md: 20 })} bg={'dark'} color={'light'}>
       <Container as={Stack} py={10} maxW={'100%'} mx={0}>
         <SimpleGrid
           templateColumns={{
@@ -31,7 +26,7 @@ const Footer = () => {
         >
           <Stack spacing={6}>
             <Box>
-              <Text color={useColorModeValue('dark', 'light')}>Grupo Lozano Migoya</Text>
+              <Text color={'light'}>Grupo Lozano Migoya</Text>
             </Box>
             <Text fontSize={'sm'}>&copy; {new Date().getFullYear()} All rights reserved</Text>
             <Stack direction={'row'} spacing={6} display={'block'}>
@@ -41,7 +36,7 @@ const Footer = () => {
                     url && (
                       <chakra.button
                         key={i}
-                        bg={useColorModeValue('light', 'dark')}
+                        bg={'dark'}
                         rounded={'full'}
                         w={6}
                         h={6}
@@ -57,7 +52,7 @@ const Footer = () => {
                         }}
                       >
                         <VisuallyHidden>{name}</VisuallyHidden>
-                        <Icon name={name} color={useColorModeValue('#191919', '#f5f5f5')} />
+                        <Icon name={name} color={'#f5f5f5'} />
                       </chakra.button>
                     )
                 )}
