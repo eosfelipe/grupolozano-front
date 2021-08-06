@@ -7,7 +7,7 @@ const Stats = () => {
         flex={1}
         zIndex={0}
         display={{ base: 'none', lg: 'flex' }}
-        backgroundImage="url('https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60')"
+        backgroundImage="url('https://images.unsplash.com/photo-1620306677888-10e367e6293d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZXhwb3J0JTIwaW1wb3J0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80')"
         backgroundSize={'cover'}
         backgroundPosition={'center'}
         backgroundRepeat={'no-repeat'}

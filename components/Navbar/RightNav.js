@@ -11,13 +11,13 @@ const links = [
   },
   {
     id: 2,
-    name: 'Productos y Servicios',
-    href: '/products-services'
+    name: 'Nosotros',
+    href: '/about'
   },
   {
     id: 3,
-    name: 'Información sobre el mercado',
-    href: '/about'
+    name: 'Productos y Servicios',
+    href: '/products-services'
   },
   {
     id: 4,

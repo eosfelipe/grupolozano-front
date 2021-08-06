@@ -22,7 +22,7 @@ const countries = [
 const Hero = () => {
   return (
     <Stack
-      h={{ base: '100%', md: '500px' }}
+      h={{ base: '100%', md: '600px' }}
       direction={{ base: 'column', md: 'row' }}
       bg={'dark'}
       color={'light'}
@@ -47,20 +47,19 @@ const Hero = () => {
                 zIndex: -1
               }}
             >
-              Freelance
+              Servicios de
             </Text>
             <br />{' '}
-            <Text color={'highlight'} as={'span'}>
-              Design Projects
+            <Text color={'highlight'} as={'span'} fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
+              Importación y Logística
             </Text>
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'light'}>
-            The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and
-            moonlighters.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam est magnam minus enim illo a voluptate sed.
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button as={'a'} href={'/dashboard'} variant={'primary'}>
-              Create project
+              Ver reporte
             </Button>
           </Stack>
         </Stack>

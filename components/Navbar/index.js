@@ -1,10 +1,10 @@
 import { Image } from '@chakra-ui/react'
 import { Nav } from './NavbarElements'
 import Burger from './Burger'
-import Logo from '../../public/img/logo.png'
+import Logo from '../../public/img/logo_invert.png'
 import { useEffect, useState } from 'react'
 
-const Navbar = ({ color = 'false' }) => {
+const Navbar = ({ color }) => {
   const [show, setShow] = useState(false)
   const navbarControl = () => {
     if (window.scrollY > 100) {
