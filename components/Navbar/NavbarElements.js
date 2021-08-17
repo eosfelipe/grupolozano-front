@@ -7,6 +7,7 @@ export const Nav = styled.nav`
   font-family: 'Noto Sans JP';
   font-size: 0.85rem;
   font-weight: 400;
+  align-items: center;
   justify-content: space-between;
   height: ${({ show }) => (show ? '70px' : '')};
   width: 100%;

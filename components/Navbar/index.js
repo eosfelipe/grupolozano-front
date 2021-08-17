@@ -20,7 +20,7 @@ const Navbar = ({ color }) => {
   return (
     <Nav show={show} color={color}>
       <div className="logo">
-        <Image src={Logo.src} alt="Grupo Lozano Migoya" h={'65px'} />
+        <Image src={Logo.src} alt="Grupo Lozano Migoya" h={show ? '55px' : '65px'} />
       </div>
       <Burger />
     </Nav>

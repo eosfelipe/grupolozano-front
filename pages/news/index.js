@@ -1,4 +1,4 @@
-import { Container, Heading, useTheme } from '@chakra-ui/react'
+import { Container, Heading } from '@chakra-ui/react'
 import Navbar from '../../components/Navbar'
 import ArticleList from '../../components/ArticleList'
 import Footer from '../../components/Footer'
@@ -34,8 +34,6 @@ const data = [
 ]
 
 export default function News() {
-  const theme = useTheme()
-  console.log(theme)
   return (
     <>
       <Navbar color={1} />

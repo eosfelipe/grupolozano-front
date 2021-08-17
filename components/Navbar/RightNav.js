@@ -1,4 +1,5 @@
 import { LinkBox, LinkOverlay } from '@chakra-ui/react'
+import { darken, mode, whiten } from '@chakra-ui/theme-tools'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { UL } from './NavbarElements'
@@ -41,41 +42,9 @@ const RightNav = ({ open }) => {
             <LinkOverlay
               color={router.pathname === link.href ? 'highlight' : 'light'}
               _hover={{
-                _before: {
-                  top: 0,
-                  backgroundColor: 'highlight',
-                  transform: 'scale(1)'
-                },
-                _after: {
-                  backgroundColor: 'highlight',
-                  transform: 'scale(1)'
-                }
+                color: mode(whiten('highlight', 20))
               }}
               transition={'color 0.3s ease-in-out'}
-              _before={{
-                content: "''",
-                display: 'block',
-                position: 'absolute',
-                top: '100%',
-                left: 0,
-                width: '100%',
-                height: '2px',
-                backgroundColor: 'transparent',
-                transition: 'all 0.3s ease',
-                transform: 'scale(0.85)'
-              }}
-              _after={{
-                content: "''",
-                display: 'block',
-                position: 'absolute',
-                top: '100%',
-                left: 0,
-                width: '100%',
-                height: '2px',
-                backgroundColor: 'transparent',
-                transition: 'all 0.3s ease',
-                transform: 'scale(0.85)'
-              }}
             >
               {link.name}
             </LinkOverlay>

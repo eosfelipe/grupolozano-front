@@ -1,13 +1,11 @@
-import { Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react'
-import Head from 'next/head'
-import Image from 'next/image'
-import Navbar from '../components/Navbar'
-import Hero from '../components/Hero'
 import ArticleList from '../components/ArticleList'
-import SectionText from '../components/SectionText'
 import CardList from '../components/CardList'
-import Stats from '../components/Stats'
 import Footer from '../components/Footer'
+import Hero from '../components/Hero'
+import Navbar from '../components/Navbar'
+import PartnersList from '../components/PartnersList'
+import SectionText from '../components/SectionText'
+import Stats from '../components/Stats'
 
 export default function Home() {
   return (
@@ -28,6 +26,7 @@ export default function Home() {
       />
       <CardList />
       <Stats />
+      <PartnersList />
       <Footer />
     </>
   )
