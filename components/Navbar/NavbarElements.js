@@ -17,7 +17,7 @@ export const Nav = styled.nav`
   z-index: 1101;
   padding-inline-start: ${props => useBreakpointValue({ base: '1rem', lg: '4rem', md: '1.5rem', sm: '1rem' })};
   padding-inline-end: ${props => useBreakpointValue({ base: '1rem', lg: '4rem', md: '1.5rem', sm: '1rem' })};
-  transition: all 0.5s ease;
+  transition: background 0.5s ease;
 
   .logo {
     padding: ${({ show }) => (show ? '0px 10px' : '18px 10px')};

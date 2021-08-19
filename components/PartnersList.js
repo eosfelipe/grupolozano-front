@@ -10,21 +10,21 @@ const PartnersList = () => {
         <Image
           alt="murray-goulburn"
           src="/img/mg.png"
-          height={'300px'}
+          height={'250px'}
           objectFit={'contain'}
           style={{ filter: 'grayscale(1)' }}
         />
         <Image
           alt="dairy-america"
           src="/img/dairy.png"
-          height={'300px'}
+          height={'250px'}
           objectFit={'contain'}
           style={{ filter: 'grayscale(1)' }}
         />
         <Image
           alt="fonterra"
           src="/img/fonterra.png"
-          height={'300px'}
+          height={'250px'}
           objectFit={'contain'}
           style={{ filter: 'grayscale(1)' }}
         />

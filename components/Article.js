@@ -40,9 +40,11 @@ const Article = ({ imgStart = false, imgSrc, heading, text, buttonLabel }) => {
         <Text as={'p'} mt={5} color={'dark'} fontSize={'md'}>
           {text}
         </Text>
-        <Button as={'a'} href={`/${string_to_slug(heading)}`} variant={'primary'} mt={5}>
-          {buttonLabel}
-        </Button>
+        {buttonLabel && (
+          <Button as={'a'} href={`/${string_to_slug(heading)}`} variant={'primary'} mt={5}>
+            {buttonLabel}
+          </Button>
+        )}
       </Box>
     </Box>
   )
