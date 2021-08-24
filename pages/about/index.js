@@ -70,7 +70,7 @@ export default function About() {
             text={item.text}
           />
         ))}
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} p={12}>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} p={8}>
           {features.map(feature => (
             <HStack key={feature.id} align={'top'}>
               <Box color={'highlight'} px={2}>

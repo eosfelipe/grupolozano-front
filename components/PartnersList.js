@@ -10,23 +10,23 @@ const PartnersList = () => {
         <Image
           alt="murray-goulburn"
           src="/img/mg.png"
-          height={'250px'}
+          height={'200px'}
           objectFit={'contain'}
-          style={{ filter: 'grayscale(1)' }}
+          style={{ filter: 'grayscale(1)', display: 'block', margin: 'auto' }}
         />
         <Image
           alt="dairy-america"
           src="/img/dairy.png"
-          height={'250px'}
+          height={'200px'}
           objectFit={'contain'}
-          style={{ filter: 'grayscale(1)' }}
+          style={{ filter: 'grayscale(1)', display: 'block', margin: 'auto' }}
         />
         <Image
           alt="fonterra"
           src="/img/fonterra.png"
-          height={'250px'}
+          height={'200px'}
           objectFit={'contain'}
-          style={{ filter: 'grayscale(1)' }}
+          style={{ filter: 'grayscale(1)', display: 'block', margin: 'auto' }}
         />
       </SimpleGrid>
     </Box>
