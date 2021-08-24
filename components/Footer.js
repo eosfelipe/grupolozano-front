@@ -88,7 +88,7 @@ const Footer = () => {
           </Stack>
           <Stack align={'flex-start'}>
             <Text fontWeight={'normal'} fontSize={'lg'} mb={2}>
-              Contact
+              Newsletter
             </Text>
             <FormNewsletter />
           </Stack>
