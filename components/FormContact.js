@@ -1,6 +1,4 @@
-import { IconButton, Input, Stack, Text, Textarea, useColorModeValue, useToast } from '@chakra-ui/react'
-import { darken, mode, whiten } from '@chakra-ui/theme-tools'
-import { EmailIcon } from '@chakra-ui/icons'
+import { Heading, Box, Input, Stack, Text, Textarea, useToast, Button } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
@@ -29,7 +27,7 @@ const FormContact = () => {
   })
 
   const sendSubscribe = async values => {
-    await sleep(3000)
+    await sleep(3000) // TODO fetch to php
     formik.resetForm()
     formik.setSubmitting(false)
     toast({
@@ -37,116 +35,145 @@ const FormContact = () => {
       description: 'Thanks for your subscription 🍕😁',
       status: 'success',
       duration: 5000,
-      position: 'bottom',
+      position: 'top-right',
       isClosable: true
     })
   }
 
   return (
-    <>
-      <Stack
-        as={'form'}
-        direction={'column'}
-        onSubmit={formik.handleSubmit}
-        width={'100%'}
-        bg={'dark'}
-        p={8}
-        rounded={'md'}
-        boxShadow={'lg'}
-      >
-        <Input
-          id="name"
-          name="name"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.name}
-          fontWeight={'light'}
-          fontSize={'sm'}
-          placeholder={'Your name'}
-          bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-          border={0}
-          _focus={{
-            bg: 'whiteAlpha.300'
-          }}
-        />
-        {formik.touched.name && formik.errors.name ? (
-          <Text fontSize={'xs'} color={'highlight'}>
-            {formik.errors.name}
-          </Text>
-        ) : null}
-        <Input
-          id="subject"
-          name="subject"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.subject}
-          fontWeight={'light'}
-          fontSize={'sm'}
-          placeholder={'Subject'}
-          bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-          border={0}
-          _focus={{
-            bg: 'whiteAlpha.300'
-          }}
-        />
-        {formik.touched.subject && formik.errors.subject ? (
-          <Text fontSize={'xs'} color={'highlight'}>
-            {formik.errors.subject}
-          </Text>
-        ) : null}
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          fontWeight={'light'}
-          fontSize={'sm'}
-          placeholder={'Your email address'}
-          bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-          border={0}
-          _focus={{
-            bg: 'whiteAlpha.300'
-          }}
-        />
-        {formik.touched.email && formik.errors.email ? (
-          <Text fontSize={'xs'} color={'highlight'}>
-            {formik.errors.email}
-          </Text>
-        ) : null}
-        <Textarea
-          id="message"
-          name="message"
-          value={formik.values.message}
-          onChange={formik.handleChange}
-          fontWeight={'light'}
-          fontSize={'sm'}
-          placeholder="Message"
-          size="sm"
-          bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-          border={0}
-          _focus={{
-            bg: 'whiteAlpha.300'
-          }}
-        />
-        {formik.touched.message && formik.errors.message ? (
-          <Text fontSize={'xs'} color={'highlight'}>
-            {formik.errors.message}
-          </Text>
-        ) : null}
-        <IconButton
+    <Stack
+      bg={'gray.50'}
+      rounded={'xl'}
+      p={{ base: 4, sm: 6, md: 8 }}
+      spacing={{ base: 8 }}
+      maxW={{ lg: 'lg' }}
+      boxShadow={'xl'}
+    >
+      <Stack spacing={4}>
+        <Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
+          Contáctanos y pide más información sobre lo que nosotros hacemos, manda un correo electrónico o bien llena el
+          formulario y nosotros nos comunicaremos contigo, cuéntanos un poco más sobre tí.
+        </Text>
+      </Stack>
+      <Box as={'form'} mt={10} onSubmit={formik.handleSubmit}>
+        <Stack spacing={4}>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            placeholder={'Your name'}
+            bg={'gray.100'}
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            border={0}
+            outline={'none'}
+            color={'gray.500'}
+            _placeholder={{
+              color: 'gray.500'
+            }}
+            _focus={{
+              zIndex: 1,
+              borderColor: 'highlight',
+              boxShadow: '0 0 0 1px #d01f28'
+            }}
+          />
+          {formik.touched.name && formik.errors.name ? (
+            <Text fontSize={'xs'} color={'highlight'}>
+              {formik.errors.name}
+            </Text>
+          ) : null}
+          <Input
+            id="subject"
+            name="subject"
+            type="text"
+            placeholder={'Subject'}
+            bg={'gray.100'}
+            onChange={formik.handleChange}
+            value={formik.values.subject}
+            border={0}
+            outline={'none'}
+            color={'gray.500'}
+            _placeholder={{
+              color: 'gray.500'
+            }}
+            _focus={{
+              zIndex: 1,
+              borderColor: 'highlight',
+              boxShadow: '0 0 0 1px #d01f28'
+            }}
+          />
+          {formik.touched.subject && formik.errors.subject ? (
+            <Text fontSize={'xs'} color={'highlight'}>
+              {formik.errors.subject}
+            </Text>
+          ) : null}
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder={'Your email address'}
+            bg={'gray.100'}
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            border={0}
+            outline={'none'}
+            color={'gray.500'}
+            _placeholder={{
+              color: 'gray.500'
+            }}
+            _focus={{
+              zIndex: 1,
+              borderColor: 'highlight',
+              boxShadow: '0 0 0 1px #d01f28'
+            }}
+          />
+          {formik.touched.email && formik.errors.email ? (
+            <Text fontSize={'xs'} color={'highlight'}>
+              {formik.errors.email}
+            </Text>
+          ) : null}
+          <Textarea
+            id="message"
+            name="message"
+            placeholder={'Message...'}
+            bg={'gray.100'}
+            onChange={formik.handleChange}
+            value={formik.values.message}
+            border={0}
+            outline={'none'}
+            color={'gray.500'}
+            _placeholder={{
+              color: 'gray.500'
+            }}
+            _focus={{
+              zIndex: 1,
+              borderColor: 'highlight',
+              boxShadow: '0 0 0 1px #d01f28'
+            }}
+          />
+          {formik.touched.message && formik.errors.message ? (
+            <Text fontSize={'xs'} color={'highlight'}>
+              {formik.errors.message}
+            </Text>
+          ) : null}
+        </Stack>
+        <Button
           type={'submit'}
-          bg={'highlight'}
+          mt={8}
+          w={'full'}
+          bgGradient="linear(to-r, rgba(190,31,40,1) 10%, rgba(208,31,40,1) 100%)"
           color={'light'}
           _hover={{
-            bg: mode(darken('highlight', 20), whiten('highlight', 20))
+            bgGradient: 'linear(to-r, rgba(190,31,40,1) 10%, rgba(208,31,40,1) 100%)',
+            boxShadow: 'xl'
           }}
-          aria-label="Subscribe"
-          icon={<EmailIcon />}
+          aria-label="Submit"
           disabled={formik.isSubmitting}
-        />
-      </Stack>
-    </>
+        >
+          Submit
+        </Button>
+      </Box>
+    </Stack>
   )
 }
 
