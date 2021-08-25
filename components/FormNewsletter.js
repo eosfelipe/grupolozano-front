@@ -1,4 +1,4 @@
-import { IconButton, Input, Stack, Text, Textarea, useColorModeValue, useToast } from '@chakra-ui/react'
+import { Flex, IconButton, Input, Stack, Text, useColorModeValue, useToast } from '@chakra-ui/react'
 import { darken, mode, whiten } from '@chakra-ui/theme-tools'
 import { EmailIcon } from '@chakra-ui/icons'
 import { useFormik } from 'formik'
@@ -39,37 +39,40 @@ const FormNewsletter = () => {
   return (
     <>
       <Stack as={'form'} direction={'column'} onSubmit={formik.handleSubmit} width={'100%'}>
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          fontWeight={'light'}
-          fontSize={'sm'}
-          placeholder={'Your email address'}
-          bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-          border={0}
-          _focus={{
-            bg: 'whiteAlpha.300'
-          }}
-        />
+        <Flex direction={'row'}>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            fontWeight={'light'}
+            fontSize={'sm'}
+            placeholder={'Your email address'}
+            bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+            border={0}
+            _focus={{
+              bg: 'whiteAlpha.300'
+            }}
+          />
+          <IconButton
+            type={'submit'}
+            bg={'highlight'}
+            color={'light'}
+            ml={2}
+            _hover={{
+              bg: mode(darken('highlight', 20), whiten('highlight', 20))
+            }}
+            aria-label="Subscribe"
+            icon={<EmailIcon />}
+            disabled={formik.isSubmitting}
+          />
+        </Flex>
         {formik.touched.email && formik.errors.email ? (
           <Text fontSize={'xs'} color={'highlight'}>
             {formik.errors.email}
           </Text>
         ) : null}
-        <IconButton
-          type={'submit'}
-          bg={'highlight'}
-          color={'light'}
-          _hover={{
-            bg: mode(darken('highlight', 20), whiten('highlight', 20))
-          }}
-          aria-label="Subscribe"
-          icon={<EmailIcon />}
-          disabled={formik.isSubmitting}
-        />
       </Stack>
     </>
   )

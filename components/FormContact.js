@@ -53,7 +53,6 @@ const FormContact = () => {
         p={8}
         rounded={'md'}
         boxShadow={'lg'}
-        minH={'500px'}
       >
         <Input
           id="name"
