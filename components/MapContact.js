@@ -1,15 +1,17 @@
 import mapboxgl from '!mapbox-gl' // eslint-disable-line
 import { Box } from '@chakra-ui/react'
 import { useState, useEffect, useRef } from 'react'
+import 'mapbox-gl/dist/mapbox-gl.css'
 mapboxgl.accessToken =
   process.env.MB_ACCESS_TOKEN ||
   'pk.eyJ1IjoiZW9zZmVsaXBlIiwiYSI6ImNrc3F2aWhpZzBmdmUyb3BnYjRxZTdsaHAifQ.FJYmbzA2vXzQbnEOktl_lQ'
+
 const MapContact = () => {
   const mapContainer = useRef(null)
   const map = useRef(null)
-  const [lng, setLng] = useState(-70.9)
-  const [lat, setLat] = useState(42.35)
-  const [zoom, setZoom] = useState(9)
+  const [lng, setLng] = useState(-99.1670641)
+  const [lat, setLat] = useState(19.4292765)
+  const [zoom, setZoom] = useState(14)
 
   useEffect(() => {
     if (map.current) return
@@ -19,6 +21,7 @@ const MapContact = () => {
       center: [lng, lat],
       zoom: zoom
     })
+    const marker = new mapboxgl.Marker({ color: '#D01F28' }).setLngLat([lng, lat]).addTo(map.current)
   }, [])
 
   useEffect(() => {

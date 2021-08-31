@@ -142,6 +142,7 @@ const FormContact = () => {
             border={0}
             outline={'none'}
             color={'gray.500'}
+            minH={'150px'}
             _placeholder={{
               color: 'gray.500'
             }}

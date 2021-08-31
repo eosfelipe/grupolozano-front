@@ -17,7 +17,7 @@ export default function Contact() {
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
           <Flex flexDirection={'column'} m={4}>
             <Heading mb={5}>Paseo de la Reforma No. 265 piso 12 Col. Cuauhtémoc C.P. 06500 México D.F.</Heading>
-            <Stack direction={'column'}>
+            {/* <Stack direction={'column'}>
               <Text as={'span'} mt={5} color={'dark'} fontSize={'lg'} fontWeight={'bold'}>
                 Correo electrónico:
               </Text>
@@ -42,7 +42,7 @@ export default function Contact() {
               >
                 +52 55 5141 0460
               </Text>
-            </Stack>
+            </Stack> */}
             <MapContact />
           </Flex>
           <FormContact />

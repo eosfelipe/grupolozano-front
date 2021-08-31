@@ -1,8 +1,9 @@
-import { Image } from '@chakra-ui/react'
+import NextLink from 'next/link'
+import { useEffect, useState } from 'react'
+import { Image, LinkOverlay } from '@chakra-ui/react'
 import { Nav } from './NavbarElements'
 import Burger from './Burger'
 import Logo from '../../public/img/logo_invert.png'
-import { useEffect, useState } from 'react'
 
 const Navbar = ({ color }) => {
   const [show, setShow] = useState(false)
@@ -20,7 +21,11 @@ const Navbar = ({ color }) => {
   return (
     <Nav show={show} color={color}>
       <div className="logo">
-        <Image src={Logo.src} alt="Grupo Lozano Migoya" h={show ? '55px' : '65px'} />
+        <NextLink href="/" passHref>
+          <LinkOverlay cursor={'pointer'} _before={'none'}>
+            <Image src={Logo.src} alt="Grupo Lozano Migoya" h={show ? '55px' : '65px'} />
+          </LinkOverlay>
+        </NextLink>
       </div>
       <Burger />
     </Nav>
