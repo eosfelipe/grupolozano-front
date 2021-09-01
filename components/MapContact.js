@@ -2,6 +2,7 @@ import mapboxgl from '!mapbox-gl' // eslint-disable-line
 import { Box } from '@chakra-ui/react'
 import { useState, useEffect, useRef } from 'react'
 import 'mapbox-gl/dist/mapbox-gl.css'
+
 mapboxgl.accessToken =
   process.env.MB_ACCESS_TOKEN ||
   'pk.eyJ1IjoiZW9zZmVsaXBlIiwiYSI6ImNrc3F2aWhpZzBmdmUyb3BnYjRxZTdsaHAifQ.FJYmbzA2vXzQbnEOktl_lQ'
@@ -21,7 +22,10 @@ const MapContact = () => {
       center: [lng, lat],
       zoom: zoom
     })
-    const marker = new mapboxgl.Marker({ color: '#D01F28' }).setLngLat([lng, lat]).addTo(map.current)
+    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+      '<a href="https://goo.gl/maps/Z7YcQp3sFdTVLXjr8" style="color:#D01F28;" target="_blank">Grupo Lozano Migoya S.A. de C.V.</a>'
+    )
+    const marker = new mapboxgl.Marker({ color: '#D01F28' }).setLngLat([lng, lat]).setPopup(popup).addTo(map.current)
   }, [])
 
   useEffect(() => {
