@@ -58,8 +58,8 @@ const Hero = () => {
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam est magnam minus enim illo a voluptate sed.
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-            <Button as={'a'} href={'/dashboard'} variant={'primary'}>
-              Ver reporte
+            <Button as={'a'} href={'/reports'} variant={'primary'}>
+              Ver reporte del mercado
             </Button>
           </Stack>
         </Stack>
