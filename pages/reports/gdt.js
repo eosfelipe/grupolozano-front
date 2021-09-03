@@ -4,6 +4,7 @@ import { Box, Container, Flex, Heading, SimpleGrid, Text } from '@chakra-ui/reac
 import { Bar } from 'react-chartjs-2'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
+import useDateTimeFormat from '../../hooks/useDateTimeformat'
 
 const performRequest = latestEvent => {
   const urls = [
@@ -44,32 +45,57 @@ const ReportGDT = () => {
 
   // if (latestEvent === null) return <div>Loading...</div>
 
+  const values = [3.0, 15.0, -3.8, 0.3, -0.1, -0.7, -0.2, -0.9, -1.3, -3.6, -2.9, -1.0, 0.3]
   const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: [
+      '16/02/21',
+      '02/03/21',
+      '16/03/21',
+      '06/04/21',
+      '20/04/21',
+      '04/05/21',
+      '18/05/21',
+      '01/06/21',
+      '15/06/21',
+      '06/07/21',
+      '20/07/21',
+      '03/08/21',
+      '17/08/21'
+    ],
     datasets: [
       {
-        label: '# of Votes',
-        data: [12, -19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
+        data: [3.0, 15.0, -3.8, 0.3, -0.1, -0.7, -0.2, -0.9, -1.3, -3.6, -2.9, -1.0, 0.3],
+        backgroundColor: ['rgba(208, 31, 40, 0.2)'],
+        borderColor: ['rgba(208, 31, 40, 1)'],
         borderWidth: 1
       }
     ]
   }
+
+  const options = {
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        displayColors: false
+      }
+    },
+    scales: {
+      y: {
+        suggestedMin: Math.min(...values) + 5,
+        suggestedMax: Math.max(...values) + 5,
+        ticks: {
+          callback: function (value, index, values) {
+            return value + '%'
+          }
+        }
+      }
+    }
+  }
+
+  const date = useDateTimeFormat('August 3, 2021 12:00:00')
+  console.log(date)
 
   return (
     <>
@@ -82,8 +108,11 @@ const ReportGDT = () => {
       >
         <Container border={'1px solid #cfcfcf'} minH={'100vh'} bg={'gray.100'}>
           <Heading py={5}>GDT Events Results</Heading>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-            <Box>
+          <SimpleGrid
+            templateColumns={{ base: 'repeat(1, minmax(0, 1fr))', md: 'repeat(1, minmax(0, 1fr));', lg: '300px 1fr' }}
+            spacing={10}
+          >
+            <Box w={'300px'}>
               <Text fontSize={'3xl'}>Event 290 / 17 August 2021</Text>
               <Flex flexDirection={'column'} my={5}>
                 <Text fontSize={'sm'}>Change in GDT Price Index from previous event</Text>
@@ -100,7 +129,7 @@ const ReportGDT = () => {
             </Box>
             <Box>
               <Text fontSize={'3xl'}>Change in GDT Price Index</Text>
-              <Bar data={data} />
+              <Bar data={data} options={options} />
             </Box>
           </SimpleGrid>
         </Container>
