@@ -7,8 +7,8 @@ const formatDate = timestamp => {
   useEffect(() => {
     setLanguage(window.navigator.language)
   }, [])
-  console.log(language)
   const date = new Date(timestamp)
+  // for old browser only
   if (!isDateTimeFormatSupported) {
     const options = {
       weekday: 'short',
@@ -16,7 +16,7 @@ const formatDate = timestamp => {
       month: 'short',
       day: 'numeric'
     }
-    return date.toLocaleDateString('es-Es', options)
+    return date.toLocaleDateString(language, options)
   }
 
   const options = {
@@ -27,7 +27,7 @@ const formatDate = timestamp => {
     // minute: 'numeric',
     // second: 'numeric'
   }
-  return new Intl.DateTimeFormat('es-ES', options).format(date)
+  return new Intl.DateTimeFormat(language, options).format(date)
 }
 
 export default function useDateTimeFormat(timestamp) {

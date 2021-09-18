@@ -1,49 +1,37 @@
 import { useEffect, useState } from 'react'
-import { ArrowUpIcon } from '@chakra-ui/icons'
+import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons'
 import { Box, Container, Flex, Heading, SimpleGrid, Text } from '@chakra-ui/react'
 import { Bar } from 'react-chartjs-2'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
-import useDateTimeFormat from '../../hooks/useDateTimeformat'
 
-const performRequest = latestEvent => {
-  const urls = [
-    `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/event_summary.json`,
-    `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/product_groups_summary.json`,
-    `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/price_indices_twelve_events.json`,
-    `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/price_indices_ten_years.json`
-  ]
-  const requests = urls.map(url => fetch(url))
-  return Promise.all(requests)
-    .then(responses => {
-      return responses
-    })
-    .then(responses => Promise.all(responses.map(r => r.json())).then(data => data))
-}
+const latestId = 'https://s3.amazonaws.com/www-production.globaldairytrade.info/results/latest.json'
+const getUrls = latestEvent => [
+  `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/event_summary.json`,
+  `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/product_groups_summary.json`,
+  `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/price_indices_twelve_events.json`,
+  `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/price_indices_ten_years.json`
+]
 
 const ReportGDT = () => {
   const [latestEvent, setLatestEvent] = useState(null)
   const [summaryEvent, setSummaryEvent] = useState(null)
 
-  // useEffect(async () => {
-  //   const latestId = 'https://s3.amazonaws.com/www-production.globaldairytrade.info/results/latest.json'
-  //   try {
-  //     const response = await fetch(latestId)
-  //     const data = await response.json()
-  //     setLatestEvent(data.latestEvent)
-  //     // perform requests
-  //     if (latestEvent !== null) {
-  //       const dataSet = await performRequest(latestEvent)
-  //       setSummaryEvent(dataSet)
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }, [latestEvent])
-
-  // const [EventSummary, ProductGroups] = summaryEvent
-
-  // if (latestEvent === null) return <div>Loading...</div>
+  useEffect(() => {
+    try {
+      fetch(latestId)
+        .then(response => response.json())
+        .then(data => {
+          setLatestEvent(data)
+          const requests = getUrls(data.latestEvent).map(url => fetch(url))
+          Promise.all(requests).then(responses =>
+            Promise.all(responses.map(r => r.json())).then(data => setSummaryEvent(data))
+          )
+        })
+    } catch (error) {
+      console.error(error)
+    }
+  }, [])
 
   const values = [3.0, 15.0, -3.8, 0.3, -0.1, -0.7, -0.2, -0.9, -1.3, -3.6, -2.9, -1.0, 0.3]
   const data = {
@@ -71,7 +59,6 @@ const ReportGDT = () => {
       }
     ]
   }
-
   const options = {
     plugins: {
       legend: {
@@ -94,8 +81,11 @@ const ReportGDT = () => {
     }
   }
 
-  const date = useDateTimeFormat('August 3, 2021 12:00:00')
-  console.log(date)
+  if (summaryEvent === null) return <div>Loading...</div>
+
+  const [summary, productsGroups, pricesMonths, pricesYears] = summaryEvent
+  console.log(summary.EventSummary)
+  const date = new Date(summary.EventSummary.EventDate)
 
   return (
     <>
@@ -113,17 +103,29 @@ const ReportGDT = () => {
             spacing={10}
           >
             <Box w={'300px'}>
-              <Text fontSize={'3xl'}>Event 290 / 17 August 2021</Text>
+              <Text fontSize={'3xl'}>
+                Event {parseInt(summary.EventSummary.EventNumber, 10)} /{' '}
+                {new Intl.DateTimeFormat(window.navigator.language, {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                }).format(date)}
+              </Text>
               <Flex flexDirection={'column'} my={5}>
                 <Text fontSize={'sm'}>Change in GDT Price Index from previous event</Text>
                 <Text fontSize={'5xl'} fontWeight={'bold'} display={'flex'} alignItems={'center'}>
-                  +0.3% <ArrowUpIcon color={'highlight'} />
+                  +{summary.EventSummary.ChangeInPriceIndex}%
+                  {summary.EventSummary.ChangeInPriceIndex > 0 ? (
+                    <ArrowUpIcon color={'highlight'} />
+                  ) : (
+                    <ArrowUpIcon color={'highlight'} />
+                  )}
                 </Text>
               </Flex>
               <Flex flexDirection={'column'} my={5}>
                 <Text fontSize={'sm'}>Average price (USD/MT,FAS)</Text>
                 <Text fontSize={'5xl'} fontWeight={'bold'}>
-                  $3,827
+                  ${summary.EventSummary.AveragePublishedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 </Text>
               </Flex>
             </Box>
