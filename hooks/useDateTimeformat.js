@@ -1,12 +1,6 @@
-import { useEffect, useState } from 'react'
-
 const isDateTimeFormatSupported = typeof Intl !== 'undefined' && Intl.DateTimeFormat
 
-const formatDate = timestamp => {
-  const [language, setLanguage] = useState('')
-  useEffect(() => {
-    setLanguage(window.navigator.language)
-  }, [])
+const formatDate = (timestamp, language) => {
   const date = new Date(timestamp)
   // for old browser only
   if (!isDateTimeFormatSupported) {

@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons'
-import { Box, Container, Flex, Heading, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Container, Flex, Heading, SimpleGrid, Text, List, ListItem } from '@chakra-ui/react'
 import { Bar } from 'react-chartjs-2'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
+import DoughnutCustom from '../../components/DoughnutCustom'
+import useDateTimeFormat from '../../hooks/useDateTimeformat'
 
 const latestId = 'https://s3.amazonaws.com/www-production.globaldairytrade.info/results/latest.json'
 const getUrls = latestEvent => [
@@ -33,26 +35,30 @@ const ReportGDT = () => {
     }
   }, [])
 
-  const values = [3.0, 15.0, -3.8, 0.3, -0.1, -0.7, -0.2, -0.9, -1.3, -3.6, -2.9, -1.0, 0.3]
+  if (summaryEvent === null) return <div>Loading...</div>
+
+  // data for charts
+  const values = []
+  const eventDate = []
+
+  // extract data from state
+  const [summary, products, pricesMonths, pricesYears] = summaryEvent
+  const date = new Date(summary.EventSummary.EventDate)
+
+  const items = pricesMonths.PriceIndicesTwelveMonths.Events.EventDetails
+  const lastYear = items.slice(-12)
+  lastYear.forEach(i => {
+    values.push(parseFloat(i.PriceIndexPercentageChange).toFixed(1))
+    eventDate.push(useDateTimeFormat(i.EventDate, window.navigator.language))
+  })
+  const productsG = products.ProductGroups.ProductGroupResult.filter(i => i.ProductSold === 'true')
+  console.log(productsG)
+
   const data = {
-    labels: [
-      '16/02/21',
-      '02/03/21',
-      '16/03/21',
-      '06/04/21',
-      '20/04/21',
-      '04/05/21',
-      '18/05/21',
-      '01/06/21',
-      '15/06/21',
-      '06/07/21',
-      '20/07/21',
-      '03/08/21',
-      '17/08/21'
-    ],
+    labels: eventDate,
     datasets: [
       {
-        data: [3.0, 15.0, -3.8, 0.3, -0.1, -0.7, -0.2, -0.9, -1.3, -3.6, -2.9, -1.0, 0.3],
+        data: values,
         backgroundColor: ['rgba(208, 31, 40, 0.2)'],
         borderColor: ['rgba(208, 31, 40, 1)'],
         borderWidth: 1
@@ -65,7 +71,12 @@ const ReportGDT = () => {
         display: false
       },
       tooltip: {
-        displayColors: false
+        displayColors: false,
+        callbacks: {
+          label: context => {
+            return `${parseFloat(context.formattedValue).toFixed(1)}%`
+          }
+        }
       }
     },
     scales: {
@@ -81,12 +92,6 @@ const ReportGDT = () => {
     }
   }
 
-  if (summaryEvent === null) return <div>Loading...</div>
-
-  const [summary, productsGroups, pricesMonths, pricesYears] = summaryEvent
-  console.log(summary.EventSummary)
-  const date = new Date(summary.EventSummary.EventDate)
-
   return (
     <>
       <Navbar color={1} />
@@ -96,7 +101,7 @@ const ReportGDT = () => {
         px={{ base: '6', md: '12' }}
         mt={'100px'}
       >
-        <Container border={'1px solid #cfcfcf'} minH={'100vh'} bg={'gray.100'}>
+        <Container border={'1px solid #cfcfcf'} minH={'100vh'} bg={'gray.100'} p={5}>
           <Heading py={5}>GDT Events Results</Heading>
           <SimpleGrid
             templateColumns={{ base: 'repeat(1, minmax(0, 1fr))', md: 'repeat(1, minmax(0, 1fr));', lg: '300px 1fr' }}
@@ -105,11 +110,7 @@ const ReportGDT = () => {
             <Box w={'300px'}>
               <Text fontSize={'3xl'}>
                 Event {parseInt(summary.EventSummary.EventNumber, 10)} /{' '}
-                {new Intl.DateTimeFormat(window.navigator.language, {
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric'
-                }).format(date)}
+                {useDateTimeFormat(date, window.navigator.language)}
               </Text>
               <Flex flexDirection={'column'} my={5}>
                 <Text fontSize={'sm'}>Change in GDT Price Index from previous event</Text>
@@ -118,7 +119,7 @@ const ReportGDT = () => {
                   {summary.EventSummary.ChangeInPriceIndex > 0 ? (
                     <ArrowUpIcon color={'highlight'} />
                   ) : (
-                    <ArrowUpIcon color={'highlight'} />
+                    <ArrowDownIcon color={'highlight'} />
                   )}
                 </Text>
               </Flex>
@@ -132,8 +133,31 @@ const ReportGDT = () => {
             <Box>
               <Text fontSize={'3xl'}>Change in GDT Price Index</Text>
               <Bar data={data} options={options} />
+              <Box py={5}>
+                <Text fontSize={'md'} fontWeight={'bold'} mb={3}>
+                  Summary of Results
+                </Text>
+                <List spacing={3}>
+                  <ListItem fontSize={'sm'}>Number of Winning Bidders</ListItem>
+                  <ListItem fontSize={'sm'}>Number of Bidding Rounds</ListItem>
+                  <ListItem fontSize={'sm'}>Duration of Trading Event (hours:mins)</ListItem>
+                  <ListItem fontSize={'sm'}>Minimum Supply (MT)</ListItem>
+                  <ListItem fontSize={'sm'}>Maximum Supply (MT)</ListItem>
+                </List>
+              </Box>
             </Box>
           </SimpleGrid>
+
+          <Box>
+            <Text fontSize={'3xl'} py={5}>
+              Products
+            </Text>
+            <SimpleGrid columns={{ base: 1, md: 4 }} spacing={10}>
+              {productsG.map(pg => (
+                <DoughnutCustom key={pg.ProductGroupGUID} item={pg} />
+              ))}
+            </SimpleGrid>
+          </Box>
         </Container>
       </Container>
       <Footer />
