@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Image, Link, Text, useColorModeValue, useTheme } from '@chakra-ui/react'
+import { Box, Flex, Button, Heading, Image, Link, useColorModeValue, useTheme } from '@chakra-ui/react'
 import { string_to_slug } from '../utils'
 
 const Article = ({ imgStart = false, imgSrc, heading, text, buttonLabel }) => {
@@ -37,9 +37,9 @@ const Article = ({ imgStart = false, imgSrc, heading, text, buttonLabel }) => {
         marginTop={{ base: '3', sm: '0' }}
       >
         <Heading mb={5}>{heading}</Heading>
-        <Text as={'p'} mt={5} color={'dark'} fontSize={'md'}>
+        <Flex mt={5} color={'dark'} fontSize={'md'}>
           {text}
-        </Text>
+        </Flex>
         {buttonLabel && (
           <Button as={'a'} href={`/${string_to_slug(heading)}`} variant={'primary'} mt={5}>
             {buttonLabel}

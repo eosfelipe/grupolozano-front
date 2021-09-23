@@ -1,5 +1,6 @@
 import { Box, Text } from '@chakra-ui/layout'
 import { Doughnut } from 'react-chartjs-2'
+import { separateMiles } from '../utils/index'
 
 const DoughnutCustom = ({ item }) => {
   const value = parseFloat(item.PriceIndexPercentageChange).toFixed(1)
@@ -23,7 +24,7 @@ const DoughnutCustom = ({ item }) => {
       },
       title: {
         display: true,
-        text: `$${item.AveragePublishedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+        text: `$${separateMiles(item.AveragePublishedPrice)}`
       },
       tooltip: {
         enabled: false
@@ -37,7 +38,7 @@ const DoughnutCustom = ({ item }) => {
         {item.ProductGroupName}
       </Text>
       <Text fontSize={{ base: '4xl', md: '3xl' }} fontWeight={'bold'}>
-        {value > 0 ? `+${value}` : `-${value}`}%
+        {value > 0 ? `+${value}` : `${value}`}%
       </Text>
       <Doughnut data={data} options={options} />
     </Box>

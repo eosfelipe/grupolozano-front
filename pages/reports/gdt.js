@@ -6,6 +6,7 @@ import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
 import DoughnutCustom from '../../components/DoughnutCustom'
 import useDateTimeFormat from '../../hooks/useDateTimeformat'
+import { separateMiles } from '../../utils/index'
 
 const latestId = 'https://s3.amazonaws.com/www-production.globaldairytrade.info/results/latest.json'
 const getUrls = latestEvent => [
@@ -52,7 +53,7 @@ const ReportGDT = () => {
     eventDate.push(useDateTimeFormat(i.EventDate, window.navigator.language))
   })
   const productsG = products.ProductGroups.ProductGroupResult.filter(i => i.ProductSold === 'true')
-  console.log(productsG)
+  console.log(summary)
 
   const data = {
     labels: eventDate,
@@ -74,7 +75,7 @@ const ReportGDT = () => {
         displayColors: false,
         callbacks: {
           label: context => {
-            return `${parseFloat(context.formattedValue).toFixed(1)}%`
+            return `${parseFloat(context.raw).toFixed(1)}%`
           }
         }
       }
@@ -126,7 +127,7 @@ const ReportGDT = () => {
               <Flex flexDirection={'column'} my={5}>
                 <Text fontSize={'sm'}>Average price (USD/MT,FAS)</Text>
                 <Text fontSize={'5xl'} fontWeight={'bold'}>
-                  ${summary.EventSummary.AveragePublishedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  ${separateMiles(summary.EventSummary.AveragePublishedPrice)}
                 </Text>
               </Flex>
             </Box>
@@ -137,13 +138,50 @@ const ReportGDT = () => {
                 <Text fontSize={'md'} fontWeight={'bold'} mb={3}>
                   Summary of Results
                 </Text>
-                <List spacing={3}>
-                  <ListItem fontSize={'sm'}>Number of Winning Bidders</ListItem>
-                  <ListItem fontSize={'sm'}>Number of Bidding Rounds</ListItem>
-                  <ListItem fontSize={'sm'}>Duration of Trading Event (hours:mins)</ListItem>
-                  <ListItem fontSize={'sm'}>Minimum Supply (MT)</ListItem>
-                  <ListItem fontSize={'sm'}>Maximum Supply (MT)</ListItem>
-                </List>
+                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+                  <List spacing={3}>
+                    <ListItem fontSize={'sm'}>
+                      Number of Winning Bidders{' '}
+                      <Text as={'span'} float={'right'}>
+                        {summary.EventSummary.WinningBidders}
+                      </Text>
+                    </ListItem>
+                    <ListItem fontSize={'sm'}>
+                      Number of Bidding Rounds{' '}
+                      <Text as={'span'} float={'right'}>
+                        {summary.EventSummary.TotalRounds}
+                      </Text>
+                    </ListItem>
+                    <ListItem fontSize={'sm'}>
+                      Duration of Trading Event (hours:mins){' '}
+                      <Text as={'span'} float={'right'}>
+                        {summary.EventSummary.EventDuration}
+                      </Text>
+                    </ListItem>
+                    <ListItem fontSize={'sm'}>
+                      Minimum Supply (MT){' '}
+                      <Text as={'span'} float={'right'}>
+                        {separateMiles(summary.EventSummary.MinSupply)}
+                      </Text>
+                    </ListItem>
+                    <ListItem fontSize={'sm'}>
+                      Maximum Supply (MT){' '}
+                      <Text as={'span'} float={'right'}>
+                        {separateMiles(summary.EventSummary.MaxSupply)}
+                      </Text>
+                    </ListItem>
+                  </List>
+                  <List spacing={3} borderLeft={'1px dotted #cfcfcf'} px={5}>
+                    <ListItem fontSize={'sm'}>Number of participating bidders</ListItem>
+                    <ListItem fontSize={{ base: '4xl', md: '3xl' }} fontWeight={'bold'}>
+                      {summary.EventSummary.ParticipatingBidders}
+                    </ListItem>
+                    <ListItem fontSize={'sm'}>Quantity sold (MT)</ListItem>
+                    <ListItem fontSize={{ base: '4xl', md: '3xl' }} fontWeight={'bold'}>
+                      {separateMiles(summary.EventSummary.QuantitySold)}
+                    </ListItem>
+                  </List>
+                </SimpleGrid>
               </Box>
             </Box>
           </SimpleGrid>
