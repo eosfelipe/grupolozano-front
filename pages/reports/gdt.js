@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons'
-import { Box, Container, Flex, Heading, SimpleGrid, Text, List, ListItem } from '@chakra-ui/react'
+import { Box, Container, Flex, Heading, SimpleGrid, Text, Link, List, ListItem } from '@chakra-ui/react'
+import { ArrowUpIcon, ArrowDownIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { Bar } from 'react-chartjs-2'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
@@ -102,7 +102,7 @@ const ReportGDT = () => {
         px={{ base: '6', md: '12' }}
         mt={'100px'}
       >
-        <Container border={'1px solid #cfcfcf'} minH={'100vh'} bg={'gray.100'} p={5}>
+        <Container border={'1px solid #cfcfcf'} minH={'100vh'} bg={'gray.100'} p={5} maxW={{ base: '3xl', md: '7xl' }}>
           <Heading py={5}>GDT Events Results</Heading>
           <SimpleGrid
             templateColumns={{ base: 'repeat(1, minmax(0, 1fr))', md: 'repeat(1, minmax(0, 1fr));', lg: '300px 1fr' }}
@@ -190,11 +190,25 @@ const ReportGDT = () => {
             <Text fontSize={'3xl'} py={5}>
               Products
             </Text>
-            <SimpleGrid columns={{ base: 1, md: 4 }} spacing={10}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} spacing={10} my={5}>
               {productsG.map(pg => (
                 <DoughnutCustom key={pg.ProductGroupGUID} item={pg} />
               ))}
             </SimpleGrid>
+            <Text fontSize={'sm'}>
+              The shaded dials indicate the proportion of each product group sold versus total quantity sold during the
+              previous 12 months, with a 3 month lag. Figures within the dials represent the percentage change in GDT
+              Price Index and the weighted average price. All information published on this page may be reproduced
+              provided the user acknowledges Global Dairy Trade as the source. See Explanatory Notes below for more
+              detailed definitions.
+            </Text>{' '}
+            <br />
+            <Text fontSize={'sm'}>
+              Source:{' '}
+              <Link href="https://www.globaldairytrade.info/en/product-results/" isExternal color={'highlight'}>
+                Global Dairy Trade <ExternalLinkIcon mx="2px" />
+              </Link>
+            </Text>
           </Box>
         </Container>
       </Container>
