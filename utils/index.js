@@ -20,3 +20,25 @@ export function string_to_slug(str) {
 export function separateMiles(string) {
   return string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
+
+export async function call(url, params = null) {
+  const heads = {}
+  let body = params
+  heads['Content-Type'] = 'application/json'
+  body = params && JSON.stringify(params)
+
+  const options = {
+    mode: 'cors',
+    method: 'GET',
+    headers: heads
+  }
+  if (body) options.body = body
+
+  try {
+    const response = await fetch(url)
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error(`Bad request ❌ from ${url}`, error)
+  }
+}

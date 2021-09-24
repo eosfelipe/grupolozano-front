@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react'
 import { Box, Container, Flex, Heading, SimpleGrid, Text, Link, List, ListItem } from '@chakra-ui/react'
 import { ArrowUpIcon, ArrowDownIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { Bar } from 'react-chartjs-2'
-import Footer from '../../components/Footer'
-import Navbar from '../../components/Navbar'
-import DoughnutCustom from '../../components/DoughnutCustom'
-import useDateTimeFormat from '../../hooks/useDateTimeformat'
-import { separateMiles } from '../../utils/index'
+import Footer from '../../../components/Footer'
+import Navbar from '../../../components/Navbar'
+import DoughnutCustom from '../../../components/DoughnutCustom'
+import useDateTimeFormat from '../../../hooks/useDateTimeformat'
+import { separateMiles } from '../../../utils/index'
 
 const latestId = 'https://s3.amazonaws.com/www-production.globaldairytrade.info/results/latest.json'
 const getUrls = latestEvent => [
@@ -53,7 +53,7 @@ const ReportGDT = () => {
     eventDate.push(useDateTimeFormat(i.EventDate, window.navigator.language))
   })
   const productsG = products.ProductGroups.ProductGroupResult.filter(i => i.ProductSold === 'true')
-  console.log(summary)
+  // console.log(productsG)
 
   const data = {
     labels: eventDate,
@@ -192,7 +192,7 @@ const ReportGDT = () => {
             </Text>
             <SimpleGrid columns={{ base: 1, md: 4 }} spacing={10} my={5}>
               {productsG.map(pg => (
-                <DoughnutCustom key={pg.ProductGroupGUID} item={pg} />
+                <DoughnutCustom key={pg.ProductGroupGUID} item={pg} eventId={latestEvent} />
               ))}
             </SimpleGrid>
             <Text fontSize={'sm'}>
