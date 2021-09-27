@@ -7,6 +7,7 @@ import Navbar from '../../../components/Navbar'
 import DoughnutCustom from '../../../components/DoughnutCustom'
 import useDateTimeFormat from '../../../hooks/useDateTimeformat'
 import { separateMiles } from '../../../utils/index'
+import DarkOverlay from '../../../components/DarkOverlay'
 
 const latestId = 'https://s3.amazonaws.com/www-production.globaldairytrade.info/results/latest.json'
 const getUrls = latestEvent => [
@@ -19,6 +20,7 @@ const getUrls = latestEvent => [
 const ReportGDT = () => {
   const [latestEvent, setLatestEvent] = useState(null)
   const [summaryEvent, setSummaryEvent] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     try {
@@ -28,7 +30,10 @@ const ReportGDT = () => {
           setLatestEvent(data)
           const requests = getUrls(data.latestEvent).map(url => fetch(url))
           Promise.all(requests).then(responses =>
-            Promise.all(responses.map(r => r.json())).then(data => setSummaryEvent(data))
+            Promise.all(responses.map(r => r.json())).then(data => {
+              setSummaryEvent(data)
+              setTimeout(() => setLoading(false), 5000)
+            })
           )
         })
     } catch (error) {
@@ -36,7 +41,8 @@ const ReportGDT = () => {
     }
   }, [])
 
-  if (summaryEvent === null) return <div>Loading...</div>
+  // if (summaryEvent === null) return <DarkOverlay loading={loading} />
+  if (loading) return <DarkOverlay loading={loading} />
 
   // data for charts
   const values = []

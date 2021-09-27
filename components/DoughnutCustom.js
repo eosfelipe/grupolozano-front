@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import { Box, Text } from '@chakra-ui/layout'
+import { Box, Text, Link } from '@chakra-ui/layout'
 import { Doughnut } from 'react-chartjs-2'
 import { separateMiles } from '../utils/index'
 
@@ -41,11 +41,8 @@ const DoughnutCustom = ({ item, eventId: { latestEvent } }) => {
             query: { eventId: latestEvent, pgc: item.ProductGroupCode }
           }}
           passHref
-          _hover={{
-            color: 'highlight'
-          }}
         >
-          {item.ProductGroupName}
+          <Link _hover={{ color: 'highlight' }}>{item.ProductGroupName}</Link>
         </NextLink>
       </Text>
       <Text fontSize={{ base: '4xl', md: '3xl' }} fontWeight={'bold'}>
