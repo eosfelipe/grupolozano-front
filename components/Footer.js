@@ -1,3 +1,4 @@
+import NextLink from 'next/link'
 import {
   Box,
   chakra,
@@ -62,9 +63,9 @@ const Footer = () => {
             <Text fontWeight={'normal'} fontSize={'lg'} mb={2}>
               Company
             </Text>
-            <Link fontWeight={'light'} href={'#'}>
-              About us
-            </Link>
+            <NextLink href={'/reports/gdt'} passHref>
+              <Link fontWeight={'light'}>Reports GDT</Link>
+            </NextLink>
             <Link fontWeight={'light'} href={'#'}>
               Blog
             </Link>
