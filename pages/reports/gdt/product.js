@@ -170,9 +170,9 @@ const ProductGDT = () => {
             </Flex>
             <Line data={data2} options={options} />
           </Box>
-          <Box py={10}>
+          <Box py={10} overflowX={'auto'}>
             <Text fontSize={{ base: '2xl', md: '3xl' }}>Changes in {productCode} Price Index</Text>
-            <Table variant={'simple'}>
+            <Table variant={'simple'} size={'sm'}>
               <TableCaption color={'dark'}>
                 A change in GDT Price Index is shown if there is a price available for the last event AND for at least
                 one of the two previous events. “n.a.” means that no product was offered or sold, or no price was
@@ -195,6 +195,103 @@ const ProductGDT = () => {
                   <Td fontSize={'sm'}>Change in {productCode} Price Index from previous event</Td>
                   {contractPeriods.map(i => (
                     <Td key={i.ContractPeriodGUID}>{i.PriceIndexPercentageChange}%</Td>
+                  ))}
+                </Tr>
+              </Tbody>
+            </Table>
+          </Box>
+          <Box py={10} overflowX={'auto'}>
+            <Text fontSize={{ base: '2xl', md: '3xl' }}>Average Price Per Region (USD/MT, FAS)</Text>
+            <Table variant={'simple'} size={'sm'}>
+              <TableCaption color={'dark'}></TableCaption>
+              <Thead>
+                <Tr>
+                  <Th></Th>
+                  {contractPeriods.map(i => (
+                    <Th key={i.ContractPeriodGUID}>
+                      {i.ContractPeriodName}
+                      <br />
+                      {i.ContractMonth}
+                    </Th>
+                  ))}
+                </Tr>
+              </Thead>
+              <Tbody>
+                <Tr>
+                  <Td>Oceania</Td>
+                </Tr>
+                <Tr>
+                  <Td>New Zealand</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    {
+                      contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                        .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductDisplayName
+                    }
+                  </Td>
+                  {contractPeriods.map((i, index) => (
+                    <Td key={index} isNumeric>
+                      $
+                      {separateMiles(
+                        i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                          .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductAveragePrice
+                      )}
+                    </Td>
+                  ))}
+                </Tr>
+                <Tr>
+                  <Td>
+                    {
+                      contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                        .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductDisplayName
+                    }
+                  </Td>
+                  {contractPeriods.map((i, index) => (
+                    <Td key={index} isNumeric>
+                      $
+                      {separateMiles(
+                        i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                          .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductAveragePrice
+                      )}
+                    </Td>
+                  ))}
+                </Tr>
+                <Tr>
+                  <Td>
+                    {
+                      contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                        .ProductSubRegionName
+                    }{' '}
+                    Average Price
+                  </Td>
+                  {contractPeriods.map((i, index) => (
+                    <Td key={index} isNumeric>
+                      $
+                      {separateMiles(
+                        i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                          .ProductSubRegionAveragePrice
+                      )}
+                    </Td>
+                  ))}
+                </Tr>
+                <Tr>
+                  <Td>
+                    {contractPeriods[0].ProductRegions.ProductRegionDetails.ProductRegionName} Average Price
+                    (USD/MT,FAS)
+                  </Td>
+                  {contractPeriods.map((i, index) => (
+                    <Td key={index} isNumeric>
+                      ${separateMiles(i.ProductRegions.ProductRegionDetails.ProductRegionAveragePrice)}
+                    </Td>
+                  ))}
+                </Tr>
+                <Tr>
+                  <Td>Average Price (USD/MT,FAS)</Td>
+                  {contractPeriods.map((i, index) => (
+                    <Td key={index} isNumeric>
+                      ${separateMiles(i.ContractPeriodAveragePublishedPrice)}
+                    </Td>
                   ))}
                 </Tr>
               </Tbody>

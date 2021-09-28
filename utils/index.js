@@ -18,6 +18,7 @@ export function string_to_slug(str) {
 }
 
 export function separateMiles(string) {
+  if (string.length === 0) return 'n.a.'
   return string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
