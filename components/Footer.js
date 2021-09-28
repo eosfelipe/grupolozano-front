@@ -64,7 +64,14 @@ const Footer = () => {
               Company
             </Text>
             <NextLink href={'/reports/gdt'} passHref>
-              <Link fontWeight={'light'}>Reports GDT</Link>
+              <Link
+                fontWeight={'light'}
+                _focus={{
+                  outline: 'none'
+                }}
+              >
+                Reports GDT
+              </Link>
             </NextLink>
             <Link fontWeight={'light'} href={'#'}>
               Blog

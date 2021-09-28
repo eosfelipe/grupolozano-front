@@ -1,5 +1,20 @@
 import { ArrowUpIcon, ArrowDownIcon, ExternalLinkIcon } from '@chakra-ui/icons'
-import { Box, Container, Flex, Heading, SimpleGrid, Text, Link, List, ListItem } from '@chakra-ui/react'
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  SimpleGrid,
+  Text,
+  Link,
+  Table,
+  TableCaption,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td
+} from '@chakra-ui/react'
 import { call, separateMiles } from '../../../utils'
 import { Line } from 'react-chartjs-2'
 import { useRouter } from 'next/router'
@@ -17,6 +32,8 @@ const ProductGDT = () => {
   let lastData
   let data12months
   let data5years
+  let contractPeriods
+  let productCode
 
   useEffect(() => {
     if (router.query.eventId === undefined) {
@@ -54,6 +71,9 @@ const ProductGDT = () => {
         useDateTimeFormat(i.EventDate, window.navigator.language, { year: 'numeric', month: 'numeric', day: 'numeric' })
       )
     })
+    productCode = contract.ProductGroupDetails.ProductGroupCode
+    contractPeriods = contract.ProductGroupDetails.ContractPeriods.ContractPeriodDetails
+    console.log(contractPeriods)
   }
 
   const data = {
@@ -149,6 +169,36 @@ const ProductGDT = () => {
               <Text fontSize={{ base: '2xl', md: '3xl' }}>5 years</Text>
             </Flex>
             <Line data={data2} options={options} />
+          </Box>
+          <Box py={10}>
+            <Text fontSize={{ base: '2xl', md: '3xl' }}>Changes in {productCode} Price Index</Text>
+            <Table variant={'simple'}>
+              <TableCaption color={'dark'}>
+                A change in GDT Price Index is shown if there is a price available for the last event AND for at least
+                one of the two previous events. “n.a.” means that no product was offered or sold, or no price was
+                published for the last event, or on both of the two previous events.
+              </TableCaption>
+              <Thead>
+                <Tr>
+                  <Th></Th>
+                  {contractPeriods.map(i => (
+                    <Th key={i.ContractPeriodGUID}>
+                      {i.ContractPeriodName}
+                      <br />
+                      {i.ContractMonth}
+                    </Th>
+                  ))}
+                </Tr>
+              </Thead>
+              <Tbody>
+                <Tr>
+                  <Td fontSize={'sm'}>Change in {productCode} Price Index from previous event</Td>
+                  {contractPeriods.map(i => (
+                    <Td key={i.ContractPeriodGUID}>{i.PriceIndexPercentageChange}%</Td>
+                  ))}
+                </Tr>
+              </Tbody>
+            </Table>
           </Box>
         </Container>
       </Container>

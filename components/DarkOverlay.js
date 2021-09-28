@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 import LoadingOverlay from 'react-loading-overlay'
-import BounceLoader from 'react-spinners/BounceLoader'
+import BeatLoader from 'react-spinners/BeatLoader'
 
 const Background = styled.div`
   display: none;
@@ -30,7 +30,7 @@ const Background = styled.div`
 const DarkOverlay = ({ loading }) => {
   return (
     <Background disappear={loading}>
-      <LoadingOverlay active={loading} spinner={<BounceLoader color="#D01F28" />} />
+      <LoadingOverlay active={loading} spinner={<BeatLoader color="#D01F28" />} />
     </Background>
   )
 }
