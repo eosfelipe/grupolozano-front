@@ -1,3 +1,4 @@
+import NextLink from 'next/link'
 import { Button, Flex, Heading, Image, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
 import CountryCard from './CountryCard'
 
@@ -58,9 +59,11 @@ const Hero = () => {
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam est magnam minus enim illo a voluptate sed.
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-            <Button as={'a'} href={'/reports'} variant={'primary'}>
-              Ver reporte del mercado
-            </Button>
+            <NextLink href="/reports" passHref>
+              <Button as={'a'} variant={'primary'}>
+                Ver reporte del mercado
+              </Button>
+            </NextLink>
           </Stack>
         </Stack>
         <Flex

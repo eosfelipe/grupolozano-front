@@ -1,3 +1,4 @@
+import NextLink from 'next/link'
 import { CheckIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, HStack, Image, List, ListIcon, ListItem, Stack, Text, VStack } from '@chakra-ui/react'
 import { string_to_slug } from '../utils'
@@ -38,9 +39,11 @@ const Wrapper = ({ title, subtitle, img, link = '404' }) => {
           </ListItem>
         </List>
         <Box w="80%" pt={7}>
-          <Button as={'a'} href={`/reports/${link}`} variant={'primary'}>
-            View report
-          </Button>
+          <NextLink href={`/reports/${link}`} passHref>
+            <Button as={'a'} variant={'primary'}>
+              View report
+            </Button>
+          </NextLink>
         </Box>
       </VStack>
     </Box>

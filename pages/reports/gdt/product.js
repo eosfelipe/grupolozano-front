@@ -1,12 +1,14 @@
 import { ArrowUpIcon, ArrowDownIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import {
   Box,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
   Container,
   Flex,
   Heading,
   SimpleGrid,
   Text,
-  Link,
   Table,
   TableCaption,
   Thead,
@@ -18,6 +20,7 @@ import {
 import { call, separateMiles } from '../../../utils'
 import { Line } from 'react-chartjs-2'
 import { useRouter } from 'next/router'
+import NextLink from 'next/link'
 import { useState, useEffect } from 'react'
 import DarkOverlay from '../../../components/DarkOverlay'
 import Footer from '../../../components/Footer'
@@ -74,6 +77,7 @@ const ProductGDT = () => {
     productCode = contract.ProductGroupDetails.ProductGroupCode
     contractPeriods = contract.ProductGroupDetails.ContractPeriods.ContractPeriodDetails
     console.log(contractPeriods)
+    console.log(router)
   }
 
   const data = {
@@ -127,6 +131,23 @@ const ProductGDT = () => {
         mt={'100px'}
       >
         <Container border={'1px solid #cfcfcf'} minH={'100vh'} bg={'gray.100'} p={5} maxW={{ base: '3xl', md: '7xl' }}>
+          <Breadcrumb fontSize={'sm'}>
+            <BreadcrumbItem>
+              <NextLink href="/" passHref>
+                <BreadcrumbLink>Home</BreadcrumbLink>
+              </NextLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <NextLink href="/reports/gdt" passHref>
+                <BreadcrumbLink>GDT</BreadcrumbLink>
+              </NextLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem isCurrentPage color={'highlight'}>
+              <NextLink href={router.asPath} passHref>
+                <BreadcrumbLink>{contract.ProductGroupDetails.ProductGroupName}</BreadcrumbLink>
+              </NextLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
           <Heading py={5}>{contract.ProductGroupDetails.ProductGroupName}</Heading>
           <SimpleGrid column={{ base: 1, md: 2 }} spacing={10}>
             <Box>
@@ -225,35 +246,53 @@ const ProductGDT = () => {
                 </Tr>
                 <Tr>
                   <Td>
-                    {
+                    {Array.isArray(
                       contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                        .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductDisplayName
-                    }
+                        .ProductSubRegionProducts.ProductSubRegionProductDetails
+                    )
+                      ? contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                          .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductDisplayName
+                      : contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                          .ProductSubRegionProducts.ProductSubRegionProductDetails.ProductDisplayName}
                   </Td>
                   {contractPeriods.map((i, index) => (
                     <Td key={index} isNumeric>
-                      $
-                      {separateMiles(
+                      {Array.isArray(
                         i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                          .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductAveragePrice
-                      )}
+                          .ProductSubRegionProducts.ProductSubRegionProductDetails
+                      )
+                        ? `$${separateMiles(
+                            i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                              .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductAveragePrice
+                          )}`
+                        : `$${separateMiles(
+                            i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                              .ProductSubRegionProducts.ProductSubRegionProductDetails.ProductAveragePrice
+                          )}`}
                     </Td>
                   ))}
                 </Tr>
                 <Tr>
                   <Td>
-                    {
+                    {Array.isArray(
                       contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                        .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductDisplayName
-                    }
+                        .ProductSubRegionProducts.ProductSubRegionProductDetails
+                    )
+                      ? contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                          .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductDisplayName
+                      : ''}
                   </Td>
                   {contractPeriods.map((i, index) => (
                     <Td key={index} isNumeric>
-                      $
-                      {separateMiles(
+                      {Array.isArray(
                         i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                          .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductAveragePrice
-                      )}
+                          .ProductSubRegionProducts.ProductSubRegionProductDetails
+                      )
+                        ? `$${separateMiles(
+                            i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                              .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductAveragePrice
+                          )}`
+                        : ''}
                     </Td>
                   ))}
                 </Tr>
