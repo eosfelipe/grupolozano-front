@@ -37,7 +37,7 @@ const dataServices = [
 const Feature = ({ title, text, icon }) => {
   return (
     <Stack>
-      <Flex w={16} h={16} align={'center'} justify={'center'} color={'light'} rounded={'full'} bg={'dark'} mb={1}>
+      <Flex w={16} h={16} align={'center'} justify={'center'} color={'light'} rounded={'full'} bg={'highlight'} mb={1}>
         {icon}
       </Flex>
       <Text fontWeight={'bold'}>{title}</Text>

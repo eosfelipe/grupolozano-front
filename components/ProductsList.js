@@ -1,9 +1,6 @@
-import Carousel from 'react-multi-carousel'
-import { useTheme } from '@chakra-ui/react'
-import Card from './Card'
-import 'react-multi-carousel/lib/styles.css'
+import { Box, Flex, Image, SimpleGrid } from '@chakra-ui/react'
 
-const features = [
+const data = [
   {
     id: 1,
     img: 'http://grupolozano.com.mx/wp-content/uploads/2016/01/Suero-de-leche-en-polvo.jpg',
@@ -84,51 +81,33 @@ const features = [
   }
 ]
 
-const CardList = () => {
-  const { breakpoints } = useTheme()
-
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: breakpoints.xl, min: breakpoints.lg },
-      items: 5
-    },
-    desktop: {
-      breakpoint: { max: breakpoints.lg, min: breakpoints.md },
-      items: 4,
-      paritialVisibilityGutter: 60
-    },
-    tablet: {
-      breakpoint: { max: breakpoints.md, min: breakpoints.sm },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: breakpoints.sm, min: breakpoints.base },
-      items: 1
-    }
-  }
-
-  const responsive2 = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 360 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 360, min: 0 },
-      items: 1
-    }
-  }
-
+const Product = ({ name, img }) => {
   return (
-    <Carousel responsive={responsive2} infinite swipeable autoPlay>
-      {features.map(feature => (
-        <Card key={feature.id} img={feature.img} name={feature.name} />
-      ))}
-    </Carousel>
+    <Flex w={'full'} alignItems={'center'} justifyContent={'center'}>
+      <Box bg={'light'} rounded={'lg'} shadow={'lg'} position={'relative'}>
+        <Image rounded={'lg'} maxH={'230px'} width={'100%'} objectFit={'cover'} src={img} alt={`Picture of ${name}`} />
+        <Box p={6}>
+          <Flex mt="1" justifyContent="space-between" alignContent="center">
+            <Box fontSize="xl" fontWeight="bold" as="h4" lineHeight="tight" color={'dark'}>
+              {name}
+            </Box>
+          </Flex>
+        </Box>
+      </Box>
+    </Flex>
   )
 }
 
-export default CardList
+const ProductsList = () => {
+  return (
+    <Box>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
+        {data.map(product => (
+          <Product key={product.id} name={product.name} img={product.img} />
+        ))}
+      </SimpleGrid>
+    </Box>
+  )
+}
+
+export default ProductsList
