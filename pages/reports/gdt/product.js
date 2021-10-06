@@ -26,6 +26,7 @@ import DarkOverlay from '../../../components/DarkOverlay'
 import Footer from '../../../components/Footer'
 import Navbar from '../../../components/Navbar'
 import useDateTimeFormat from '../../../hooks/useDateTimeformat'
+import TableContracts from '../../../components/TableContracts'
 
 const ProductGDT = () => {
   const router = useRouter()
@@ -76,8 +77,8 @@ const ProductGDT = () => {
     })
     productCode = contract.ProductGroupDetails.ProductGroupCode
     contractPeriods = contract.ProductGroupDetails.ContractPeriods.ContractPeriodDetails
-    console.log(contractPeriods)
-    console.log(router)
+    // console.log(contractPeriods)
+    // console.log(router)
   }
 
   const data = {
@@ -204,9 +205,7 @@ const ProductGDT = () => {
                   <Th></Th>
                   {contractPeriods.map(i => (
                     <Th key={i.ContractPeriodGUID}>
-                      {i.ContractPeriodName}
-                      <br />
-                      {i.ContractMonth}
+                      {i.ContractPeriodName} {i.ContractMonth}
                     </Th>
                   ))}
                 </Tr>
@@ -215,7 +214,9 @@ const ProductGDT = () => {
                 <Tr>
                   <Td fontSize={'sm'}>Change in {productCode} Price Index from previous event</Td>
                   {contractPeriods.map(i => (
-                    <Td key={i.ContractPeriodGUID}>{i.PriceIndexPercentageChange}%</Td>
+                    <Td key={i.ContractPeriodGUID}>
+                      {i.PriceIndexPercentageChange > 0 ? `${i.PriceIndexPercentageChange}%` : `n.a`}
+                    </Td>
                   ))}
                 </Tr>
               </Tbody>
@@ -223,7 +224,8 @@ const ProductGDT = () => {
           </Box>
           <Box py={10} overflowX={'auto'}>
             <Text fontSize={{ base: '2xl', md: '3xl' }}>Average Price Per Region (USD/MT, FAS)</Text>
-            <Table variant={'simple'} size={'sm'}>
+            <TableContracts data={contractPeriods} />
+            {/* <Table variant={'simple'} size={'sm'}>
               <TableCaption color={'dark'}></TableCaption>
               <Thead>
                 <Tr>
@@ -334,7 +336,7 @@ const ProductGDT = () => {
                   ))}
                 </Tr>
               </Tbody>
-            </Table>
+            </Table> */}
           </Box>
         </Container>
       </Container>

@@ -1,9 +1,22 @@
 import NextLink from 'next/link'
 import { CheckIcon } from '@chakra-ui/icons'
-import { Box, Button, Heading, HStack, Image, List, ListIcon, ListItem, Stack, Text, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  Image,
+  List,
+  ListIcon,
+  ListItem,
+  Stack,
+  Text,
+  VStack,
+  Link
+} from '@chakra-ui/react'
 import { string_to_slug } from '../utils'
 
-const Wrapper = ({ title, subtitle, img, link = '404' }) => {
+const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExternal = false }) => {
   return (
     <Box
       shadow="base"
@@ -12,7 +25,17 @@ const Wrapper = ({ title, subtitle, img, link = '404' }) => {
       borderColor={'gray.500'}
       borderRadius={'xl'}
     >
-      <Box py={4} px={12} bg={'dark'} borderTopRadius={'xl'}>
+      <Box
+        py={4}
+        px={12}
+        bg={'dark'}
+        borderTopRadius={'xl'}
+        minH={'115px'}
+        minW={'342px'}
+        display={'flex'}
+        alignItems={'center'}
+        justifyContent={'center'}
+      >
         {/* <Text fontWeight="500" fontSize="2xl">
           {title}
         </Text> */}
@@ -20,7 +43,7 @@ const Wrapper = ({ title, subtitle, img, link = '404' }) => {
           {/* <Text fontSize="5xl" fontWeight="900">
             {subtitle}
           </Text> */}
-          <Image src={img} alt={link} />
+          <Image src={img} alt={link} w={'100%'} />
         </HStack>
       </Box>
       <VStack py={4} borderBottomRadius={'xl'}>
@@ -39,11 +62,23 @@ const Wrapper = ({ title, subtitle, img, link = '404' }) => {
           </ListItem>
         </List>
         <Box w="80%" pt={7}>
-          <NextLink href={`/reports/${link}`} passHref>
-            <Button as={'a'} variant={'primary'}>
-              View report
-            </Button>
-          </NextLink>
+          {isExternal ? (
+            <Link
+              href={link}
+              isExternal
+              _hover={{
+                textDecoration: 'none'
+              }}
+            >
+              <Button variant={'primary'}>{title}</Button>
+            </Link>
+          ) : (
+            <NextLink href={`/reports/${link}`} passHref>
+              <Button as={'a'} variant={'primary'}>
+                {title}
+              </Button>
+            </NextLink>
+          )}
         </Box>
       </VStack>
     </Box>
@@ -70,7 +105,14 @@ const ReportsList = () => {
       >
         <Wrapper img={'https://cdn.globaldairytrade.info/ps/static-ss4/img/primary-logo.20f4cce6.svg'} link={'gdt'} />
         <Wrapper img={'https://cdn.globaldairytrade.info/ps/static-ss4/img/primary-logo.20f4cce6.svg'} link={'gdt-2'} />
-        <Wrapper img={'https://cdn.globaldairytrade.info/ps/static-ss4/img/primary-logo.20f4cce6.svg'} link={'gdt-3'} />
+        <Wrapper
+          img={'https://www.rabobank.co.nz/-/media/new-images/rabobank-logo-white.png'}
+          link={
+            'https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2021/186068_nz-agribusiness-monthly_sept2021.pdf?la=en&hash=CC9A90208896C7003A61E57DC141891796E260CD'
+          }
+          title="View latest report"
+          isExternal
+        />
       </Stack>
     </Box>
   )
