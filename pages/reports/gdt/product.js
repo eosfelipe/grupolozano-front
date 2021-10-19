@@ -50,7 +50,7 @@ const ProductGDT = () => {
     const urlPrices = `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${router.query.eventId}/product_group_winning_prices_5_years_${router.query.pgc}.json`
     setContract(await call(urlContract))
     setPrices(await call(urlPrices))
-    setTimeout(() => setLoading(false), 5000)
+    setTimeout(() => setLoading(false), 3000)
   }, [])
 
   // data for chart
@@ -215,7 +215,7 @@ const ProductGDT = () => {
                   <Td fontSize={'sm'}>Change in {productCode} Price Index from previous event</Td>
                   {contractPeriods.map(i => (
                     <Td key={i.ContractPeriodGUID}>
-                      {i.PriceIndexPercentageChange > 0 ? `${i.PriceIndexPercentageChange}%` : `n.a`}
+                      {i.PriceIndexPercentageChange.length === 0 ? `n.a.` : `${i.PriceIndexPercentageChange}%`}
                     </Td>
                   ))}
                 </Tr>

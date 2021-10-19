@@ -32,7 +32,7 @@ const ReportGDT = () => {
           Promise.all(requests).then(responses =>
             Promise.all(responses.map(r => r.json())).then(data => {
               setSummaryEvent(data)
-              setTimeout(() => setLoading(false), 5000)
+              setTimeout(() => setLoading(false), 3000)
             })
           )
         })

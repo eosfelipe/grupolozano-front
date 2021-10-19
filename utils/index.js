@@ -43,3 +43,28 @@ export async function call(url, params = null) {
     console.error(`Bad request ❌ from ${url}`, error)
   }
 }
+/**
+ *
+ * @param {*} object
+ * @param {*} originalKey
+ * @param {*} matches
+ * @returns array
+ */
+export function searchByKey(object, originalKey, matches = []) {
+  if (object != null) {
+    if (Array.isArray(object)) {
+      for (const arrayItem of object) {
+        searchByKey(arrayItem, originalKey, matches)
+      }
+    } else if (typeof object === 'object') {
+      for (const key of Object.keys(object)) {
+        if (key === originalKey) {
+          matches.push(object)
+        } else {
+          searchByKey(object[key], originalKey, matches)
+        }
+      }
+    }
+  }
+  return matches[0]
+}
