@@ -61,7 +61,7 @@ const Footer = () => {
           </Stack>
           <Stack align={'flex-start'}>
             <Text fontWeight={'normal'} fontSize={'lg'} mb={2}>
-              Company
+              Reports
             </Text>
             <NextLink href={'/reports/gdt'} passHref>
               <Link
@@ -73,11 +73,18 @@ const Footer = () => {
                 Reports GDT
               </Link>
             </NextLink>
+            <NextLink href={'/reports/imports'} passHref>
+              <Link
+                fontWeight={'light'}
+                _focus={{
+                  outline: 'none'
+                }}
+              >
+                Report of accumulated monthly imports
+              </Link>
+            </NextLink>
             <Link fontWeight={'light'} href={'#'}>
-              Blog
-            </Link>
-            <Link fontWeight={'light'} href={'#'}>
-              Testimonials
+              Rabobank
             </Link>
           </Stack>
           <Stack align={'flex-start'}>

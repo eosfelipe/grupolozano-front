@@ -15,6 +15,7 @@ import {
   Link
 } from '@chakra-ui/react'
 import { string_to_slug } from '../utils'
+import Logo from '../public/img/logo_invert.png'
 
 const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExternal = false }) => {
   return (
@@ -104,7 +105,7 @@ const ReportsList = () => {
         py={10}
       >
         <Wrapper img={'https://cdn.globaldairytrade.info/ps/static-ss4/img/primary-logo.20f4cce6.svg'} link={'gdt'} />
-        <Wrapper img={'https://cdn.globaldairytrade.info/ps/static-ss4/img/primary-logo.20f4cce6.svg'} link={'gdt-2'} />
+        <Wrapper img={Logo.src} link={'imports'} />
         <Wrapper
           img={'https://www.rabobank.co.nz/-/media/new-images/rabobank-logo-white.png'}
           link={
