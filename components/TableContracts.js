@@ -5,7 +5,9 @@ import { searchByKey } from '../utils'
 // data is array
 const TableContracts = ({ data }) => {
   const { ProductRegionDetails } = searchByKey(data, 'ProductRegionDetails')
-  console.log(data)
+  const { details } = searchByKey(data, 'ProductSubRegionProductDetails')
+
+  console.log(Array.isArray(details))
 
   return (
     <Flex>
@@ -149,26 +151,37 @@ const TableContracts = ({ data }) => {
               <Td borderBottom={'none'}>&nbsp;</Td>
             </Tr>
             <Tr>
-              {data.map(p => (
-                <Td key={p.ContractPeriodGUID}>
-                  {p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                    .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductAveragePrice.length === 0
-                    ? 'n.a.'
-                    : p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                        .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductAveragePrice}
-                </Td>
-              ))}
+              {Array.isArray(details)
+                ? data.map(p => (
+                    <Td key={p.ContractPeriodGUID}>
+                      {p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                        .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductAveragePrice.length === 0
+                        ? 'n.a.'
+                        : p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                            .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductAveragePrice}
+                    </Td>
+                  ))
+                : data.map(p => (
+                    <Td key={p.ContractPeriodGUID}>
+                      {p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                        .ProductSubRegionProducts.ProductSubRegionProductDetails.ProductAveragePrice.length === 0
+                        ? 'n.a.'
+                        : p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                            .ProductSubRegionProducts.ProductSubRegionProductDetails.ProductAveragePrice}
+                    </Td>
+                  ))}
             </Tr>
             <Tr>
-              {data.map(p => (
-                <Td key={p.ContractPeriodGUID}>
-                  {p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                    .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductAveragePrice.length === 0
-                    ? 'n.a.'
-                    : p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                        .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductAveragePrice}
-                </Td>
-              ))}
+              {Array.isArray(details) &&
+                data.map(p => (
+                  <Td key={p.ContractPeriodGUID}>
+                    {p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                      .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductAveragePrice.length === 0
+                      ? 'n.a.'
+                      : p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
+                          .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductAveragePrice}
+                  </Td>
+                ))}
             </Tr>
             <Tr>
               {data.map(p => (
