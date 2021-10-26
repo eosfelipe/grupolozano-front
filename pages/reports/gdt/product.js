@@ -1,4 +1,4 @@
-import { ArrowUpIcon, ArrowDownIcon, ExternalLinkIcon } from '@chakra-ui/icons'
+import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons'
 import {
   Box,
   Breadcrumb,
@@ -27,6 +27,7 @@ import Footer from '../../../components/Footer'
 import Navbar from '../../../components/Navbar'
 import useDateTimeFormat from '../../../hooks/useDateTimeformat'
 import TableContracts from '../../../components/TableContracts'
+import TableLAC from '../../../components/TableLAC'
 
 const ProductGDT = () => {
   const router = useRouter()
@@ -224,119 +225,11 @@ const ProductGDT = () => {
           </Box>
           <Box py={10} overflowX={'auto'}>
             <Text fontSize={{ base: '2xl', md: '3xl' }}>Average Price Per Region (USD/MT, FAS)</Text>
-            <TableContracts data={contractPeriods} />
-            {/* <Table variant={'simple'} size={'sm'}>
-              <TableCaption color={'dark'}></TableCaption>
-              <Thead>
-                <Tr>
-                  <Th></Th>
-                  {contractPeriods.map(i => (
-                    <Th key={i.ContractPeriodGUID}>
-                      {i.ContractPeriodName}
-                      <br />
-                      {i.ContractMonth}
-                    </Th>
-                  ))}
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  <Td>Oceania</Td>
-                </Tr>
-                <Tr>
-                  <Td>New Zealand</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    {Array.isArray(
-                      contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                        .ProductSubRegionProducts.ProductSubRegionProductDetails
-                    )
-                      ? contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                          .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductDisplayName
-                      : contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                          .ProductSubRegionProducts.ProductSubRegionProductDetails.ProductDisplayName}
-                  </Td>
-                  {contractPeriods.map((i, index) => (
-                    <Td key={index} isNumeric>
-                      {Array.isArray(
-                        i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                          .ProductSubRegionProducts.ProductSubRegionProductDetails
-                      )
-                        ? `$${separateMiles(
-                            i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                              .ProductSubRegionProducts.ProductSubRegionProductDetails[0].ProductAveragePrice
-                          )}`
-                        : `$${separateMiles(
-                            i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                              .ProductSubRegionProducts.ProductSubRegionProductDetails.ProductAveragePrice
-                          )}`}
-                    </Td>
-                  ))}
-                </Tr>
-                <Tr>
-                  <Td>
-                    {Array.isArray(
-                      contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                        .ProductSubRegionProducts.ProductSubRegionProductDetails
-                    )
-                      ? contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                          .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductDisplayName
-                      : ''}
-                  </Td>
-                  {contractPeriods.map((i, index) => (
-                    <Td key={index} isNumeric>
-                      {Array.isArray(
-                        i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                          .ProductSubRegionProducts.ProductSubRegionProductDetails
-                      )
-                        ? `$${separateMiles(
-                            i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                              .ProductSubRegionProducts.ProductSubRegionProductDetails[1].ProductAveragePrice
-                          )}`
-                        : ''}
-                    </Td>
-                  ))}
-                </Tr>
-                <Tr>
-                  <Td>
-                    {
-                      contractPeriods[0].ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                        .ProductSubRegionName
-                    }{' '}
-                    Average Price
-                  </Td>
-                  {contractPeriods.map((i, index) => (
-                    <Td key={index} isNumeric>
-                      $
-                      {separateMiles(
-                        i.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
-                          .ProductSubRegionAveragePrice
-                      )}
-                    </Td>
-                  ))}
-                </Tr>
-                <Tr>
-                  <Td>
-                    {contractPeriods[0].ProductRegions.ProductRegionDetails.ProductRegionName} Average Price
-                    (USD/MT,FAS)
-                  </Td>
-                  {contractPeriods.map((i, index) => (
-                    <Td key={index} isNumeric>
-                      ${separateMiles(i.ProductRegions.ProductRegionDetails.ProductRegionAveragePrice)}
-                    </Td>
-                  ))}
-                </Tr>
-                <Tr>
-                  <Td>Average Price (USD/MT,FAS)</Td>
-                  {contractPeriods.map((i, index) => (
-                    <Td key={index} isNumeric>
-                      ${separateMiles(i.ContractPeriodAveragePublishedPrice)}
-                    </Td>
-                  ))}
-                </Tr>
-              </Tbody>
-            </Table> */}
+            {router.query.pgc === 'LAC' ? (
+              <TableLAC data={contractPeriods} />
+            ) : (
+              <TableContracts data={contractPeriods} />
+            )}
           </Box>
         </Container>
       </Container>

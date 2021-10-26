@@ -5,13 +5,14 @@ import { searchByKey } from '../utils'
 // data is array
 const TableContracts = ({ data }) => {
   const { ProductRegionDetails } = searchByKey(data, 'ProductRegionDetails')
-  const { details } = searchByKey(data, 'ProductSubRegionProductDetails')
+  const { ProductSubRegionProductDetails } = searchByKey(data, 'ProductSubRegionProductDetails')
 
-  console.log(Array.isArray(details))
+  console.log(ProductSubRegionProductDetails)
+  console.log(Array.isArray(ProductSubRegionProductDetails))
 
   return (
-    <Flex>
-      <Box>
+    <Flex flexDirection={{ base: 'column', md: 'row' }}>
+      <Box overflowX={'auto'}>
         <Table variant={'simple'} size={'sm'}>
           <TableCaption color={'dark'}>Source: Global Dairy Trade</TableCaption>
           <Thead>
@@ -151,7 +152,7 @@ const TableContracts = ({ data }) => {
               <Td borderBottom={'none'}>&nbsp;</Td>
             </Tr>
             <Tr>
-              {Array.isArray(details)
+              {Array.isArray(ProductSubRegionProductDetails)
                 ? data.map(p => (
                     <Td key={p.ContractPeriodGUID}>
                       {p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
@@ -172,7 +173,7 @@ const TableContracts = ({ data }) => {
                   ))}
             </Tr>
             <Tr>
-              {Array.isArray(details) &&
+              {Array.isArray(ProductSubRegionProductDetails) &&
                 data.map(p => (
                   <Td key={p.ContractPeriodGUID}>
                     {p.ProductRegions.ProductRegionDetails.ProductSubRegions.ProductSubRegionDetails
