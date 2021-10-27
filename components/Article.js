@@ -1,5 +1,5 @@
 import { Box, Flex, Button, Heading, Image, Link, useColorModeValue, useTheme } from '@chakra-ui/react'
-import { string_to_slug } from '../utils'
+import { stringToSlug } from '../utils'
 
 const Article = ({ imgStart = false, imgSrc, heading, text, buttonLabel }) => {
   const { colors } = useTheme()
@@ -41,7 +41,7 @@ const Article = ({ imgStart = false, imgSrc, heading, text, buttonLabel }) => {
           {text}
         </Flex>
         {buttonLabel && (
-          <Button as={'a'} href={`/${string_to_slug(heading)}`} variant={'primary'} mt={5}>
+          <Button as={'a'} href={`/${stringToSlug(heading)}`} variant={'primary'} mt={5}>
             {buttonLabel}
           </Button>
         )}

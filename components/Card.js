@@ -1,5 +1,5 @@
 import { Box, Button, Center, Heading, Image, Stack, Text } from '@chakra-ui/react'
-import { string_to_slug } from '../utils'
+import { stringToSlug } from '../utils'
 
 const Card = ({ img, name }) => {
   return (
@@ -48,7 +48,7 @@ const Card = ({ img, name }) => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, expedita?
           </Text>
           <Stack direction={'row'} align={'center'} justifyContent={'center'}>
-            <Button as={'a'} href={`/${string_to_slug(name)}`} variant={'primary'} my={5}>
+            <Button as={'a'} href={`/${stringToSlug(name)}`} variant={'primary'} my={5}>
               More information
             </Button>
           </Stack>

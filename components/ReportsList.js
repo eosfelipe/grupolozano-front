@@ -14,7 +14,7 @@ import {
   VStack,
   Link
 } from '@chakra-ui/react'
-import { string_to_slug } from '../utils'
+import { stringToSlug } from '../utils'
 import Logo from '../public/img/logo_invert.png'
 
 const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExternal = false }) => {
