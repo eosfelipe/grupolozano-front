@@ -48,20 +48,20 @@ const Hero = () => {
                 zIndex: -1
               }}
             >
-              Servicios de
+              Representante de
             </Text>
             <br />{' '}
             <Text color={'highlight'} as={'span'} fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
-              Importación y Logística
+              empresas extranjeras en el sector alimenticio
             </Text>
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'light'}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam est magnam minus enim illo a voluptate sed.
+            Impotamos y exportamos en todo el mundo
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <NextLink href="/reports" passHref>
               <Button as={'a'} variant={'primary'}>
-                Ver reporte del mercado
+                Reportes del mercado
               </Button>
             </NextLink>
           </Stack>

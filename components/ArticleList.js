@@ -8,7 +8,7 @@ const dataHome = [
     imgSrc:
       'https://images.unsplash.com/photo-1588710929895-6ee7a0a4d155?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80',
     heading: 'Milk Partners',
-    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+    text: 'Somos un proveedor líder de soluciones e ingredientes lácteos para los sectores de la alimentación, las bebidas y la salud. Nuestra preocupación es mejorar el valor, la eficacia y el rendimiento de sus productos para satisfacer las más altas exigencias de los clientes. Con muchos años de experiencia, somos capaces de introducir nuevos productos y proporcionar ingredientes de la mejor calidad para una gran variedad de aplicaciones. Nuestros productos se desarrollan para mejorar la salud y el bienestar de la mejor manera posible.',
     buttonLabel: 'More information'
   },
   {

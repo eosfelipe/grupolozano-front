@@ -1,88 +1,47 @@
-import Carousel from 'react-multi-carousel'
 import { useTheme } from '@chakra-ui/react'
+import Carousel from 'react-multi-carousel'
 import Card from './Card'
+import { stringToSlug } from '../utils'
 import 'react-multi-carousel/lib/styles.css'
-
-const features = [
-  {
-    id: 1,
-    img: 'http://grupolozano.com.mx/wp-content/uploads/2016/01/Suero-de-leche-en-polvo.jpg',
-    name: 'Suero de leche en polvo',
-    text: ''
-  },
-  {
-    id: 2,
-    img: 'http://grupolozano.com.mx/wp-content/uploads/2014/04/caseina1.jpg',
-    name: 'Caseína',
-    text: ''
-  },
-  {
-    id: 3,
-    img: 'http://grupolozano.com.mx/wp-content/uploads/2016/01/queso-azul.jpg',
-    name: 'Queso azul',
-    text: ''
-  },
-  {
-    id: 4,
-    img: 'http://grupolozano.com.mx/wp-content/uploads/2014/04/grasa_de_leche.jpg',
-    name: 'Grasa de leche',
-    text: ''
-  },
-  {
-    id: 5,
-    img: 'http://grupolozano.com.mx/wp-content/uploads/2016/01/dulce-de-leche.jpg',
-    name: 'Dulce de leche',
-    text: ''
-  },
-  {
-    id: 6,
-    img: '/img/acid_casein.png',
-    name: 'Caseína Ácida',
-    text: ''
-  },
-  {
-    id: 7,
-    img: '/img/casein_renet.png',
-    name: 'Caseína Renina',
-    text: ''
-  },
-  {
-    id: 8,
-    img: '/img/dry_buttermilk.png',
-    name: 'Leche descremada en polvo (SMP Y NFDM)',
-    text: ''
-  },
-  {
-    id: 9,
-    img: '/img/gouda.png',
-    name: 'Queso Gouda block',
-    text: ''
-  },
-  {
-    id: 10,
-    img: '/img/grasa.jpg',
-    name: 'Grasa butírica',
-    text: ''
-  },
-  {
-    id: 11,
-    img: '/img/queso_moza.png',
-    name: 'Queso Mozzarella',
-    text: ''
-  },
-  {
-    id: 12,
-    img: '/img/sodium.png',
-    name: 'Caseinato de sodio',
-    text: ''
-  },
-  {
-    id: 13,
-    img: '/img/whole_milk.png',
-    name: 'Leche entera en polvo (WMP)',
+const imgName = [
+  'Caseína acida',
+  'Azafran',
+  'Queso azul',
+  'Queso brie',
+  'Queso camembert',
+  'Canola',
+  'Caseína renina',
+  'Leche descremada en polvo (SMP Y NFDM)',
+  'Dulce de leche',
+  'Queso edam',
+  'Queso emmental',
+  'Queso feta',
+  'Fondue',
+  'Queso gouda block',
+  'Grasa butírica',
+  'Queso havarti',
+  'Maíz amarillo',
+  'Mantequilla',
+  'Margarina',
+  'Concentrado de proteína',
+  'Queso mozzarella',
+  'Queso reggianito',
+  'Semilla de algodón',
+  'Caseinato de sodio',
+  'Soya',
+  'Queso suizo',
+  'Leche entera en polvo (WMP)'
+]
+const features = []
+imgName.forEach((img, idx) => {
+  const item = {
+    id: idx,
+    img: `/img/p/${stringToSlug(img)}.jpg`,
+    name: img,
     text: ''
   }
-]
+  features.push(item)
+})
 
 const CardList = () => {
   const { breakpoints } = useTheme()
@@ -110,7 +69,7 @@ const CardList = () => {
   const responsive2 = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3
+      items: 4
     },
     tablet: {
       breakpoint: { max: 1024, min: 360 },
