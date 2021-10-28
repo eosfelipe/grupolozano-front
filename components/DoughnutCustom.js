@@ -37,7 +37,7 @@ const DoughnutCustom = ({ item, eventId: { latestEvent } }) => {
       <Text py={5} fontSize={{ base: '2xl', md: 'lg' }}>
         <NextLink
           href={{
-            pathname: '/reports/gdt/product',
+            pathname: '/market-reports/gdt/product',
             query: { eventId: latestEvent, pgc: item.ProductGroupCode }
           }}
           passHref
