@@ -1,4 +1,5 @@
-import { Box, Container, Flex, Heading, Stack, Text } from '@chakra-ui/react'
+import { ChevronRightIcon } from '@chakra-ui/icons'
+import { Box, Container, Flex, Heading, List, ListItem, ListIcon, Stack, Text } from '@chakra-ui/react'
 
 const Stats = () => {
   return (
@@ -33,12 +34,31 @@ const Stats = () => {
             </Box>
             <Box mb={{ base: 8, md: 20 }} p={4}>
               <Heading color={'dark'} mb={5} fontSize={{ base: '3xl', md: '5xl' }}>
-                Importamos y exportamos a todo el mundo
+                Servicios de importación y logística
               </Heading>
               <Text fontSize={'xl'} color={'dark'}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia sunt, iste dolore, ipsa autem molestias,
-                consequuntur ducimus hic ad laboriosam nisi temporibus. Tempora modi reprehenderit dignissimos
-                repudiandae laudantium, quis vero.
+                Realizamos servicios de logística para importación y exportación de productos lácteos a cualquier parte
+                del mundo y ejecutamos los trámites necesarios para la aprobación de los productos lácteos.
+              </Text>
+              <Text fontSize={'xl'} color={'dark'} mt={5}>
+                <List spacing={3}>
+                  <ListItem>
+                    <ListIcon as={ChevronRightIcon} color="highlight" />
+                    Logística y apoyo
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={ChevronRightIcon} color="highlight" />
+                    Legislación
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={ChevronRightIcon} color="highlight" />
+                    Ventas y asesoría
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={ChevronRightIcon} color="highlight" />
+                    Trámites aduanales resueltos
+                  </ListItem>
+                </List>
               </Text>
             </Box>
           </Stack>

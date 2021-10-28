@@ -15,7 +15,7 @@ import {
   Link
 } from '@chakra-ui/react'
 import { stringToSlug } from '../utils'
-import Logo from '../public/img/logo_invert.png'
+import Logo from '../public/logorojo.png'
 
 const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExternal = false }) => {
   return (
@@ -31,6 +31,8 @@ const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExterna
         px={12}
         bg={'dark'}
         borderTopRadius={'xl'}
+        height={'130px'}
+        width={'300px'}
         minH={'115px'}
         minW={'342px'}
         display={'flex'}
@@ -100,7 +102,7 @@ const ReportsList = () => {
       <Stack
         direction={{ base: 'column', md: 'row' }}
         textAlign={'center'}
-        justify={'center'}
+        justify={'space-between'}
         spacing={{ base: 4, lg: 10 }}
         py={10}
       >

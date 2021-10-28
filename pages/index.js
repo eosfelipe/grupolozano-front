@@ -1,3 +1,4 @@
+import { Heading } from '@chakra-ui/react'
 import ArticleList from '../components/ArticleList'
 import CardList from '../components/CardList'
 import Footer from '../components/Footer'
@@ -12,11 +13,10 @@ export default function Home() {
     <>
       <Navbar color={0} />
       <Hero />
-      <SectionText
-        text={
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, aliquid libero expedita distinctio vitae quasi unde, quod labore eius tempora, sed esse veniam voluptates. Sed quas beatae modi aliquam veritatis!'
-        }
-      />
+      {/* <SectionText text={'Te ayudamos a materializar tus sueños'} /> */}
+      <Heading color={'dark'} my={5} py={5} textAlign={'center'}>
+        Te ayudamos a materializar tus sueños
+      </Heading>
       <ArticleList />
       <SectionText
         heading={'Products'}

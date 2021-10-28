@@ -17,8 +17,29 @@ const TableLAC = ({ data }) => {
   data.forEach(contract => {
     rowHeader.push(contract.ContractPeriodName + ' ' + contract.ContractMonth)
   })
-  console.log(rowHeader)
-  console.log(rowBody)
+  const colOne = rowBody.map(item => [item])
+  const colTwo = rowHeader.map(item => [item])
+  // colOne[i].push('test')
+  data.forEach(contract => {
+    if (Array.isArray(contract.ProductRegions.ProductRegionDetails)) {
+      contract.ProductRegions.ProductRegionDetails.forEach(region => {
+        if (
+          Array.isArray(
+            region.ProductSubRegions.ProductSubRegionDetails.ProductSubRegionProducts.ProductSubRegionProductDetails
+          )
+        ) {
+          region.ProductSubRegions.ProductSubRegionDetails.ProductSubRegionProducts.ProductSubRegionProductDetails.forEach(
+            subregion => {
+              console.log(subregion.ProductAveragePrice)
+            }
+          )
+        }
+      })
+    }
+  })
+
+  console.log(colOne)
+  console.log(colTwo)
   return <div>LAC</div>
 }
 

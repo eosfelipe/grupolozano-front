@@ -7,8 +7,8 @@ const TableContracts = ({ data }) => {
   const { ProductRegionDetails } = searchByKey(data, 'ProductRegionDetails')
   const { ProductSubRegionProductDetails } = searchByKey(data, 'ProductSubRegionProductDetails')
 
-  console.log(ProductSubRegionProductDetails)
-  console.log(Array.isArray(ProductSubRegionProductDetails))
+  // console.log(ProductSubRegionProductDetails)
+  // console.log(Array.isArray(ProductSubRegionProductDetails))
 
   return (
     <Flex flexDirection={{ base: 'column', md: 'row' }}>

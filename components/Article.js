@@ -1,3 +1,4 @@
+import NextLink from 'next/link'
 import { Box, Flex, Button, Heading, Image, Link, useColorModeValue, useTheme } from '@chakra-ui/react'
 import { stringToSlug } from '../utils'
 
@@ -41,9 +42,11 @@ const Article = ({ imgStart = false, imgSrc, heading, text, buttonLabel }) => {
           {text}
         </Flex>
         {buttonLabel && (
-          <Button as={'a'} href={`/${stringToSlug(heading)}`} variant={'primary'} mt={5}>
-            {buttonLabel}
-          </Button>
+          <NextLink href={`/${stringToSlug(heading)}`} passHref>
+            <Button as={'a'} variant={'primary'} mt={5}>
+              {buttonLabel}
+            </Button>
+          </NextLink>
         )}
       </Box>
     </Box>

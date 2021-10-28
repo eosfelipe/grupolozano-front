@@ -63,7 +63,7 @@ const Footer = () => {
             <Text fontWeight={'normal'} fontSize={'lg'} mb={2}>
               Reports
             </Text>
-            <NextLink href={'/reports/gdt'} passHref>
+            <NextLink href={'/market-reports/gdt'} passHref>
               <Link
                 fontWeight={'light'}
                 _focus={{
@@ -73,7 +73,7 @@ const Footer = () => {
                 Reports GDT
               </Link>
             </NextLink>
-            <NextLink href={'/reports/imports'} passHref>
+            <NextLink href={'/market-reports/imports'} passHref>
               <Link
                 fontWeight={'light'}
                 _focus={{
@@ -83,7 +83,7 @@ const Footer = () => {
                 Report of accumulated monthly imports
               </Link>
             </NextLink>
-            <Link fontWeight={'light'} href={'#'}>
+            <Link fontWeight={'light'} href={'/market-reports'}>
               Rabobank
             </Link>
           </Stack>
