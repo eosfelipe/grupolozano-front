@@ -42,7 +42,7 @@ const ProductGDT = () => {
 
   useEffect(() => {
     if (router.query.eventId === undefined) {
-      return router.push('/reports/gdt')
+      return router.push('/market-reports/gdt')
     }
   }, [])
 
@@ -140,7 +140,7 @@ const ProductGDT = () => {
               </NextLink>
             </BreadcrumbItem>
             <BreadcrumbItem>
-              <NextLink href="/reports/gdt" passHref>
+              <NextLink href="/market-reports/gdt" passHref>
                 <BreadcrumbLink>GDT</BreadcrumbLink>
               </NextLink>
             </BreadcrumbItem>
