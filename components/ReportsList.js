@@ -14,7 +14,6 @@ import {
   VStack,
   Link
 } from '@chakra-ui/react'
-import { stringToSlug } from '../utils'
 import Logo from '../public/logorojo.png'
 
 const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExternal = false }) => {
@@ -76,7 +75,7 @@ const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExterna
               <Button variant={'primary'}>{title}</Button>
             </Link>
           ) : (
-            <NextLink href={`/reports/${link}`} passHref>
+            <NextLink href={`/market-reports/${link}`} passHref>
               <Button as={'a'} variant={'primary'}>
                 {title}
               </Button>
