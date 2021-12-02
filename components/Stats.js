@@ -40,7 +40,7 @@ const Stats = () => {
                 Realizamos servicios de logística para importación y exportación de productos lácteos a cualquier parte
                 del mundo y ejecutamos los trámites necesarios para la aprobación de los productos lácteos.
               </Text>
-              <Text fontSize={'xl'} color={'dark'} mt={5}>
+              <Flex fontSize={'xl'} color={'dark'} mt={5}>
                 <List spacing={3}>
                   <ListItem>
                     <ListIcon as={ChevronRightIcon} color="highlight" />
@@ -59,7 +59,7 @@ const Stats = () => {
                     Trámites aduanales resueltos
                   </ListItem>
                 </List>
-              </Text>
+              </Flex>
             </Box>
           </Stack>
           <Flex flex={1} />
