@@ -28,6 +28,7 @@ import Navbar from '../../../components/Navbar'
 import useDateTimeFormat from '../../../hooks/useDateTimeformat'
 import TableContracts from '../../../components/TableContracts'
 import TableLAC from '../../../components/TableLAC'
+import TableGen from '../../../components/TableGen'
 
 const ProductGDT = () => {
   const router = useRouter()
@@ -228,7 +229,8 @@ const ProductGDT = () => {
             {router.query.pgc === 'LAC' ? (
               <TableLAC data={contractPeriods} />
             ) : (
-              <TableContracts data={contractPeriods} />
+              // <TableContracts data={contractPeriods} />
+              <TableGen data={contractPeriods} />
             )}
           </Box>
         </Container>

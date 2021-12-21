@@ -1,4 +1,3 @@
-import NextImage from 'next/image'
 import {
   Box,
   Container,
@@ -16,17 +15,9 @@ import {
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
+import ChakraNextImage from '../../components/ChakraNextImage'
 import Milk from '../../public/img/milk-partners.jpg'
 import Vision from '../../public/img/vision.jpg'
-
-const ChakraNextImage = props => {
-  const { src, alt, placeholder, ...rest } = props
-  return (
-    <Box objectFit={'cover'} borderRadius={'lg'} {...rest}>
-      <NextImage src={src} alt={alt} placeholder={placeholder} />
-    </Box>
-  )
-}
 
 const MilkPartners = () => {
   const { colors } = useTheme()

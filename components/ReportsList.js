@@ -14,9 +14,12 @@ import {
   VStack,
   Link
 } from '@chakra-ui/react'
-import Logo from '../public/logorojo.png'
+import ChakraNextImage from './ChakraNextImage'
+import Logo from '../public/img/logo_invert.png'
+import GDT from '../public/img/gdt.svg'
+import Rabobank from '../public/img/rabobank.png'
 
-const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExternal = false }) => {
+const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExternal = false, w, h }) => {
   return (
     <Box
       shadow="base"
@@ -45,7 +48,8 @@ const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExterna
           {/* <Text fontSize="5xl" fontWeight="900">
             {subtitle}
           </Text> */}
-          <Image src={img} alt={link} w={'100%'} />
+          {/* <Image src={img} alt={link} w={'100%'} /> */}
+          <ChakraNextImage src={img} alt={link} placeholder={link} w={w} h={h} />
         </HStack>
       </Box>
       <VStack py={4} borderBottomRadius={'xl'}>
@@ -105,10 +109,12 @@ const ReportsList = () => {
         spacing={{ base: 4, lg: 10 }}
         py={10}
       >
-        <Wrapper img={'https://cdn.globaldairytrade.info/ps/static-ss4/img/primary-logo.20f4cce6.svg'} link={'gdt'} />
-        <Wrapper img={Logo.src} link={'imports'} />
+        <Wrapper img={GDT.src} link={'gdt'} w={200} h={100} />
+        <Wrapper img={Logo.src} link={'imports'} w={200} h={100} />
         <Wrapper
-          img={'https://www.rabobank.co.nz/-/media/new-images/rabobank-logo-white.png'}
+          img={Rabobank.src}
+          w={200}
+          h={50}
           link={
             'https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2021/186068_nz-agribusiness-monthly_sept2021.pdf?la=en&hash=CC9A90208896C7003A61E57DC141891796E260CD'
           }
