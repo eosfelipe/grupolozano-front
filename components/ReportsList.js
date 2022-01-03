@@ -1,23 +1,12 @@
 import NextLink from 'next/link'
 import { CheckIcon } from '@chakra-ui/icons'
-import {
-  Box,
-  Button,
-  Heading,
-  HStack,
-  Image,
-  List,
-  ListIcon,
-  ListItem,
-  Stack,
-  Text,
-  VStack,
-  Link
-} from '@chakra-ui/react'
+import { Box, Button, Heading, HStack, List, ListIcon, ListItem, Stack, Text, VStack, Link } from '@chakra-ui/react'
 import ChakraNextImage from './ChakraNextImage'
 import Logo from '../public/img/logo_invert.png'
 import GDT from '../public/img/gdt.svg'
 import Rabobank from '../public/img/rabobank.png'
+
+const linkRabobank = `https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2021/148127_nz-agribusiness-monthly_nov2021.pdf?la=en&hash=4439468C8C1433B1C5407AAFD2209BE16092E1F4`
 
 const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExternal = false, w, h }) => {
   return (
@@ -111,16 +100,7 @@ const ReportsList = () => {
       >
         <Wrapper img={GDT.src} link={'gdt'} w={200} h={100} />
         <Wrapper img={Logo.src} link={'imports'} w={200} h={100} />
-        <Wrapper
-          img={Rabobank.src}
-          w={200}
-          h={50}
-          link={
-            'https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2021/186068_nz-agribusiness-monthly_sept2021.pdf?la=en&hash=CC9A90208896C7003A61E57DC141891796E260CD'
-          }
-          title="View latest report"
-          isExternal
-        />
+        <Wrapper img={Rabobank.src} w={200} h={50} link={linkRabobank} title="View latest report" isExternal />
       </Stack>
     </Box>
   )

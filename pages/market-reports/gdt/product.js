@@ -1,4 +1,4 @@
-import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons'
+import { ArrowUpIcon, ArrowDownIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import {
   Box,
   Breadcrumb,
@@ -15,7 +15,8 @@ import {
   Tbody,
   Tr,
   Th,
-  Td
+  Td,
+  Link
 } from '@chakra-ui/react'
 import { call, separateMiles } from '../../../utils'
 import { Line } from 'react-chartjs-2'
@@ -226,12 +227,18 @@ const ProductGDT = () => {
           </Box>
           <Box py={10} overflowX={'auto'}>
             <Text fontSize={{ base: '2xl', md: '3xl' }}>Average Price Per Region (USD/MT, FAS)</Text>
-            {router.query.pgc === 'LAC' ? (
+            {/* {router.query.pgc === 'LAC' ? (
               <TableLAC data={contractPeriods} />
             ) : (
               // <TableContracts data={contractPeriods} />
-              <TableGen data={contractPeriods} />
-            )}
+              )} */}
+            <TableGen data={contractPeriods} />
+            <Text fontSize={'sm'}>
+              Source:{' '}
+              <Link href="https://www.globaldairytrade.info/en/product-results/" isExternal color={'highlight'}>
+                Global Dairy Trade <ExternalLinkIcon mx="2px" />
+              </Link>
+            </Text>
           </Box>
         </Container>
       </Container>
