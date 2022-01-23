@@ -20,10 +20,16 @@ const TableGen = ({ data }) => {
   const productRegionName = new Set()
   const regionNameValues = []
   productRegions.forEach(item => {
-    console.log(item)
-    productRegionName.add(Object.values(item)[0].ProductRegionName)
-    regionNameValues.push('$' + Object.values(item)[0].ProductRegionAveragePrice)
-    productSubRegions.push(Object.values(item)[0].ProductSubRegions.ProductSubRegionDetails)
+    if (!Array.isArray(Object.values(item)[0])) {
+      productRegionName.add(Object.values(item)[0].ProductRegionName)
+      regionNameValues.push('$' + Object.values(item)[0].ProductRegionAveragePrice)
+      productSubRegions.push(Object.values(item)[0].ProductSubRegions.ProductSubRegionDetails)
+    } else {
+      console.log('is array')
+      Object.values(item)[0].forEach(item => {
+        console.log(item)
+      })
+    }
   })
   for (const item of productRegionName) regionNameValues.unshift(`${item} Average Price (USD/MT, FAS)`)
 
@@ -90,7 +96,7 @@ const TableGen = ({ data }) => {
             )
         )}
 
-        {<Tr>{detailsProducts.map((element, i) => !Array.isArray(element) && <Td>{element}</Td>)}</Tr>}
+        {<Tr>{detailsProducts.map((element, i) => !Array.isArray(element) && <Td key={i}>{element}</Td>)}</Tr>}
 
         <Tr>
           {subRegionNameValues.map((element, i) => (

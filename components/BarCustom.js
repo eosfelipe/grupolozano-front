@@ -4,6 +4,7 @@ import { Bar } from 'react-chartjs-2'
 const BarCustom = ({ name, values, text }) => {
   const values1 = values[0].map(item => item.value)
   const values2 = values[1].map(item => item.value)
+  const year = new Date().getFullYear()
   const data = {
     labels: [
       'Enero',
@@ -21,13 +22,13 @@ const BarCustom = ({ name, values, text }) => {
     ],
     datasets: [
       {
-        label: `Year 2020`,
+        label: `Year ${year - 1}`,
         data: values1,
         backgroundColor: 'rgba(208, 31, 40, 0.5)',
         stack: 'Stack 0'
       },
       {
-        label: `Year 2021`,
+        label: `Year ${year}`,
         data: values2,
         backgroundColor: 'rgba(208, 31, 40, 1)',
         stack: 'Stack 1'

@@ -1,6 +1,7 @@
 {
   "name": "grupolozano",
   "version": "0.1.0",
+  "author": "eosfelipe",
   "private": true,
   "scripts": {
     "dev": "next dev",
