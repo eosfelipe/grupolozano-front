@@ -96,7 +96,11 @@ const TableGen = ({ data }) => {
             )
         )}
 
-        {<Tr>{detailsProducts.map((element, i) => !Array.isArray(element) && <Td key={i}>{element}</Td>)}</Tr>}
+        {
+          <Tr>
+            {detailsProducts.map((element, i) => !Array.isArray(element) && <Td key={i}>{separateMiles(element)}</Td>)}
+          </Tr>
+        }
 
         <Tr>
           {subRegionNameValues.map((element, i) => (
