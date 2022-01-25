@@ -87,8 +87,7 @@ const ReportsList = () => {
           Most demanded reports
         </Heading>
         <Text fontSize={'lg'} color={'dark'}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste architecto ratione hic eveniet, temporibus
-          iusto?
+          Análisis detallado de las tendencias, el panorama competitivo, los principales impulsores del mercado
         </Text>
       </VStack>
       <Stack

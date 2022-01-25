@@ -34,7 +34,7 @@ const Hero = () => {
     >
       <Flex flex={1} align={'center'} justify={'center'} mt={{ base: '100px', md: 0 }}>
         <Stack spacing={6} w={'full'} maxW={'lg'} p={8}>
-          {/* <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+          <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
             <Text
               as={'span'}
               position={'relative'}
@@ -55,18 +55,18 @@ const Hero = () => {
             <Text color={'highlight'} as={'span'} fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
               empresas extranjeras en el sector alimenticio
             </Text>
-          </Heading> */}
-          <Image src={Logorojo.src} alt="logo" />
+          </Heading>
+          {/* <Image src={Logorojo.src} alt="logo" /> */}
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'light'}>
             Importamos y exportamos en todo el mundo
           </Text>
-          {/* <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
+          <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <NextLink href="/reports" passHref>
               <Button as={'a'} variant={'primary'}>
                 Reportes del mercado
               </Button>
             </NextLink>
-          </Stack> */}
+          </Stack>
         </Stack>
         <Flex
           display={{ base: 'none', md: 'flex' }}

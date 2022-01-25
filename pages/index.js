@@ -20,9 +20,7 @@ export default function Home() {
       <ArticleList />
       <SectionText
         heading={'Products'}
-        text={
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, aliquid libero expedita distinctio vitae quasi unde, quod labore eius tempora, sed esse veniam voluptates. Sed quas beatae modi aliquam veritatis!'
-        }
+        text={'Somos representantes de empresas extranjeras en el sector alimenticio con productos de calidad'}
       />
       <CardList />
       <Stats />

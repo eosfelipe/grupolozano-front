@@ -17,7 +17,7 @@ const dataHome = [
     imgSrc:
       'https://images.unsplash.com/photo-1552767059-ce182ead6c1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80',
     heading: 'Market reports',
-    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+    text: 'Hoy en día en el mercado de la analítica empresarial, las organizaciones, asociaciones y actores en el mercado B2B generan un enorme volumen de datos estructurados y no estructurados debido a sus actividades cotidianas, lo que ha dado lugar a las tendencias de big data. En Grupo Lozano Migoya estamos relacionados con las actividades de los clientes, empresas del sector, los productos y los competidores. Es por esa razón que recopilamos a través de varios canales digitales involucrados en el negocio la información necesaria e importante para que nuestros clientes puedan tomar las decisiones importantes en su negocio.',
     buttonLabel: 'More information'
   },
   {
