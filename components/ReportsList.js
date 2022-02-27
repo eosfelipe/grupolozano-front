@@ -110,7 +110,7 @@ const ReportsList = () => {
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
           <Wrapper img={GDT.src} link={'gdt'} w={200} h={100} />
           <Wrapper img={Logo.src} link={'imports'} w={200} h={100} />
-          <Wrapper img={Logo.src} link={'new-graphics'} w={200} h={100} />
+          <Wrapper img={Logo.src} link={'graphics'} w={200} h={100} />
           <Wrapper img={Rabobank.src} w={200} h={50} link={linkRabobank} title="View latest report" isExternal />
         </SimpleGrid>
       </Flex>
