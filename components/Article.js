@@ -1,8 +1,9 @@
 import NextLink from 'next/link'
-import { Box, Flex, Button, Heading, Image, Link, useColorModeValue, useTheme } from '@chakra-ui/react'
+import { Box, Flex, Button, Heading, Link, useColorModeValue, useTheme, Image } from '@chakra-ui/react'
+import ChakraNextImage from './ChakraNextImage'
 import { stringToSlug } from '../utils'
 
-const Article = ({ imgStart = false, imgSrc, heading, text, buttonLabel }) => {
+const Article = ({ imgStart = false, imgSrc, heading, text, buttonLabel, isImgExternal = false }) => {
   const { colors } = useTheme()
   return (
     <Box
@@ -14,7 +15,11 @@ const Article = ({ imgStart = false, imgSrc, heading, text, buttonLabel }) => {
       <Box display={'flex'} flex={'1'} marginRight={'3'} position={'relative'} alignItems={'center'}>
         <Box w={{ base: '100%', sm: '85%' }} zIndex={'2'} marginLeft={{ base: '0', sm: '5%' }} marginTop={'5%'}>
           <Link textDecoration={'none'} _hover={{ textDecoration: 'none' }}>
-            <Image borderRadius={'lg'} src={imgSrc} alt={heading} objectFit={'contain'} />
+            {isImgExternal ? (
+              <Image borderRadius={'lg'} src={imgSrc} alt={heading} objectFit={'contain'} />
+            ) : (
+              <ChakraNextImage alt={heading} src={imgSrc} placeholder="blur" />
+            )}
           </Link>
         </Box>
         <Box zIndex={'1'} w={'100%'} position={'absolute'} h={'100%'}>

@@ -1,6 +1,19 @@
 import NextLink from 'next/link'
 import { CheckIcon } from '@chakra-ui/icons'
-import { Box, Button, Heading, HStack, List, ListIcon, ListItem, Stack, Text, VStack, Link } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  List,
+  ListIcon,
+  ListItem,
+  Text,
+  VStack,
+  Link,
+  SimpleGrid,
+  Flex
+} from '@chakra-ui/react'
 import ChakraNextImage from './ChakraNextImage'
 import Logo from '../public/img/logo_invert.png'
 import GDT from '../public/img/gdt.svg'
@@ -22,10 +35,6 @@ const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExterna
         px={12}
         bg={'dark'}
         borderTopRadius={'xl'}
-        height={'130px'}
-        width={'300px'}
-        minH={'115px'}
-        minW={'342px'}
         display={'flex'}
         alignItems={'center'}
         justifyContent={'center'}
@@ -90,17 +99,21 @@ const ReportsList = () => {
           Análisis detallado de las tendencias, el panorama competitivo, los principales impulsores del mercado
         </Text>
       </VStack>
-      <Stack
+      <Flex
         direction={{ base: 'column', md: 'row' }}
-        textAlign={'center'}
-        justify={'space-between'}
+        justify={'center'}
+        alignContent={'center'}
         spacing={{ base: 4, lg: 10 }}
+        textAlign={'center'}
         py={10}
       >
-        <Wrapper img={GDT.src} link={'gdt'} w={200} h={100} />
-        <Wrapper img={Logo.src} link={'imports'} w={200} h={100} />
-        <Wrapper img={Rabobank.src} w={200} h={50} link={linkRabobank} title="View latest report" isExternal />
-      </Stack>
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
+          <Wrapper img={GDT.src} link={'gdt'} w={200} h={100} />
+          <Wrapper img={Logo.src} link={'imports'} w={200} h={100} />
+          <Wrapper img={Logo.src} link={'new-graphics'} w={200} h={100} />
+          <Wrapper img={Rabobank.src} w={200} h={50} link={linkRabobank} title="View latest report" isExternal />
+        </SimpleGrid>
+      </Flex>
     </Box>
   )
 }

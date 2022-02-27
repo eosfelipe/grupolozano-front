@@ -48,7 +48,7 @@ const Card = ({ img, name }) => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, expedita?
           </Text>
           <Stack direction={'row'} align={'center'} justifyContent={'center'}>
-            <Button as={'a'} href={`/${stringToSlug(name)}`} variant={'primary'} my={5}>
+            <Button as={'a'} href={`/products-services`} variant={'primary'} my={5}>
               More information
             </Button>
           </Stack>

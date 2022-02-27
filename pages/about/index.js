@@ -3,6 +3,7 @@ import { CheckIcon } from '@chakra-ui/icons'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
 import Article from '../../components/Article'
+import Worldimg from '../../public/img/world-black.png'
 
 const features = [
   {
@@ -45,7 +46,6 @@ const data = [
   {
     id: 1,
     imgStart: true,
-    imgSrc: 'http://grupolozano.com.mx/wp-content/uploads/2014/04/large-black.png',
     heading: '¿Quiénes Somos?',
     text: <HighlightText />
   }
@@ -62,13 +62,7 @@ export default function About() {
         mt={'100px'}
       >
         {data.map(item => (
-          <Article
-            key={item.id}
-            imgStart={item.imgStart}
-            imgSrc={item.imgSrc}
-            heading={item.heading}
-            text={item.text}
-          />
+          <Article key={item.id} imgStart={item.imgStart} imgSrc={Worldimg} heading={item.heading} text={item.text} />
         ))}
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} p={8}>
           {features.map(feature => (

@@ -1,23 +1,27 @@
 import NextLink from 'next/link'
 import { Button, Flex, Heading, Image, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
 import CountryCard from './CountryCard'
-import Logorojo from '../public/logorojo.png'
 
 const countries = [
   {
     id: 1,
-    name: 'Netherlands',
-    brand: 'Firesland Campina DMV'
+    name: 'Alemania',
+    brand: 'FrieslandCampina'
   },
   {
     id: 2,
-    name: 'Switzerland',
-    brand: 'Lustenberger'
+    name: 'Uruguay',
+    brand: 'Conaprole'
   },
   {
     id: 3,
-    name: 'Denmark',
-    brand: 'Arla Foods'
+    name: 'Eua',
+    brand: 'DairyAmerica'
+  },
+  {
+    id: 4,
+    name: 'Zalemania',
+    brand: 'Alpenhain'
   }
 ]
 
@@ -49,19 +53,18 @@ const Hero = () => {
                 zIndex: -1
               }}
             >
-              Representante de
+              Representante de las mejores
             </Text>
             <br />{' '}
             <Text color={'highlight'} as={'span'} fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
-              empresas extranjeras en el sector alimenticio
+              empresas extranjeras
             </Text>
           </Heading>
-          {/* <Image src={Logorojo.src} alt="logo" /> */}
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'light'}>
-            Importamos y exportamos en todo el mundo
+            Importamos y exportamos productos alimenticios de la mejor calidad en el mercado
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-            <NextLink href="/reports" passHref>
+            <NextLink href="/market-reports" passHref>
               <Button as={'a'} variant={'primary'}>
                 Reportes del mercado
               </Button>
@@ -72,9 +75,10 @@ const Hero = () => {
           display={{ base: 'none', md: 'flex' }}
           flexDirection={'row'}
           position={'absolute'}
-          bottom={-20}
+          bottom={-50}
+          left={100}
           justify={'space-between'}
-          spacing={6}
+          spacing={4}
           zIndex={'sticky'}
         >
           {countries.map(country => (

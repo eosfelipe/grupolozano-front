@@ -19,7 +19,7 @@ export default function Home() {
       </Heading>
       <ArticleList />
       <SectionText
-        heading={'Products'}
+        heading={'Productos'}
         text={'Somos representantes de empresas extranjeras en el sector alimenticio con productos de calidad'}
       />
       <CardList />

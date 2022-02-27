@@ -1,39 +1,38 @@
 import { Box, Flex, Image, SimpleGrid } from '@chakra-ui/react'
 import { stringToSlug } from '../utils'
 const imgName = [
-  'Caseína acida',
   'Azafran',
+  'Canola',
+  'Caseína',
+  'Caseinato',
+  'Dulce de leche',
+  'Fondue',
+  'Grasa butírica',
+  'Leche descremada en polvo',
+  'Leche entera',
+  'Leche entera con aprole',
+  'Maíz',
+  'Mantequilla',
+  'Margarina',
+  'Proteinas',
   'Queso azul',
   'Queso brie',
   'Queso camembert',
-  'Canola',
-  'Caseína renina',
-  'Leche descremada en polvo (SMP Y NFDM)',
-  'Dulce de leche',
-  'Queso edam',
   'Queso emmental',
   'Queso feta',
-  'Fondue',
-  'Queso gouda block',
-  'Grasa butírica',
+  'Queso gouda',
   'Queso havarti',
-  'Maíz amarillo',
-  'Mantequilla',
-  'Margarina',
-  'Concentrado de proteína',
   'Queso mozzarella',
   'Queso reggianito',
   'Semilla de algodón',
-  'Caseinato de sodio',
   'Soya',
-  'Queso suizo',
-  'Leche entera en polvo (WMP)'
+  'Suizo'
 ]
 const data = []
 imgName.forEach((img, idx) => {
   const item = {
     id: idx,
-    img: `/img/p/${stringToSlug(img)}.jpg`,
+    img: `/img/pro/${stringToSlug(img)}.jpg`,
     name: img,
     text: ''
   }
@@ -59,8 +58,8 @@ const Product = ({ name, img }) => {
 
 const ProductsList = () => {
   return (
-    <Box>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
+    <Box my={10}>
+      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={10}>
         {data.map(product => (
           <Product key={product.id} name={product.name} img={product.img} />
         ))}
