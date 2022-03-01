@@ -51,7 +51,7 @@ const ReportImports = () => {
               </NextLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage color={'highlight'}>
-              <NextLink href="/reports/imports" passHref>
+              <NextLink href="/market-reports/imports" passHref>
                 <BreadcrumbLink>Acumulativo mensual</BreadcrumbLink>
               </NextLink>
             </BreadcrumbItem>
