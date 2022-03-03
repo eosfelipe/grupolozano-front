@@ -6,7 +6,7 @@ import Footer from '../../../components/Footer'
 import Navbar from '../../../components/Navbar'
 import LineChartCustom from '../../../components/LineChartCustom'
 
-const URL = 'http://localhost/backend-grupolozano/public/api/milk'
+const URL = 'https://grupolozano.com.mx/dashboard/public/api/milk'
 const Graphics = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -47,7 +47,7 @@ const Graphics = () => {
             </BreadcrumbItem>
           </Breadcrumb>
           <Heading py={5}>U.S. Milk Production in 1000 t</Heading>
-          <LineChartCustom data={data} />
+          {data && <LineChartCustom data={data} />}
           <Box mt={5}>
             <Text fontSize={'sm'}>
               All information published on this page may be reproduced provided the user acknowledges Grupo Lozano

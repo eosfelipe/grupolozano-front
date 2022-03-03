@@ -29,6 +29,7 @@ const LineChartCustom = ({ data: { data: datasets } }) => {
   ]
 
   const years = []
+  const colors = ['208, 31, 40', '53, 162, 235', '255, 215, 0', '188, 143, 143', '119, 136, 153']
   const yearNow = new Date().getFullYear()
   for (let i = yearNow; i > yearNow - 5; i--) {
     years.push(i)
@@ -41,20 +42,13 @@ const LineChartCustom = ({ data: { data: datasets } }) => {
       .filter(Boolean)
   }
 
-  const randomRgba = () => {
-    const o = Math.round
-    const r = Math.random
-    const s = 255
-    return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')'
-  }
-
   const line = []
   years.forEach((year, i) => {
     line.push({
       label: year,
       data: getValuesxYear(year),
-      borderColor: randomRgba(),
-      backgroundColor: randomRgba()
+      borderColor: `rgb(${colors[i]})`,
+      backgroundColor: `rgba(${colors[i]},0.5)`
     })
   })
 
