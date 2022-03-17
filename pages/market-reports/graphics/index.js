@@ -1,6 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import NextLink from 'next/link'
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Container, Divider, Heading, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Button,
+  Container,
+  Divider,
+  Grid,
+  GridItem,
+  Heading,
+  SimpleGrid,
+  Text
+} from '@chakra-ui/react'
 import DarkOverlay from '../../../components/DarkOverlay'
 import Footer from '../../../components/Footer'
 import Navbar from '../../../components/Navbar'
@@ -18,6 +31,7 @@ const Graphics = () => {
   const [dataImporters, setDataImporters] = useState([])
   const [dataExporters, setDataExporters] = useState([])
   const [loading, setLoading] = useState(true)
+  const componentRef = useRef()
 
   const getData = async () => {
     const response = await (await fetch(URL)).json()
@@ -56,6 +70,7 @@ const Graphics = () => {
         py={{ base: '6', md: '12' }}
         px={{ base: '6', md: '12' }}
         mt={'100px'}
+        ref={componentRef}
       >
         <Container border={'1px solid #cfcfcf'} minH={'100vh'} bg={'gray.100'} p={5} maxW={{ base: '3xl', md: '7xl' }}>
           <Breadcrumb fontSize={'sm'}>
@@ -77,13 +92,24 @@ const Graphics = () => {
           </Breadcrumb>
 
           <Heading py={5}>U.S. Milk Production in 1000 t</Heading>
-          {data && <LineChartCustom data={data} />}
+          <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+            <GridItem colSpan={2}>{data && <LineChartCustom data={data} />}</GridItem>
+            <GridItem display={'flex'} justifyContent={'flex-end'}>
+              <Button as={'a'} variant={'primary'} onClick={() => window.print()} cursor={'pointer'}>
+                Print report
+              </Button>
+            </GridItem>
+          </Grid>
           <Divider py={5} />
           <Heading py={5}>Milk main dairy importers</Heading>
-          {dataImporters && dataImporters.map((item, idx) => <BarProduct key={idx} data={item.data} />)}
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
+            {dataImporters && dataImporters.map((item, idx) => <BarProduct key={idx} data={item.data} />)}
+          </SimpleGrid>
           <Divider py={5} />
           <Heading py={5}>Milk main dairy exporters</Heading>
-          {dataExporters && dataExporters.map((item, idx) => <BarProduct key={idx} data={item.data} />)}
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
+            {dataExporters && dataExporters.map((item, idx) => <BarProduct key={idx} data={item.data} />)}
+          </SimpleGrid>
           <Box mt={5}>
             <Text fontSize={'sm'}>
               All information published on this page may be reproduced provided the user acknowledges Grupo Lozano

@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react'
 import { Line } from 'react-chartjs-2'
 
 const LineChartCustom = ({ data: { data: datasets } }) => {
@@ -57,7 +58,11 @@ const LineChartCustom = ({ data: { data: datasets } }) => {
     datasets: line
   }
 
-  return <Line options={options} data={data2} />
+  return (
+    <Box>
+      <Line options={options} data={data2} />
+    </Box>
+  )
 }
 
 export default LineChartCustom
