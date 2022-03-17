@@ -11,15 +11,18 @@ import {
   Grid,
   GridItem,
   Heading,
+  Image,
   SimpleGrid,
   Text
 } from '@chakra-ui/react'
+import ReactToPrint from 'react-to-print'
+import { groupBy, parseCsv } from '../../../utils'
 import DarkOverlay from '../../../components/DarkOverlay'
 import Footer from '../../../components/Footer'
 import Navbar from '../../../components/Navbar'
 import LineChartCustom from '../../../components/LineChartCustom'
-import { groupBy, parseCsv } from '../../../utils'
 import BarProduct from '../../../components/BarProduct'
+import Logo from '../../../public/img/logo.png'
 
 const URL = 'https://grupolozano.com.mx/dashboard/public/api/milk'
 const URL_CSV_IMP =
@@ -30,6 +33,7 @@ const Graphics = () => {
   const [data, setData] = useState([])
   const [dataImporters, setDataImporters] = useState([])
   const [dataExporters, setDataExporters] = useState([])
+  const [displayToPrint, setDisplayToPrint] = useState('block')
   const [loading, setLoading] = useState(true)
   const componentRef = useRef()
 
@@ -70,9 +74,15 @@ const Graphics = () => {
         py={{ base: '6', md: '12' }}
         px={{ base: '6', md: '12' }}
         mt={'100px'}
-        ref={componentRef}
       >
-        <Container border={'1px solid #cfcfcf'} minH={'100vh'} bg={'gray.100'} p={5} maxW={{ base: '3xl', md: '7xl' }}>
+        <Container
+          border={'1px solid #cfcfcf'}
+          minH={'100vh'}
+          bg={'gray.100'}
+          p={5}
+          maxW={{ base: '3xl', md: '7xl' }}
+          ref={componentRef}
+        >
           <Breadcrumb fontSize={'sm'}>
             <BreadcrumbItem>
               <NextLink href="/" passHref>
@@ -91,13 +101,31 @@ const Graphics = () => {
             </BreadcrumbItem>
           </Breadcrumb>
 
+          {/* <Box>
+            <Image src={Logo.src} py={5} display={displayToPrint} w={'200px'} />
+          </Box> */}
           <Heading py={5}>U.S. Milk Production in 1000 t</Heading>
           <Grid templateColumns="repeat(3, 1fr)" gap={4}>
             <GridItem colSpan={2}>{data && <LineChartCustom data={data} />}</GridItem>
-            <GridItem display={'flex'} justifyContent={'flex-end'}>
-              <Button as={'a'} variant={'primary'} onClick={() => window.print()} cursor={'pointer'}>
+            <GridItem
+              colStart={3}
+              display={'flex'}
+              flexDirection={'column'}
+              alignItems={'center'}
+              justifyContent={'flex-start'}
+            >
+              <Image src={Logo.src} py={5} display={displayToPrint} />
+              <Button as={'a'} variant={'primary'} cursor={'pointer'} className={'noprint'}>
                 Print report
               </Button>
+              {/* <ReactToPrint
+                trigger={() => (
+                  <Button as={'a'} variant={'primary'} cursor={'pointer'} className={'noprint'}>
+                    Print report
+                  </Button>
+                )}
+                content={() => componentRef.current}
+              /> */}
             </GridItem>
           </Grid>
           <Divider py={5} />
