@@ -106,10 +106,10 @@ const Graphics = () => {
           </Box> */}
           <Heading py={5}>U.S. Milk Production in 1000 t</Heading>
           <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-            <GridItem colSpan={2}>{data && <LineChartCustom data={data} />}</GridItem>
+            <GridItem colSpan={{ base: 3, md: 2 }}>{data && <LineChartCustom data={data} />}</GridItem>
             <GridItem
               colStart={3}
-              display={'flex'}
+              display={{ base: 'none', md: 'flex' }}
               flexDirection={'column'}
               alignItems={'center'}
               justifyContent={'flex-start'}
