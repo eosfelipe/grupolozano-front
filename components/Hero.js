@@ -5,7 +5,7 @@ import CountryCard from './CountryCard'
 const countries = [
   {
     id: 1,
-    name: 'Alemania',
+    name: 'Friesland-1',
     brand: 'FrieslandCampina'
   },
   {

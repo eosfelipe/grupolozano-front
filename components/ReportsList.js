@@ -17,6 +17,7 @@ import {
 import ChakraNextImage from './ChakraNextImage'
 import Logo from '../public/img/logo_invert.png'
 import GDT from '../public/img/gdt.svg'
+import EC from '../public/img/european.svg'
 import Rabobank from '../public/img/rabobank.png'
 
 const linkRabobank = `https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2021/148127_nz-agribusiness-monthly_nov2021.pdf?la=en&hash=4439468C8C1433B1C5407AAFD2209BE16092E1F4`
@@ -110,7 +111,7 @@ const ReportsList = () => {
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
           <Wrapper img={GDT.src} link={'gdt'} w={200} h={100} />
           <Wrapper img={Logo.src} link={'imports'} w={200} h={100} />
-          <Wrapper img={Logo.src} link={'graphics'} w={200} h={100} />
+          <Wrapper img={EC.src} link={'graphics'} w={200} h={100} />
           <Wrapper img={Rabobank.src} w={200} h={50} link={linkRabobank} title="View latest report" isExternal />
         </SimpleGrid>
       </Flex>

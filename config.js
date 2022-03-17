@@ -3,15 +3,15 @@ module.exports = {
   socialMedia: [
     {
       name: 'Facebook',
-      url: 'https://facebook.com/'
+      url: null
     },
     {
       name: 'Instagram',
-      url: 'https://www.instagram.com/'
+      url: null
     },
     {
       name: 'Twitter',
-      url: 'https://twitter.com/'
+      url: null
     },
     {
       name: 'Linkedin',

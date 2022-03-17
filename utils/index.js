@@ -1,3 +1,5 @@
+import Papa from 'papaparse'
+
 export function stringToSlug(str) {
   str = str.replace(/^\s+|\s+$/g, '') // trim
   str = str.toLowerCase()
@@ -67,4 +69,32 @@ export function searchByKey(object, originalKey, matches = []) {
     }
   }
   return matches[0]
+}
+
+export function parseCsv(data) {
+  return Papa.parse(data, {
+    header: true,
+    skipEmptyLines: true,
+    complete: results => {
+      return results
+    },
+    error: error => {
+      return error.message
+    }
+  })
+}
+
+export function groupBy(values, iteratee) {
+  const obj = {}
+  for (const value of values) {
+    const key = typeof iteratee === 'string' ? value[iteratee] : null
+    obj[key] ??= []
+    obj[key].push(value)
+  }
+
+  return Object.entries(obj).map(entry => {
+    const key = entry[0]
+    const value = entry[1]
+    return { data: value }
+  })
 }

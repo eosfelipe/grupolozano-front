@@ -13,6 +13,8 @@ import {
 import { socialMedia } from '../config'
 import Icon from './Icon'
 import FormNewsletter from './FormNewsletter'
+import ChakraNextImage from './ChakraNextImage'
+import BrainHub from '../public/img/brainhub2.jpg'
 
 const Footer = () => {
   return (
@@ -25,12 +27,13 @@ const Footer = () => {
           }}
           spacing={8}
         >
-          <Stack spacing={6}>
+          <Stack spacing={6} textAlign={'center'}>
             <Box>
               <Text color={'light'}>Grupo Lozano Migoya</Text>
             </Box>
             <Text fontSize={'sm'}>&copy; {new Date().getFullYear()} All rights reserved</Text>
             <Stack direction={'row'} spacing={6} display={'block'}>
+              <ChakraNextImage src={BrainHub} alt={'brainhub-merida'} placeholder={'brainhub'} w={100} h={50} />
               {socialMedia &&
                 socialMedia.map(
                   ({ name, url }, i) =>
@@ -81,6 +84,16 @@ const Footer = () => {
                 }}
               >
                 Report of accumulated monthly imports
+              </Link>
+            </NextLink>
+            <NextLink href={'/market-reports/graphics'} passHref>
+              <Link
+                fontWeight={'light'}
+                _focus={{
+                  outline: 'none'
+                }}
+              >
+                Report Milk production
               </Link>
             </NextLink>
             <Link fontWeight={'light'} href={'/market-reports'}>

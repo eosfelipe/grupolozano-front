@@ -5,15 +5,21 @@ import { stringToSlug } from '../utils'
 
 const Article = ({ imgStart = false, imgSrc, heading, text, buttonLabel, isImgExternal = false }) => {
   const { colors } = useTheme()
+
   return (
     <Box
       marginTop={{ base: '7', sm: '7' }}
       display={'flex'}
-      flexDirection={{ base: 'column', sm: `${imgStart ? 'row' : 'row-reverse'}` }}
+      flexDirection={{ base: 'column', sm: `${heading.length > 0 ? (imgStart ? 'row' : 'row-reverse') : 'column'}` }}
       justifyContent={'space-between'}
     >
       <Box display={'flex'} flex={'1'} marginRight={'3'} position={'relative'} alignItems={'center'}>
-        <Box w={{ base: '100%', sm: '85%' }} zIndex={'2'} marginLeft={{ base: '0', sm: '5%' }} marginTop={'5%'}>
+        <Box
+          w={{ base: '100%', sm: `${heading.length > 0 ? '85%' : '70%'}` }}
+          zIndex={'2'}
+          marginLeft={{ base: '0', sm: '5%' }}
+          marginTop={'5%'}
+        >
           <Link textDecoration={'none'} _hover={{ textDecoration: 'none' }}>
             {isImgExternal ? (
               <Image borderRadius={'lg'} src={imgSrc} alt={heading} objectFit={'contain'} />

@@ -42,11 +42,11 @@ const Card = ({ img, name }) => {
         </Box>
         <Stack pt={10}>
           <Heading color={'dark'} fontSize={'2xl'} fontWeight={'normal'}>
-            {name}
+            {name.length < 20 ? name : <Text fontSize={'xl'}>{name}</Text>}
           </Heading>
-          <Text color={'dark'} fontSize={'sm'} my={5}>
+          {/* <Text color={'dark'} fontSize={'sm'} my={5}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, expedita?
-          </Text>
+          </Text> */}
           <Stack direction={'row'} align={'center'} justifyContent={'center'}>
             <Button as={'a'} href={`/products-services`} variant={'primary'} my={5}>
               More information
