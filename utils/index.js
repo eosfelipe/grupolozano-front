@@ -88,8 +88,9 @@ export function groupBy(values, iteratee) {
   const obj = {}
   for (const value of values) {
     const key = typeof iteratee === 'string' ? value[iteratee] : null
-    obj[key] ??= []
-    obj[key].push(value)
+    // obj[key] ??= []
+    // obj[key].push(value)
+    key in obj ? obj[key].push(value) : (obj[key] = [value])
   }
 
   return Object.entries(obj).map(entry => {
