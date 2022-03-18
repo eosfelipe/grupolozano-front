@@ -3,7 +3,7 @@ import { Box, Text, Link } from '@chakra-ui/layout'
 import { Doughnut } from 'react-chartjs-2'
 import { separateMiles } from '../utils/index'
 
-const DoughnutCustom = ({ item, eventId: { latestEvent } }) => {
+const DoughnutCustom = ({ item, eventId }) => {
   const value = parseFloat(item.PriceIndexPercentageChange).toFixed(1)
   const data = {
     labels: [value, ''],
@@ -38,7 +38,7 @@ const DoughnutCustom = ({ item, eventId: { latestEvent } }) => {
         <NextLink
           href={{
             pathname: '/market-reports/gdt/product',
-            query: { eventId: latestEvent, pgc: item.ProductGroupCode }
+            query: { eventId: eventId, pgc: item.ProductGroupCode }
           }}
           passHref
         >

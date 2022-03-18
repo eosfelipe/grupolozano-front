@@ -1,47 +1,79 @@
 import { useEffect, useState } from 'react'
-import { Box, Container, Flex, Heading, SimpleGrid, Text, Link, List, ListItem } from '@chakra-ui/react'
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  SimpleGrid,
+  Text,
+  Link,
+  List,
+  ListItem,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
+  Spinner
+} from '@chakra-ui/react'
 import { ArrowUpIcon, ArrowDownIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { Bar } from 'react-chartjs-2'
+import { useIsFetching, useQuery } from 'react-query'
 import Footer from '../../../components/Footer'
 import Navbar from '../../../components/Navbar'
 import DoughnutCustom from '../../../components/DoughnutCustom'
 import useDateTimeFormat from '../../../hooks/useDateTimeformat'
 import { separateMiles } from '../../../utils/index'
 import DarkOverlay from '../../../components/DarkOverlay'
-
-const latestId = 'https://s3.amazonaws.com/www-production.globaldairytrade.info/results/latest.json'
-const getUrls = latestEvent => [
-  `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/event_summary.json`,
-  `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/product_groups_summary.json`,
-  `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/price_indices_twelve_events.json`,
-  `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/price_indices_ten_years.json`
-]
+import { getEventsGDT, getLastEventGDT } from '../../../api'
 
 const ReportGDT = () => {
-  const [latestEvent, setLatestEvent] = useState(null)
-  const [summaryEvent, setSummaryEvent] = useState(null)
+  const isFetching = useIsFetching()
   const [loading, setLoading] = useState(true)
+  const getUrls = latestEvent => [
+    `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/event_summary.json`,
+    `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/product_groups_summary.json`,
+    `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/price_indices_twelve_events.json`,
+    `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${latestEvent}/price_indices_ten_years.json`
+  ]
+
+  const {
+    data: latestEvent,
+    error: errorLatest,
+    isLoading: isLoadingLatest
+  } = useQuery(['latestEvent'], getLastEventGDT, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
+
+  const urls = latestEvent && getUrls(latestEvent)
+
+  const {
+    data: summaryEvent,
+    error: errorSummary,
+    isLoading: isLoadingSummary
+  } = useQuery(['summaryEvent'], () => getEventsGDT(urls), {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60,
+    enabled: !!latestEvent
+  })
 
   useEffect(() => {
-    try {
-      fetch(latestId)
-        .then(response => response.json())
-        .then(data => {
-          setLatestEvent(data)
-          const requests = getUrls(data.latestEvent).map(url => fetch(url))
-          Promise.all(requests).then(responses =>
-            Promise.all(responses.map(r => r.json())).then(data => {
-              setSummaryEvent(data)
-              setTimeout(() => setLoading(false), 3000)
-            })
-          )
-        })
-    } catch (error) {
-      console.error(error)
+    if (summaryEvent) {
+      setLoading(false)
     }
-  }, [])
+  }, [summaryEvent])
 
-  // if (summaryEvent === null) return <DarkOverlay loading={loading} />
+  if (errorLatest && errorSummary) {
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        <AlertTitle mr={2}>418 I&apos;m a teapot</AlertTitle>
+        <AlertDescription>Please check your network</AlertDescription>
+        <CloseButton position="absolute" right="8px" top="8px" />
+      </Alert>
+    )
+  }
   if (loading) return <DarkOverlay loading={loading} />
 
   // data for charts
@@ -54,12 +86,11 @@ const ReportGDT = () => {
 
   const items = pricesMonths.PriceIndicesTwelveMonths.Events.EventDetails
   const lastYear = items.slice(-12)
-  lastYear.forEach(i => {
+  lastYear?.forEach(i => {
     values.push(parseFloat(i.PriceIndexPercentageChange).toFixed(1))
     eventDate.push(useDateTimeFormat(i.EventDate, window.navigator.language))
   })
   const productsG = products.ProductGroups.ProductGroupResult.filter(i => i.ProductSold === 'true')
-  // console.log(productsG)
 
   const data = {
     labels: eventDate,
@@ -109,7 +140,7 @@ const ReportGDT = () => {
         mt={'100px'}
       >
         <Container border={'1px solid #cfcfcf'} minH={'100vh'} bg={'gray.100'} p={5} maxW={{ base: '3xl', md: '7xl' }}>
-          <Heading py={5}>GDT Events Results</Heading>
+          <Heading py={5}>GDT Events Results {isFetching ? <Spinner /> : null}</Heading>
           <SimpleGrid
             templateColumns={{ base: 'repeat(1, minmax(0, 1fr))', md: 'repeat(1, minmax(0, 1fr));', lg: '300px 1fr' }}
             spacing={10}

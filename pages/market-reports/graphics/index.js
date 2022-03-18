@@ -1,11 +1,16 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import NextLink from 'next/link'
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
   Box,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   Button,
+  CloseButton,
   Container,
   Divider,
   Grid,
@@ -13,57 +18,60 @@ import {
   Heading,
   Image,
   SimpleGrid,
+  Spinner,
   Text
 } from '@chakra-ui/react'
 import ReactToPrint from 'react-to-print'
-import { groupBy, parseCsv } from '../../../utils'
 import DarkOverlay from '../../../components/DarkOverlay'
 import Footer from '../../../components/Footer'
 import Navbar from '../../../components/Navbar'
 import LineChartCustom from '../../../components/LineChartCustom'
 import BarProduct from '../../../components/BarProduct'
 import Logo from '../../../public/img/logo.png'
+import { useIsFetching, useQuery } from 'react-query'
+import { getDataExp, getDataImp, getDataMilk } from '../../../api'
 
-const URL = 'https://grupolozano.com.mx/dashboard/public/api/milk'
-const URL_CSV_IMP =
-  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSIOeWuwBPQw0oDShUBWrSYWoSK1y1SWF4d4NbSzl2wOSDCClP0hOCgfl2zGQx63OVoZbyCSR6qMK2i/pub?output=csv'
-const URL_CSV_EXP =
-  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpTD4J7YSBTXMt9_PoT9a7N66Ioq4Fk4clbtW3vZPxtxePoM5j_SN5fMFKaC0zsSnkTGzTcpguWJGh/pub?output=csv'
 const Graphics = () => {
-  const [data, setData] = useState([])
-  const [dataImporters, setDataImporters] = useState([])
-  const [dataExporters, setDataExporters] = useState([])
   const [displayToPrint, setDisplayToPrint] = useState('block')
-  const [loading, setLoading] = useState(true)
   const componentRef = useRef()
+  const isFetching = useIsFetching()
 
-  const getData = async () => {
-    const response = await (await fetch(URL)).json()
-    setData(response)
+  const {
+    data: milk,
+    error: errorMilk,
+    isLoading: isLoadingMilk
+  } = useQuery(['milk'], getDataMilk, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
+
+  const {
+    data: dataImporters,
+    error: errorImp,
+    isLoading: isLoadingImp
+  } = useQuery(['importers'], getDataImp, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
+
+  const { data: dataExporters } = useQuery(['exporters'], getDataExp, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
+
+  if (errorMilk && errorImp) {
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        <AlertTitle mr={2}>418 I&apos;m a teapot</AlertTitle>
+        <AlertDescription>Please check your network</AlertDescription>
+        <CloseButton position="absolute" right="8px" top="8px" />
+      </Alert>
+    )
   }
-  const getCSV = () => {
-    fetch(URL_CSV_IMP).then(response => {
-      response.text().then(data => {
-        const csv = parseCsv(data)
-        setDataImporters(groupBy(csv.data, 'product'))
-      })
-    })
-    fetch(URL_CSV_EXP).then(response => {
-      response.text().then(data => {
-        const csv = parseCsv(data)
-        setDataExporters(groupBy(csv.data, 'product'))
-      })
-    })
-  }
 
-  useEffect(() => {
-    getData()
-    getCSV()
-    setTimeout(() => setLoading(false), 2000)
-  }, [])
-
-  if (loading) {
-    return <DarkOverlay loading={loading} />
+  if (isLoadingMilk && isLoadingImp) {
+    return <DarkOverlay loading={isLoadingImp} />
   }
 
   return (
@@ -104,9 +112,9 @@ const Graphics = () => {
           {/* <Box>
             <Image src={Logo.src} py={5} display={displayToPrint} w={'200px'} />
           </Box> */}
-          <Heading py={5}>U.S. Milk Production in 1000 t</Heading>
+          <Heading py={5}>U.S. Milk Production in 1000 t {isFetching ? <Spinner /> : null}</Heading>
           <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-            <GridItem colSpan={{ base: 3, md: 2 }}>{data && <LineChartCustom data={data} />}</GridItem>
+            <GridItem colSpan={{ base: 3, md: 2 }}>{milk.data && <LineChartCustom data={milk.data} />}</GridItem>
             <GridItem
               colStart={3}
               display={{ base: 'none', md: 'flex' }}

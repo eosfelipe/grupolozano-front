@@ -1,37 +1,47 @@
-import { useState, useEffect } from 'react'
 import NextLink from 'next/link'
-import { Box, Container, Heading, Text, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
+import {
+  Box,
+  Container,
+  Heading,
+  Text,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Spinner,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton
+} from '@chakra-ui/react'
+import { useQuery } from 'react-query'
 import DarkOverlay from '../../../components/DarkOverlay'
 import Navbar from '../../../components/Navbar'
-import { call } from '../../../utils'
 import Footer from '../../../components/Footer'
 import BarCustom from '../../../components/BarCustom'
+import { getProducts } from '../../../api'
 
 const ReportImports = () => {
-  const url = 'https://grupolozano.com.mx/dashboard/public/api/products/search/'
-  const year = new Date().getFullYear()
-  const years = [year - 1, year]
-  const [year1, setYear1] = useState({})
-  const [year2, setYear2] = useState({})
-  const [loading, setLoading] = useState(true)
   const products = ['Leche en polvo', 'Mantequilla', 'Grasa butírica', 'Quesos', 'Caseína', 'Caseinatos']
 
-  useEffect(async () => {
-    const response1 = await call(`${url}${years[0]}`)
-    const response2 = await call(`${url}${years[1]}`)
-    setYear1({
-      year: years[0],
-      data: response1.data
-    })
-    setYear2({
-      year: years[1],
-      data: response2.data
-    })
-    setTimeout(() => setLoading(false), 3000)
-  }, [])
+  const { data, error, isLoading, isFetching } = useQuery(['products'], getProducts, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
 
-  if (loading) {
-    return <DarkOverlay loading={loading} />
+  if (error) {
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        <AlertTitle mr={2}>418 I&apos;m a teapot</AlertTitle>
+        <AlertDescription>Please check your network</AlertDescription>
+        <CloseButton position="absolute" right="8px" top="8px" />
+      </Alert>
+    )
+  }
+
+  if (isLoading) {
+    return <DarkOverlay loading={isLoading} />
   }
 
   return (
@@ -61,13 +71,13 @@ const ReportImports = () => {
               </NextLink>
             </BreadcrumbItem>
           </Breadcrumb>
-          <Heading py={5}>Acumulativo mensual de importaciones</Heading>
-          {products.map((product, idx) => {
-            const p1 = year1.data.filter(item => item.name === product)
-            const p2 = year2.data.filter(item => item.name === product)
+          <Heading py={5}>Acumulativo mensual de importaciones {isFetching && <Spinner />}</Heading>
+          {products.map((product, i) => {
+            const p1 = data.dataset1.filter(item => item.name === product)
+            const p2 = data.dataset2.filter(item => item.name === product)
             return (
               <BarCustom
-                key={idx}
+                key={i}
                 name={product}
                 values={[p1, p2]}
                 text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus eveniet doloribus alias eius tempore aspernatur non quos ullam cum, nam ad aliquam consequatur sit dolor mollitia modi quaerat quasi iste!"
