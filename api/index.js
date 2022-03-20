@@ -52,3 +52,16 @@ export const getEventsGDT = async urls => {
     .then(responses => Promise.all(responses.map(r => r.data)).then(data => data))
     .catch(error => console.log(error))
 }
+
+// pgc = ProductGroupCode
+export const getContract = async (eventId, pgc) => {
+  const url = `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${eventId}/product_group_${pgc}.json`
+  const { data } = await axios.get(url)
+  return data
+}
+
+export const getPrices = async (eventId, pgc) => {
+  const url = `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${eventId}/product_group_winning_prices_5_years_${pgc}.json`
+  const { data } = await axios.get(url)
+  return data
+}

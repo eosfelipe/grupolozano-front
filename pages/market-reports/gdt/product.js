@@ -18,43 +18,48 @@ import {
   Td,
   Link
 } from '@chakra-ui/react'
-import { call, separateMiles } from '../../../utils'
+import { separateMiles } from '../../../utils'
 import { Line } from 'react-chartjs-2'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
-import { useState, useEffect } from 'react'
 import DarkOverlay from '../../../components/DarkOverlay'
 import Footer from '../../../components/Footer'
 import Navbar from '../../../components/Navbar'
 import useDateTimeFormat from '../../../hooks/useDateTimeformat'
-import TableContracts from '../../../components/TableContracts'
-import TableLAC from '../../../components/TableLAC'
 import TableGen from '../../../components/TableGen'
+import { useQuery } from 'react-query'
+import { getContract, getLastEventGDT, getPrices } from '../../../api'
 
 const ProductGDT = () => {
   const router = useRouter()
-  const [contract, setContract] = useState({})
-  const [prices, setPrices] = useState({})
-  const [loading, setLoading] = useState(true)
+  const { data: latestEvent } = useQuery(['latestEvent'], getLastEventGDT, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
+  const { data: contract, isLoading: isLoadingContract } = useQuery(
+    ['contract', router.query.pgc],
+    () => getContract(latestEvent, router.query?.pgc),
+    {
+      staleTime: Infinity,
+      cacheTime: 1000 * 60,
+      enabled: !!latestEvent
+    }
+  )
+  const { data: prices, isLoading: isLoadingPrices } = useQuery(
+    ['prices', router.query.pgc],
+    () => getPrices(latestEvent, router.query?.pgc),
+    {
+      staleTime: Infinity,
+      cacheTime: 1000 * 60,
+      enabled: !!latestEvent
+    }
+  )
+
   let lastData
   let data12months
   let data5years
   let contractPeriods
   let productCode
-
-  useEffect(() => {
-    if (router.query.eventId === undefined) {
-      return router.push('/market-reports/gdt')
-    }
-  }, [])
-
-  useEffect(async () => {
-    const urlContract = `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${router.query.eventId}/product_group_${router.query.pgc}.json`
-    const urlPrices = `https://s3.amazonaws.com/www-production.globaldairytrade.info/results/${router.query.eventId}/product_group_winning_prices_5_years_${router.query.pgc}.json`
-    setContract(await call(urlContract))
-    setPrices(await call(urlPrices))
-    setTimeout(() => setLoading(false), 3000)
-  }, [])
 
   // data for chart
   const values = []
@@ -62,7 +67,7 @@ const ProductGDT = () => {
   const values2 = []
   const eventDate2 = []
 
-  if (loading === false) {
+  if (isLoadingPrices === false && prices && contract) {
     lastData = prices.ProductGroup.Events.Event.slice(-1)
     data12months = prices.ProductGroup.Events.Event.slice(-24)
     data5years = prices.ProductGroup.Events.Event
@@ -80,8 +85,6 @@ const ProductGDT = () => {
     })
     productCode = contract.ProductGroupDetails.ProductGroupCode
     contractPeriods = contract.ProductGroupDetails.ContractPeriods.ContractPeriodDetails
-    // console.log(contractPeriods)
-    // console.log(router)
   }
 
   const data = {
@@ -122,8 +125,8 @@ const ProductGDT = () => {
     }
   }
 
-  if (loading) {
-    return <DarkOverlay loading={loading} />
+  if (isLoadingPrices || !contract || !prices) {
+    return <DarkOverlay loading={isLoadingPrices} />
   }
   return (
     <>
@@ -227,11 +230,6 @@ const ProductGDT = () => {
           </Box>
           <Box py={10} overflowX={'auto'}>
             <Text fontSize={{ base: '2xl', md: '3xl' }}>Average Price Per Region (USD/MT, FAS)</Text>
-            {/* {router.query.pgc === 'LAC' ? (
-              <TableLAC data={contractPeriods} />
-            ) : (
-              // <TableContracts data={contractPeriods} />
-              )} */}
             <TableGen data={contractPeriods} />
             <Text fontSize={'sm'}>
               Source:{' '}
