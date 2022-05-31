@@ -29,7 +29,8 @@ import LineChartCustom from '../../../components/LineChartCustom'
 import BarProduct from '../../../components/BarProduct'
 import Logo from '../../../public/img/logo.png'
 import { useIsFetching, useQuery } from 'react-query'
-import { getDataExp, getDataImp, getDataMilk } from '../../../api'
+import { getDataExp, getDataImp, getDataMilk, getEUProduction } from '../../../api'
+import BarHorizontal from '../../../components/BarHorizontal'
 
 const Graphics = () => {
   const [displayToPrint, setDisplayToPrint] = useState('block')
@@ -54,12 +55,25 @@ const Graphics = () => {
     cacheTime: 1000 * 60
   })
 
-  const { data: dataExporters } = useQuery(['exporters'], getDataExp, {
+  const {
+    data: dataExporters,
+    error: errorExp,
+    isLoading: isLoadingExp
+  } = useQuery(['exporters'], getDataExp, {
     staleTime: Infinity,
     cacheTime: 1000 * 60
   })
 
-  if (errorMilk && errorImp) {
+  const {
+    data: dataEuproduction,
+    error: errorEu,
+    isLoading: isLoadingEu
+  } = useQuery(['euproduction'], getEUProduction, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
+
+  if (errorMilk && errorImp && errorExp && errorEu) {
     return (
       <Alert status="error">
         <AlertIcon />
@@ -70,7 +84,7 @@ const Graphics = () => {
     )
   }
 
-  if (isLoadingMilk && isLoadingImp) {
+  if (isLoadingMilk && isLoadingImp && isLoadingExp && isLoadingEu) {
     return <DarkOverlay loading={isLoadingImp} />
   }
 
@@ -112,7 +126,9 @@ const Graphics = () => {
           {/* <Box>
             <Image src={Logo.src} py={5} display={displayToPrint} w={'200px'} />
           </Box> */}
-          <Heading py={5}>U.S. Milk Production in 1000 t {isFetching ? <Spinner /> : null}</Heading>
+          <Heading p={5} bg={'dark'} color={'light'}>
+            U.S. Milk Production in 1000 t {isFetching ? <Spinner /> : null}
+          </Heading>
           <Grid templateColumns="repeat(3, 1fr)" gap={4}>
             <GridItem colSpan={{ base: 3, md: 2 }}>{milk.data && <LineChartCustom data={milk.data} />}</GridItem>
             <GridItem
@@ -137,14 +153,25 @@ const Graphics = () => {
             </GridItem>
           </Grid>
           <Divider py={5} />
-          <Heading py={5}>Milk main dairy importers</Heading>
+          <Heading p={5} bg={'dark'} color={'light'}>
+            Milk main dairy importers
+          </Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
             {dataImporters && dataImporters.map((item, idx) => <BarProduct key={idx} data={item.data} />)}
           </SimpleGrid>
           <Divider py={5} />
-          <Heading py={5}>Milk main dairy exporters</Heading>
+          <Heading p={5} bg={'dark'} color={'light'}>
+            Milk main dairy exporters
+          </Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
             {dataExporters && dataExporters.map((item, idx) => <BarProduct key={idx} data={item.data} />)}
+          </SimpleGrid>
+          <Divider py={5} />
+          <Heading p={5} bg={'dark'} color={'light'}>
+            EU Production (rango de tiempo para comparar )
+          </Heading>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
+            {dataEuproduction && <BarHorizontal values={dataEuproduction} />}
           </SimpleGrid>
           <Box mt={5}>
             <Text fontSize={'sm'}>

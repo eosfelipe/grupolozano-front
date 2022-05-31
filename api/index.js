@@ -65,3 +65,11 @@ export const getPrices = async (eventId, pgc) => {
   const { data } = await axios.get(url)
   return data
 }
+
+export const getEUProduction = async () => {
+  const URL_EUPROD_CSV =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vQUFQrUf6oDX8a7d6xOc2SxD8iL2Be-4pIfS2U2K18j60VVEccp6ACcrY39Xag26TktSvEGNmni1bNS/pub?output=csv'
+  const { data } = await axios.get(URL_EUPROD_CSV)
+  const csv = parseCsv(data)
+  return groupBy(csv.data, 'year')
+}

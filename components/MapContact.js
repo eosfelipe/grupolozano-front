@@ -10,8 +10,8 @@ mapboxgl.accessToken =
 const MapContact = () => {
   const mapContainer = useRef(null)
   const map = useRef(null)
-  const [lng, setLng] = useState(-99.1670641)
-  const [lat, setLat] = useState(19.4292765)
+  const [lng, setLng] = useState(-99.1650918)
+  const [lat, setLat] = useState(19.4292372) // 19.4292372,-99.1650918
   const [zoom, setZoom] = useState(14)
 
   useEffect(() => {

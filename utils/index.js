@@ -99,3 +99,13 @@ export function groupBy(values, iteratee) {
     return { data: value }
   })
 }
+
+// data2 > data1
+// return array
+export function calcPercentage(data1, data2) {
+  const result = []
+  for (let i = 0; i < data1.length; i++) {
+    result.push(Number.parseFloat((data2[i].value / data1[i].value - 1) * 100).toFixed(2))
+  }
+  return result
+}
