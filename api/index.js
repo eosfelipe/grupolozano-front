@@ -81,3 +81,11 @@ export const getTotalMilkCollected = async () => {
   const csv = parseCsv(data)
   return groupBy(csv.data, 'year')
 }
+
+export const getDairyEvolutionPrice = async () => {
+  const URL_DAIRYEVOPRICE_CSV =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vQGWugSum7U6gW8XI0KVfXh_5fjdCxLmsVWs_JZfWg7baLu7Ml0anTNVkDFE5Z5Wi2CS6hCF4JbNwh8/pub?output=csv'
+  const { data } = await axios.get(URL_DAIRYEVOPRICE_CSV)
+  const csv = parseCsv(data)
+  return groupBy(csv.data, 'year')
+}

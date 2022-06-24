@@ -30,8 +30,16 @@ import LineChartCustom2 from '../../../components/LineChartCustom2'
 import BarProduct from '../../../components/BarProduct'
 import Logo from '../../../public/img/logo.png'
 import { useIsFetching, useQuery } from 'react-query'
-import { getDataExp, getDataImp, getDataMilk, getEUProduction, getTotalMilkCollected } from '../../../api'
+import {
+  getDairyEvolutionPrice,
+  getDataExp,
+  getDataImp,
+  getDataMilk,
+  getEUProduction,
+  getTotalMilkCollected
+} from '../../../api'
 import BarHorizontal from '../../../components/BarHorizontal'
+import MultiChart from '../../../components/MultiChart'
 
 const Graphics = () => {
   const [displayToPrint, setDisplayToPrint] = useState('block')
@@ -83,7 +91,16 @@ const Graphics = () => {
     cacheTime: 1000 * 60
   })
 
-  if (errorMilk && errorImp && errorExp && errorEu && errorMilkCol) {
+  const {
+    data: dairyEvolution,
+    error: errorDairy,
+    isLoading: isLoadingDairy
+  } = useQuery(['DairyEvolutionPrice'], getDairyEvolutionPrice, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
+
+  if (errorMilk && errorImp && errorExp && errorEu && errorMilkCol && errorDairy) {
     return (
       <Alert status="error">
         <AlertIcon />
@@ -94,7 +111,7 @@ const Graphics = () => {
     )
   }
 
-  if (isLoadingMilk && isLoadingImp && isLoadingExp && isLoadingEu && isLoadingMilkCol) {
+  if (isLoadingMilk && isLoadingImp && isLoadingExp && isLoadingEu && isLoadingMilkCol && isLoadingDairy) {
     return <DarkOverlay loading={isLoadingImp} />
   }
 
@@ -191,6 +208,22 @@ const Graphics = () => {
             <GridItem colSpan={{ base: 3, md: 2 }}>
               {milkCollected && <LineChartCustom2 data={milkCollected} />}
             </GridItem>
+            <GridItem
+              colStart={3}
+              display={{ base: 'none', md: 'flex' }}
+              flexDirection={'row'}
+              alignItems={'center'}
+              justifyContent={'flex-start'}
+            >
+              <Image src={Logo.src} py={5} display={displayToPrint} />
+            </GridItem>
+          </Grid>
+          <Divider py={5} />
+          <Heading p={5} mb={2} bg={'dark'} color={'light'}>
+            Dairy Evolution Price {isFetching ? <Spinner /> : null}
+          </Heading>
+          <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+            <GridItem colSpan={{ base: 3, md: 2 }}>{dairyEvolution && <MultiChart data={dairyEvolution} />}</GridItem>
             <GridItem
               colStart={3}
               display={{ base: 'none', md: 'flex' }}
