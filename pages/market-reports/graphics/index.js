@@ -26,10 +26,11 @@ import DarkOverlay from '../../../components/DarkOverlay'
 import Footer from '../../../components/Footer'
 import Navbar from '../../../components/Navbar'
 import LineChartCustom from '../../../components/LineChartCustom'
+import LineChartCustom2 from '../../../components/LineChartCustom2'
 import BarProduct from '../../../components/BarProduct'
 import Logo from '../../../public/img/logo.png'
 import { useIsFetching, useQuery } from 'react-query'
-import { getDataExp, getDataImp, getDataMilk, getEUProduction } from '../../../api'
+import { getDataExp, getDataImp, getDataMilk, getEUProduction, getTotalMilkCollected } from '../../../api'
 import BarHorizontal from '../../../components/BarHorizontal'
 
 const Graphics = () => {
@@ -73,7 +74,16 @@ const Graphics = () => {
     cacheTime: 1000 * 60
   })
 
-  if (errorMilk && errorImp && errorExp && errorEu) {
+  const {
+    data: milkCollected,
+    error: errorMilkCol,
+    isLoading: isLoadingMilkCol
+  } = useQuery(['milkCollected'], getTotalMilkCollected, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
+
+  if (errorMilk && errorImp && errorExp && errorEu && errorMilkCol) {
     return (
       <Alert status="error">
         <AlertIcon />
@@ -84,7 +94,7 @@ const Graphics = () => {
     )
   }
 
-  if (isLoadingMilk && isLoadingImp && isLoadingExp && isLoadingEu) {
+  if (isLoadingMilk && isLoadingImp && isLoadingExp && isLoadingEu && isLoadingMilkCol) {
     return <DarkOverlay loading={isLoadingImp} />
   }
 
@@ -126,7 +136,7 @@ const Graphics = () => {
           {/* <Box>
             <Image src={Logo.src} py={5} display={displayToPrint} w={'200px'} />
           </Box> */}
-          <Heading p={5} bg={'dark'} color={'light'}>
+          <Heading p={5} mb={2} bg={'dark'} color={'light'}>
             U.S. Milk Production in 1000 t {isFetching ? <Spinner /> : null}
           </Heading>
           <Grid templateColumns="repeat(3, 1fr)" gap={4}>
@@ -134,14 +144,14 @@ const Graphics = () => {
             <GridItem
               colStart={3}
               display={{ base: 'none', md: 'flex' }}
-              flexDirection={'column'}
+              flexDirection={'row'}
               alignItems={'center'}
               justifyContent={'flex-start'}
             >
               <Image src={Logo.src} py={5} display={displayToPrint} />
-              <Button as={'a'} variant={'primary'} cursor={'pointer'} className={'noprint'}>
+              {/* <Button as={'a'} variant={'primary'} cursor={'pointer'} className={'noprint'}>
                 Print report
-              </Button>
+              </Button> */}
               {/* <ReactToPrint
                 trigger={() => (
                   <Button as={'a'} variant={'primary'} cursor={'pointer'} className={'noprint'}>
@@ -168,11 +178,29 @@ const Graphics = () => {
           </SimpleGrid>
           <Divider py={5} />
           <Heading p={5} bg={'dark'} color={'light'}>
-            EU Production (rango de tiempo para comparar )
+            EU Production {isFetching ? <Spinner /> : dataEuproduction[0]?.data[0]?.range}
           </Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
             {dataEuproduction && <BarHorizontal values={dataEuproduction} />}
           </SimpleGrid>
+          <Divider py={5} />
+          <Heading p={5} mb={2} bg={'dark'} color={'light'}>
+            Total Cows Milk collected in 1000 t {isFetching ? <Spinner /> : null}
+          </Heading>
+          <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+            <GridItem colSpan={{ base: 3, md: 2 }}>
+              {milkCollected && <LineChartCustom2 data={milkCollected} />}
+            </GridItem>
+            <GridItem
+              colStart={3}
+              display={{ base: 'none', md: 'flex' }}
+              flexDirection={'row'}
+              alignItems={'center'}
+              justifyContent={'flex-start'}
+            >
+              <Image src={Logo.src} py={5} display={displayToPrint} />
+            </GridItem>
+          </Grid>
           <Box mt={5}>
             <Text fontSize={'sm'}>
               All information published on this page may be reproduced provided the user acknowledges Grupo Lozano

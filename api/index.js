@@ -73,3 +73,11 @@ export const getEUProduction = async () => {
   const csv = parseCsv(data)
   return groupBy(csv.data, 'year')
 }
+
+export const getTotalMilkCollected = async () => {
+  const URL_MILK_COL_CSV =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vQzQ-EABe4jwaKxdWgNXLRjd-Rss-bVbWQ3d9DeB4NtYyO1kU8DaAzV_jv6VMmIZGj2kUpcf05ZVzYx/pub?output=csv'
+  const { data } = await axios.get(URL_MILK_COL_CSV)
+  const csv = parseCsv(data)
+  return groupBy(csv.data, 'year')
+}
