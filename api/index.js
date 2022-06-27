@@ -89,3 +89,19 @@ export const getDairyEvolutionPrice = async () => {
   const csv = parseCsv(data)
   return groupBy(csv.data, 'year')
 }
+
+export const getRawMilk = async () => {
+  const URL_RAWMILK_CSV =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vQC2qjRCYrS_-gZhYLvfuBr5gS1IIERu5GuBKtSdqW0_JXIdihdeiyLf7jI0KeH3WRNgcatqiu_ksfI/pub?output=csv'
+  const { data } = await axios.get(URL_RAWMILK_CSV)
+  const csv = parseCsv(data)
+  return groupBy(csv.data, 'year')
+}
+
+export const getCheesePrice = async () => {
+  const URL_CHEESE_CSV =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vScwVjkghzwbyNcks4lWdSIJsxQkqFTdf5pExAiukMofyf6TXsqyqoOjoLs8kwT1UXj1VB_RmYQwQ8g/pub?output=csv'
+  const { data } = await axios.get(URL_CHEESE_CSV)
+  const csv = parseCsv(data)
+  return groupBy(csv.data, 'product')
+}

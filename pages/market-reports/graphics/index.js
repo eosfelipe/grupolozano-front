@@ -31,15 +31,19 @@ import BarProduct from '../../../components/BarProduct'
 import Logo from '../../../public/img/logo.png'
 import { useIsFetching, useQuery } from 'react-query'
 import {
+  getCheesePrice,
   getDairyEvolutionPrice,
   getDataExp,
   getDataImp,
   getDataMilk,
   getEUProduction,
+  getRawMilk,
   getTotalMilkCollected
 } from '../../../api'
 import BarHorizontal from '../../../components/BarHorizontal'
 import MultiChart from '../../../components/MultiChart'
+import PieChart from '../../../components/PieChart'
+import LineChartCustom3 from '../../../components/LineChartCustom3'
 
 const Graphics = () => {
   const [displayToPrint, setDisplayToPrint] = useState('block')
@@ -100,7 +104,25 @@ const Graphics = () => {
     cacheTime: 1000 * 60
   })
 
-  if (errorMilk && errorImp && errorExp && errorEu && errorMilkCol && errorDairy) {
+  const {
+    data: rawMilk,
+    error: errorRawMilk,
+    isLoading: isLoadingRawMilk
+  } = useQuery(['RawMilk'], getRawMilk, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
+
+  const {
+    data: dataCheese,
+    error: errorCheese,
+    isLoading: isLoadingCheese
+  } = useQuery(['CheesePrice'], getCheesePrice, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
+
+  if (errorMilk || errorImp || errorExp || errorEu || errorMilkCol || errorDairy || errorRawMilk || errorCheese) {
     return (
       <Alert status="error">
         <AlertIcon />
@@ -111,8 +133,17 @@ const Graphics = () => {
     )
   }
 
-  if (isLoadingMilk && isLoadingImp && isLoadingExp && isLoadingEu && isLoadingMilkCol && isLoadingDairy) {
-    return <DarkOverlay loading={isLoadingImp} />
+  if (
+    isLoadingMilk ||
+    isLoadingImp ||
+    isLoadingExp ||
+    isLoadingEu ||
+    isLoadingMilkCol ||
+    isLoadingDairy ||
+    isLoadingRawMilk ||
+    isLoadingCheese
+  ) {
+    return <DarkOverlay loading={isLoadingMilk} />
   }
 
   return (
@@ -197,7 +228,7 @@ const Graphics = () => {
           <Heading p={5} bg={'dark'} color={'light'}>
             EU Production {isFetching ? <Spinner /> : dataEuproduction[0]?.data[0]?.range}
           </Heading>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
+          <SimpleGrid columns={{ base: 1 }} spacing={{ base: 5, lg: 8 }}>
             {dataEuproduction && <BarHorizontal values={dataEuproduction} />}
           </SimpleGrid>
           <Divider py={5} />
@@ -234,6 +265,21 @@ const Graphics = () => {
               <Image src={Logo.src} py={5} display={displayToPrint} />
             </GridItem>
           </Grid>
+          <Divider py={5} />
+          <Heading p={5} mb={2} bg={'dark'} color={'light'}>
+            EU Raw Milk Evolution {isFetching ? <Spinner /> : null}
+          </Heading>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
+            {rawMilk && <LineChartCustom2 data={rawMilk} />}
+            {rawMilk && <PieChart values={rawMilk} />}
+          </SimpleGrid>
+          <Divider py={5} />
+          <Heading p={5} mb={2} bg={'dark'} color={'light'}>
+            Cheese Price EUR / 1000KG
+          </Heading>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
+            {dataCheese && dataCheese.map((dc, i) => <LineChartCustom3 key={i} data={dc} />)}
+          </SimpleGrid>
           <Box mt={5}>
             <Text fontSize={'sm'}>
               All information published on this page may be reproduced provided the user acknowledges Grupo Lozano
