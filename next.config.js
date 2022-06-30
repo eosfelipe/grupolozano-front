@@ -5,10 +5,10 @@ module.exports = {
     ignoreDuringBuilds: true
   },
   trailingSlash: true,
-  images: {
-    loader: 'akamai',
-    path: ''
-  },
+  // images: {
+  //   loader: 'akamai',
+  //   path: ''
+  // only for export},
   exportPathMap: async function (defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
     return {
       '/': { page: '/' },
