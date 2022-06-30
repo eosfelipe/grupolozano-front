@@ -11,12 +11,12 @@ const BarProduct = ({ data }) => {
   })
   datasets.push(
     {
-      label: '2020',
+      label: y - 1,
       data: data.map(item => item.value1),
       backgroundColor: 'rgba(208, 31, 40, 0.5)'
     },
     {
-      label: '2021',
+      label: y,
       data: data.map(item => item.value2),
       backgroundColor: 'rgba(208, 31, 40, 1)'
     }
