@@ -52,7 +52,7 @@ const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExterna
         </HStack>
       </Box>
       <VStack py={4} borderBottomRadius={'xl'}>
-        <List spacing={3} textAlign="start" px={12}>
+        {/* <List spacing={3} textAlign="start" px={12}>
           <ListItem color={'dark'}>
             <ListIcon as={CheckIcon} color="highlight" />
             unlimited build minutes
@@ -65,7 +65,7 @@ const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExterna
             <ListIcon as={CheckIcon} color="highlight" />
             5TB Lorem, ipsum dolor.
           </ListItem>
-        </List>
+        </List> */}
         <Box w="80%" pt={7}>
           {isExternal ? (
             <Link

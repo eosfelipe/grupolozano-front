@@ -49,7 +49,7 @@ const Card = ({ img, name }) => {
           </Text> */}
           <Stack direction={'row'} align={'center'} justifyContent={'center'}>
             <Button as={'a'} href={`/products-services`} variant={'primary'} my={5}>
-              More information
+              Conóce más
             </Button>
           </Stack>
         </Stack>

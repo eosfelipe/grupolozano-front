@@ -5,7 +5,7 @@ import Conaprole from '../public/img/part/2.png'
 import Alpenhain from '../public/img/part/3.png'
 import Polmlek from '../public/img/part/4.png'
 import Saputo from '../public/img/part/5.png'
-import Nzmp from '../public/img/part/6.png'
+// import Nzmp from '../public/img/part/6.png'
 import MilkMexico from '../public/img/part/7.png'
 import Fonterra from '../public/img/part/8.png'
 import Dmv from '../public/img/part/9.png'
@@ -42,41 +42,36 @@ const partners = [
   },
   {
     id: 6,
-    name: 'NZMP',
-    img: Nzmp
-  },
-  {
-    id: 7,
     name: 'Milk Partners México',
     img: MilkMexico
   },
   {
-    id: 8,
+    id: 7,
     name: 'Fonterra',
     img: Fonterra
   },
   {
-    id: 9,
+    id: 8,
     name: 'DMV',
     img: Dmv
   },
   {
-    id: 10,
+    id: 9,
     name: 'Darigold',
     img: Darigold
   },
   {
-    id: 11,
+    id: 10,
     name: 'Le Superbe',
     img: Lesuperbe
   },
   {
-    id: 12,
+    id: 11,
     name: 'Agrar-Kontor',
     img: Agrar
   },
   {
-    id: 13,
+    id: 12,
     name: 'FrieslandCampina',
     img: Friesland
   }

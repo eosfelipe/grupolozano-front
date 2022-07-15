@@ -26,11 +26,11 @@ const Stats = () => {
               <Heading color={'dark'} mb={5} fontSize={{ base: '3xl', md: '5xl' }}>
                 Trabajamos con marcas de excelencia
               </Heading>
-              <Text fontSize={'xl'} color={'dark'}>
+              {/* <Text fontSize={'xl'} color={'dark'}>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione dolorem quam officiis ex suscipit,
                 impedit inventore alias reiciendis, facilis odit expedita libero ullam, dolor voluptas reprehenderit
                 deleniti consectetur hic asperiores!
-              </Text>
+              </Text> */}
             </Box>
             <Box mb={{ base: 8, md: 20 }} p={4}>
               <Heading color={'dark'} mb={5} fontSize={{ base: '3xl', md: '5xl' }}>
