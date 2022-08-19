@@ -185,6 +185,22 @@ const Graphics = () => {
             <Image src={Logo.src} py={5} display={displayToPrint} w={'200px'} />
           </Box> */}
           <Heading p={5} mb={2} bg={'dark'} color={'light'}>
+            Dairy Evolution Price {isFetching ? <Spinner /> : null}
+          </Heading>
+          <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+            <GridItem colSpan={{ base: 3, md: 2 }}>{dairyEvolution && <MultiChart data={dairyEvolution} />}</GridItem>
+            <GridItem
+              colStart={3}
+              display={{ base: 'none', md: 'flex' }}
+              flexDirection={'row'}
+              alignItems={'center'}
+              justifyContent={'flex-start'}
+            >
+              <Image src={Logo.src} py={5} display={displayToPrint} />
+            </GridItem>
+          </Grid>
+          <Divider py={5} />
+          <Heading p={5} mb={2} bg={'dark'} color={'light'}>
             U.S. Milk Production in 1000 t {isFetching ? <Spinner /> : null}
           </Heading>
           <Grid templateColumns="repeat(3, 1fr)" gap={4}>
@@ -239,22 +255,6 @@ const Graphics = () => {
             <GridItem colSpan={{ base: 3, md: 2 }}>
               {milkCollected && <LineChartCustom2 data={milkCollected} />}
             </GridItem>
-            <GridItem
-              colStart={3}
-              display={{ base: 'none', md: 'flex' }}
-              flexDirection={'row'}
-              alignItems={'center'}
-              justifyContent={'flex-start'}
-            >
-              <Image src={Logo.src} py={5} display={displayToPrint} />
-            </GridItem>
-          </Grid>
-          <Divider py={5} />
-          <Heading p={5} mb={2} bg={'dark'} color={'light'}>
-            Dairy Evolution Price {isFetching ? <Spinner /> : null}
-          </Heading>
-          <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-            <GridItem colSpan={{ base: 3, md: 2 }}>{dairyEvolution && <MultiChart data={dairyEvolution} />}</GridItem>
             <GridItem
               colStart={3}
               display={{ base: 'none', md: 'flex' }}

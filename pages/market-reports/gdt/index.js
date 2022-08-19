@@ -14,10 +14,14 @@ import {
   AlertTitle,
   AlertDescription,
   CloseButton,
-  Spinner
+  Spinner,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink
 } from '@chakra-ui/react'
 import { ArrowUpIcon, ArrowDownIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { Bar } from 'react-chartjs-2'
+import NextLink from 'next/link'
 import { useIsFetching, useQuery } from 'react-query'
 import Footer from '../../../components/Footer'
 import Navbar from '../../../components/Navbar'
@@ -140,6 +144,18 @@ const ReportGDT = () => {
         mt={'100px'}
       >
         <Container border={'1px solid #cfcfcf'} minH={'100vh'} bg={'gray.100'} p={5} maxW={{ base: '3xl', md: '7xl' }}>
+          <Breadcrumb fontSize={'sm'}>
+            <BreadcrumbItem>
+              <NextLink href="/" passHref>
+                <BreadcrumbLink>Home</BreadcrumbLink>
+              </NextLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <NextLink href="/market-reports" passHref>
+                <BreadcrumbLink>Market reports</BreadcrumbLink>
+              </NextLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
           <Heading py={5}>GDT Events Results {isFetching ? <Spinner /> : null}</Heading>
           <SimpleGrid
             templateColumns={{ base: 'repeat(1, minmax(0, 1fr))', md: 'repeat(1, minmax(0, 1fr));', lg: '300px 1fr' }}
@@ -153,7 +169,10 @@ const ReportGDT = () => {
               <Flex flexDirection={'column'} my={5}>
                 <Text fontSize={'sm'}>Change in GDT Price Index from previous event</Text>
                 <Text fontSize={'5xl'} fontWeight={'bold'} display={'flex'} alignItems={'center'}>
-                  +{summary.EventSummary.ChangeInPriceIndex}%
+                  {summary.EventSummary.ChangeInPriceIndex > 0
+                    ? `+${summary.EventSummary.ChangeInPriceIndex}`
+                    : `${summary.EventSummary.ChangeInPriceIndex}`}
+                  %
                   {summary.EventSummary.ChangeInPriceIndex > 0 ? (
                     <ArrowUpIcon color={'highlight'} />
                   ) : (

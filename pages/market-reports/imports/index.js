@@ -12,7 +12,8 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
-  CloseButton
+  CloseButton,
+  SimpleGrid
 } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
 import DarkOverlay from '../../../components/DarkOverlay'
@@ -72,18 +73,13 @@ const ReportImports = () => {
             </BreadcrumbItem>
           </Breadcrumb>
           <Heading py={5}>Acumulativo mensual de importaciones {isFetching && <Spinner />}</Heading>
-          {products.map((product, i) => {
-            const p1 = data.dataset1.filter(item => item.name === product)
-            const p2 = data.dataset2.filter(item => item.name === product)
-            return (
-              <BarCustom
-                key={i}
-                name={product}
-                values={[p1, p2]}
-                text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus eveniet doloribus alias eius tempore aspernatur non quos ullam cum, nam ad aliquam consequatur sit dolor mollitia modi quaerat quasi iste!"
-              />
-            )
-          })}
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
+            {products.map((product, i) => {
+              const p1 = data.dataset1.filter(item => item.name === product)
+              const p2 = data.dataset2.filter(item => item.name === product)
+              return <BarCustom key={i} name={product} values={[p1, p2]} text="" />
+            })}
+          </SimpleGrid>
           <Box>
             <Text fontSize={'sm'}>
               All information published on this page may be reproduced provided the user acknowledges Grupo Lozano

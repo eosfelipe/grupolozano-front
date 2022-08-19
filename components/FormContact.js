@@ -16,10 +16,10 @@ const FormContact = () => {
   const formik = useFormik({
     initialValues,
     validationSchema: yup.object({
-      name: yup.string().required('Required'),
-      subject: yup.string().required('Required'),
-      email: yup.string().email('Invalid email address').required('Required'),
-      message: yup.string().max(255, 'Must be 255 characters or less').required('Required')
+      name: yup.string().required('Campo requerido'),
+      subject: yup.string().required('Campo requerido'),
+      email: yup.string().email('Correo eectrónico inválido').required('Campo requerido'),
+      message: yup.string().max(255, 'Máximo 255 caracteres').required('Campo requerido')
     }),
     onSubmit: values => {
       sendSubscribe(values)
@@ -27,17 +27,38 @@ const FormContact = () => {
   })
 
   const sendSubscribe = async values => {
-    await sleep(3000) // TODO fetch to php
-    formik.resetForm()
-    formik.setSubmitting(false)
-    toast({
-      title: values.email,
-      description: 'Thanks for your subscription 🍕😁',
-      status: 'success',
-      duration: 5000,
-      position: 'top-right',
-      isClosable: true
-    })
+    // await sleep(3000) // TODO fetch to php
+    try {
+      const response = await fetch('https://grupolozano.com.mx/contact/', {
+        method: 'POST',
+        body: JSON.stringify(values)
+      })
+      const data = await response.json()
+      if (data.sent) {
+        toast({
+          title: values.email,
+          description: data.message,
+          status: 'success',
+          duration: 5000,
+          position: 'top-right',
+          isClosable: true
+        })
+      } else {
+        toast({
+          title: values.email,
+          description: data.message,
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+          isClosable: true
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      formik.resetForm()
+      formik.setSubmitting(false)
+    }
   }
 
   return (
@@ -61,7 +82,7 @@ const FormContact = () => {
             id="name"
             name="name"
             type="text"
-            placeholder={'Your name'}
+            placeholder={'Nombre'}
             bg={'gray.100'}
             onChange={formik.handleChange}
             value={formik.values.name}
@@ -86,7 +107,7 @@ const FormContact = () => {
             id="subject"
             name="subject"
             type="text"
-            placeholder={'Subject'}
+            placeholder={'Asunto'}
             bg={'gray.100'}
             onChange={formik.handleChange}
             value={formik.values.subject}
@@ -111,7 +132,7 @@ const FormContact = () => {
             id="email"
             name="email"
             type="email"
-            placeholder={'Your email address'}
+            placeholder={'Correo electrónico'}
             bg={'gray.100'}
             onChange={formik.handleChange}
             value={formik.values.email}
@@ -135,7 +156,7 @@ const FormContact = () => {
           <Textarea
             id="message"
             name="message"
-            placeholder={'Message...'}
+            placeholder={'Mensaje...'}
             bg={'gray.100'}
             onChange={formik.handleChange}
             value={formik.values.message}
@@ -171,7 +192,7 @@ const FormContact = () => {
           aria-label="Submit"
           disabled={formik.isSubmitting}
         >
-          Submit
+          Enviar mensaje
         </Button>
       </Box>
     </Stack>

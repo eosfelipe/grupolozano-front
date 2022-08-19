@@ -20,7 +20,8 @@ import GDT from '../public/img/gdt.svg'
 import EC from '../public/img/european.svg'
 import Rabobank from '../public/img/rabobank.png'
 
-const linkRabobank = `https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2021/148127_nz-agribusiness-monthly_nov2021.pdf?la=en&hash=4439468C8C1433B1C5407AAFD2209BE16092E1F4`
+// https://www.rabobank.co.nz/knowledge/agribusiness-monthly/
+const linkRabobank = `https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2022/nz-agribusiness-monthly-august-2022.pdf?la=en&hash=9BBD8245279A587D1DDE7CE56660F835637D0029`
 
 const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExternal = false, w, h }) => {
   return (

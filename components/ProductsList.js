@@ -8,6 +8,7 @@ const imgName = [
   { name: 'Grasa butírica', cat: '2' },
   { name: 'Leche descremada en polvo', cat: '1' },
   { name: 'Leche entera', cat: '1' },
+  { name: 'Concentrado de proteína láctea', cat: '1' },
   { name: 'Maíz', cat: '5' },
   { name: 'Mantequilla', cat: '3' },
   { name: 'Margarina', cat: '3' },

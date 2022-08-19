@@ -50,7 +50,7 @@ const BarCustom = ({ name, values, text }) => {
 
   return (
     <Box>
-      <Text fontSize={'3xl'} py={5}>
+      <Text fontSize={'3xl'} p={5} mb={2} bg={'dark'} color={'light'}>
         {name}
       </Text>
       <Bar data={data} options={options} />

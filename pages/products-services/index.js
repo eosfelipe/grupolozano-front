@@ -25,7 +25,7 @@ export default function ProductsServices() {
         <SectionText
           heading={'Servicios'}
           text={
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, aliquid libero expedita distinctio vitae quasi unde, quod labore eius tempora, sed esse veniam voluptates. Sed quas beatae modi aliquam veritatis!'
+            'Contáctanos y pide más información sobre lo que nosotros hacemos, manda un correo electrónico o bien llena el formulario y nosotros nos comunicaremos contigo, cuéntanos un poco más sobre tí.'
           }
         />
         <ServicesList />
