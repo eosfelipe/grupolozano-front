@@ -33,7 +33,9 @@ const Footer = () => {
             </Box>
             <Text fontSize={'sm'}>&copy; {new Date().getFullYear()} All rights reserved</Text>
             <Stack direction={'row'} spacing={6} display={'block'}>
-              <ChakraNextImage src={BrainHub} alt={'brainhub-merida'} placeholder={'brainhub'} w={100} h={50} />
+              <Link href="http://brainhub.com.mx/" isExternal>
+                <ChakraNextImage src={BrainHub} alt={'brainhub-merida'} placeholder={'brainhub'} w={100} h={50} />
+              </Link>
               {socialMedia &&
                 socialMedia.map(
                   ({ name, url }, i) =>
@@ -64,7 +66,7 @@ const Footer = () => {
           </Stack>
           <Stack align={'flex-start'}>
             <Text fontWeight={'normal'} fontSize={'lg'} mb={2}>
-              Reports
+              Market Reports
             </Text>
             <NextLink href={'/market-reports/gdt'} passHref>
               <Link
@@ -73,7 +75,7 @@ const Footer = () => {
                   outline: 'none'
                 }}
               >
-                Reports GDT
+                Global Dairy Trade
               </Link>
             </NextLink>
             <NextLink href={'/market-reports/imports'} passHref>
@@ -83,7 +85,7 @@ const Footer = () => {
                   outline: 'none'
                 }}
               >
-                Report of accumulated monthly imports
+                Accumulated Monthly Imports
               </Link>
             </NextLink>
             <NextLink href={'/market-reports/graphics'} passHref>
@@ -93,7 +95,7 @@ const Footer = () => {
                   outline: 'none'
                 }}
               >
-                Report Milk production
+                Milk Production
               </Link>
             </NextLink>
             <Link fontWeight={'light'} href={'/market-reports'}>
@@ -104,15 +106,22 @@ const Footer = () => {
             <Text fontWeight={'normal'} fontSize={'lg'} mb={2}>
               Support
             </Text>
-            <Link fontWeight={'light'} href={'#'}>
+            {/* <Link fontWeight={'light'} href={'#'}>
               Terms of Service
             </Link>
             <Link fontWeight={'light'} href={'#'}>
               Legal
-            </Link>
-            <Link fontWeight={'light'} href={'#'}>
-              Privacy Policy
-            </Link>
+            </Link> */}
+            <NextLink href={'/privacy'} passHref>
+              <Link
+                fontWeight={'light'}
+                _focus={{
+                  outline: 'none'
+                }}
+              >
+                Privacy Policy
+              </Link>
+            </NextLink>
           </Stack>
           <Stack align={'flex-start'}>
             <Text fontWeight={'normal'} fontSize={'lg'} mb={2}>
