@@ -188,16 +188,27 @@ const Graphics = () => {
             Dairy Evolution Price {isFetching ? <Spinner /> : null}
           </Heading>
           <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-            <GridItem colSpan={{ base: 3, md: 2 }}>{dairyEvolution && <MultiChart data={dairyEvolution} />}</GridItem>
             <GridItem
               colStart={3}
-              display={{ base: 'none', md: 'flex' }}
-              flexDirection={'row'}
+              display={{ base: 'block', md: 'flex' }}
+              flexDirection={'column'}
               alignItems={'center'}
               justifyContent={'flex-start'}
+              marginTop={{ base: '1rem', md: '0' }}
+              marginBottom={{ base: '1rem', md: '0' }}
             >
-              <Image src={Logo.src} py={5} display={displayToPrint} />
+              {/* <Image src={Logo.src} py={5} display={displayToPrint} /> */}
+              <Button
+                as={'a'}
+                variant={'primary'}
+                cursor={'pointer'}
+                href={'https://grupolozano.com.mx/pdf/market-situation-jun22.pdf'}
+                target="_blank"
+              >
+                Download market report
+              </Button>
             </GridItem>
+            <GridItem colSpan={{ base: 3, md: 2 }}>{dairyEvolution && <MultiChart data={dairyEvolution} />}</GridItem>
           </Grid>
           <Divider py={5} />
           <Heading p={5} mb={2} bg={'dark'} color={'light'}>
@@ -213,9 +224,6 @@ const Graphics = () => {
               justifyContent={'flex-start'}
             >
               <Image src={Logo.src} py={5} display={displayToPrint} />
-              {/* <Button as={'a'} variant={'primary'} cursor={'pointer'} className={'noprint'}>
-                Print report
-              </Button> */}
               {/* <ReactToPrint
                 trigger={() => (
                   <Button as={'a'} variant={'primary'} cursor={'pointer'} className={'noprint'}>
