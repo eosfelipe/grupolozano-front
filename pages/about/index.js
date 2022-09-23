@@ -3,7 +3,7 @@ import { CheckIcon } from '@chakra-ui/icons'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
 import Article from '../../components/Article'
-import Worldimg from '../../public/img/world-black.png'
+import Worldimg from 'public/img/world-black.png'
 
 const features = [
   {

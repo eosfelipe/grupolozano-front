@@ -28,7 +28,7 @@ import Navbar from '../../../components/Navbar'
 import LineChartCustom from '../../../components/LineChartCustom'
 import LineChartCustom2 from '../../../components/LineChartCustom2'
 import BarProduct from '../../../components/BarProduct'
-import Logo from '../../../public/img/logo.png'
+import Logo from 'public/img/logo.png'
 import { useIsFetching, useQuery } from 'react-query'
 import {
   getCheesePrice,

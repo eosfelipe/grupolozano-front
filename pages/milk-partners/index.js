@@ -16,8 +16,8 @@ import { ChevronRightIcon } from '@chakra-ui/icons'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
 import ChakraNextImage from '../../components/ChakraNextImage'
-import Milk from '../../public/img/milk-partners.jpg'
-import Vision from '../../public/img/vision.jpg'
+import Milk from 'public/img/milk-partners.jpg'
+import Vision from 'public/img/vision.jpg'
 
 const MilkPartners = () => {
   const { colors } = useTheme()

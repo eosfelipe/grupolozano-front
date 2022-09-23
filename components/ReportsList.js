@@ -1,24 +1,10 @@
 import NextLink from 'next/link'
-import { CheckIcon } from '@chakra-ui/icons'
-import {
-  Box,
-  Button,
-  Heading,
-  HStack,
-  List,
-  ListIcon,
-  ListItem,
-  Text,
-  VStack,
-  Link,
-  SimpleGrid,
-  Flex
-} from '@chakra-ui/react'
+import { Box, Button, Heading, HStack, Text, VStack, Link, SimpleGrid, Flex } from '@chakra-ui/react'
 import ChakraNextImage from './ChakraNextImage'
-import Logo from '../public/img/logo_invert.png'
-import GDT from '../public/img/gdt.svg'
-import EC from '../public/img/european.svg'
-import Rabobank from '../public/img/rabobank.png'
+import Logo from 'public/img/logo_invert.png'
+import GDT from 'public/img/gdt.svg'
+import EC from 'public/img/european.svg'
+import Rabobank from 'public/img/rabobank.png'
 
 // https://www.rabobank.co.nz/knowledge/agribusiness-monthly/
 const linkRabobank = `https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2022/nz-agribusiness-monthly-august-2022.pdf?la=en&hash=9BBD8245279A587D1DDE7CE56660F835637D0029`

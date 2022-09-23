@@ -14,7 +14,7 @@ import { socialMedia } from '../config'
 import Icon from './Icon'
 import FormNewsletter from './FormNewsletter'
 import ChakraNextImage from './ChakraNextImage'
-import BrainHub from '../public/img/brainhub2.jpg'
+import BrainHub from 'public/img/brainhub2.jpg'
 
 const Footer = () => {
   return (

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Image, LinkOverlay } from '@chakra-ui/react'
 import { Nav } from './NavbarElements'
 import Burger from './Burger'
-import Logo from '../../public/img/logo-blanco.png'
+import Logo from 'public/img/logo-blanco.png'
 
 const Navbar = ({ color }) => {
   const [show, setShow] = useState(false)

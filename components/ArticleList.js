@@ -1,8 +1,8 @@
 import { Container } from '@chakra-ui/react'
 import Article from './Article'
-import Milkimg from '../public/img/milk.jpg'
-import Marketimg from '../public/img/market.jpg'
-import Caseinimg from '../public/img/casein.jpg'
+import Milkimg from 'public/img/milk.jpg'
+import Marketimg from 'public/img/market.jpg'
+import Caseinimg from 'public/img/casein.jpg'
 
 const dataHome = [
   {
