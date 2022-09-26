@@ -1,5 +1,5 @@
 import { Box, Button, Center, Heading, Image, Stack, Text } from '@chakra-ui/react'
-import { stringToSlug } from '../utils'
+import NextLink from 'next/link'
 
 const Card = ({ img, name }) => {
   return (
@@ -48,9 +48,11 @@ const Card = ({ img, name }) => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, expedita?
           </Text> */}
           <Stack direction={'row'} align={'center'} justifyContent={'center'}>
-            <Button as={'a'} href={`/products-services`} variant={'primary'} my={5}>
-              Conóce más
-            </Button>
+            <NextLink href="/products-services" passHref>
+              <Button as={'a'} variant={'primary'} my={5}>
+                Conóce más
+              </Button>
+            </NextLink>
           </Stack>
         </Stack>
       </Box>

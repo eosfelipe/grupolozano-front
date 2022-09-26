@@ -143,7 +143,7 @@ const Graphics = () => {
     isLoadingRawMilk ||
     isLoadingCheese
   ) {
-    return <DarkOverlay loading={isLoadingMilk} />
+    return <DarkOverlay loading={isLoadingCheese} />
   }
 
   return (
@@ -189,15 +189,14 @@ const Graphics = () => {
           </Heading>
           <Grid templateColumns="repeat(3, 1fr)" gap={4}>
             <GridItem
-              colStart={3}
+              // colStart={3}
               display={{ base: 'block', md: 'flex' }}
               flexDirection={'column'}
               alignItems={'center'}
-              justifyContent={'flex-start'}
+              justifyContent={{ base: 'flex-start', md: 'center' }}
               marginTop={{ base: '1rem', md: '0' }}
               marginBottom={{ base: '1rem', md: '0' }}
             >
-              {/* <Image src={Logo.src} py={5} display={displayToPrint} /> */}
               <Button
                 as={'a'}
                 variant={'primary'}
@@ -207,6 +206,7 @@ const Graphics = () => {
               >
                 Download market report
               </Button>
+              <Image src={Logo.src} py={5} display={{ base: 'none', md: 'block' }} />
             </GridItem>
             <GridItem colSpan={{ base: 3, md: 2 }}>{dairyEvolution && <MultiChart data={dairyEvolution} />}</GridItem>
           </Grid>

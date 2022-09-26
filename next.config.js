@@ -1,15 +1,15 @@
 module.exports = {
-  basePath: '/n', // only for export
+  // basePath: '/n', // only for export
   eslint: {
     // Warning: Dangerously allow production builds to successfully complete even if
     // your project has ESLint errors.
     ignoreDuringBuilds: true
   },
   trailingSlash: true,
-  images: {
-    loader: 'akamai',
-    path: 'https://grupolozano.com.mx/n/'
-  },
+  // images: {
+  //   loader: 'akamai',
+  //   path: 'https://grupolozano.com.mx/n/'
+  // },
   // only for export
   exportPathMap: async function (defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
     return {
