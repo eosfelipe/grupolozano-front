@@ -23,12 +23,17 @@ import BarCustom from '../../../components/BarCustom'
 import { getProducts } from '../../../api'
 
 const ReportImports = () => {
-  const products = ['Leche en polvo', 'Mantequilla', 'Grasa butírica', 'Quesos', 'Caseína', 'Caseinatos']
+  // const products = ['Leche en polvo', 'Mantequilla', 'Grasa butírica', 'Quesos', 'Caseína', 'Caseinatos']
 
-  const { data, error, isLoading, isFetching } = useQuery(['products'], getProducts, {
+  const { data, error, isLoading, isFetching, isSuccess } = useQuery(['products'], getProducts, {
     staleTime: Infinity,
     cacheTime: 1000 * 60
   })
+
+  const filteredProducts = isSuccess
+    ? data.dataset2.filter(o => o.year === new Date().getFullYear()).map(e => e.name)
+    : []
+  const products = [...new Set(filteredProducts)]
 
   if (error) {
     return (
