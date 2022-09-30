@@ -7,7 +7,7 @@ import EC from 'public/img/european.svg'
 import Rabobank from 'public/img/rabobank.png'
 
 // https://www.rabobank.co.nz/knowledge/agribusiness-monthly/
-const linkRabobank = `https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2022/nz-agribusiness-monthly-august-2022.pdf?la=en&hash=9BBD8245279A587D1DDE7CE56660F835637D0029`
+export const linkRabobank = `https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2022/nz-agribusiness-monthly-sep-2022.pdf?la=en&hash=0E86979560602B74C89D6C13706A145356F6AF25`
 
 const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExternal = false, w, h }) => {
   return (

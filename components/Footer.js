@@ -15,6 +15,7 @@ import Icon from './Icon'
 import FormNewsletter from './FormNewsletter'
 import ChakraNextImage from './ChakraNextImage'
 import BrainHub from 'public/img/brainhub2.jpg'
+import { linkRabobank } from './ReportsList'
 
 const Footer = () => {
   return (
@@ -98,13 +99,20 @@ const Footer = () => {
                 Milk Production
               </Link>
             </NextLink>
-            <Link fontWeight={'light'} href={'/market-reports'}>
+            <Link
+              fontWeight={'light'}
+              href={linkRabobank}
+              isExternal
+              _hover={{
+                textDecoration: 'none'
+              }}
+            >
               Rabobank
             </Link>
           </Stack>
           <Stack align={'flex-start'}>
             <Text fontWeight={'normal'} fontSize={'lg'} mb={2}>
-              Support
+              Soporte
             </Text>
             {/* <Link fontWeight={'light'} href={'#'}>
               Terms of Service
@@ -119,7 +127,7 @@ const Footer = () => {
                   outline: 'none'
                 }}
               >
-                Privacy Policy
+                Aviso de Privacidad
               </Link>
             </NextLink>
           </Stack>
@@ -130,6 +138,10 @@ const Footer = () => {
             <FormNewsletter />
           </Stack>
         </SimpleGrid>
+        <Text as={'span'} color={'light'} fontSize={'xs'} fontWeight={'light'} textAlign={'center'}>
+          Las marcas, logotipos, tipografías y las imágenes alusivas a cualquier marca mostrada en este sitio web, son
+          propiedad de sus respectivos dueños.
+        </Text>
       </Container>
     </Box>
   )

@@ -29,7 +29,7 @@ const FormContact = () => {
   const sendSubscribe = async values => {
     // await sleep(3000) // TODO fetch to php
     try {
-      const response = await fetch('https://grupolozano.com.mx/contact/', {
+      const response = await fetch('https://brainhub.com.mx/contactlozano/', {
         method: 'POST',
         body: JSON.stringify(values)
       })
