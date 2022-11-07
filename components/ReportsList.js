@@ -5,9 +5,11 @@ import Logo from 'public/img/logo_invert.png'
 import GDT from 'public/img/gdt.svg'
 import EC from 'public/img/european.svg'
 import Rabobank from 'public/img/rabobank.png'
+import { getRabobankLink } from 'api'
+import { useQuery } from 'react-query'
 
 // https://www.rabobank.co.nz/knowledge/agribusiness-monthly/
-export const linkRabobank = `https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2022/nz-agribusiness-monthly-sep-2022.pdf?la=en&hash=0E86979560602B74C89D6C13706A145356F6AF25`
+// export const linkRabobank = `https://www.rabobank.co.nz/-/media/rabobank-nz/files/pdf/agribusiness-monthly/2022/nz-agribusiness-monthly-november-2022.pdf?la=en&hash=035F05F675417B9E7158817AA80C8978C571B8F4`
 
 const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExternal = false, w, h }) => {
   return (
@@ -77,6 +79,10 @@ const Wrapper = ({ title = 'View report', subtitle, img, link = '404', isExterna
   )
 }
 const ReportsList = () => {
+  const { data, isSuccess } = useQuery(['rabobank'], getRabobankLink, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
   return (
     <Box py={12}>
       <VStack spacing={2} textAlign={'center'}>
@@ -99,7 +105,16 @@ const ReportsList = () => {
           <Wrapper img={GDT.src} link={'gdt'} w={200} h={100} />
           <Wrapper img={Logo.src} link={'imports'} w={200} h={100} />
           <Wrapper img={EC.src} link={'graphics'} w={200} h={100} />
-          <Wrapper img={Rabobank.src} w={200} h={50} link={linkRabobank} title="View latest report" isExternal />
+          {isSuccess && (
+            <Wrapper
+              img={Rabobank.src}
+              w={200}
+              h={50}
+              link={data[0].data[0].link}
+              title="View latest report"
+              isExternal
+            />
+          )}
         </SimpleGrid>
       </Flex>
     </Box>

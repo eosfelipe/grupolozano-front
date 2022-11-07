@@ -8,7 +8,7 @@ module.exports = {
   trailingSlash: true,
   images: {
     loader: 'akamai',
-    path: 'https://grupolozano.com.mx/n/'
+    path: 'https://grupolozano.com.mx/'
   },
   // only for export
   exportPathMap: async function (defaultPathMap, { dev, dir, outDir, distDir, buildId }) {

@@ -105,3 +105,11 @@ export const getCheesePrice = async () => {
   const csv = parseCsv(data)
   return groupBy(csv.data, 'product')
 }
+
+export const getRabobankLink = async () => {
+  const URL_RABO =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vSNohRwrBI-mgU35jG_ToyoVSRK9FTlZhd9YUjrLg2-bnxud32tRVQOvAwuraUsJhGndQlTiNF8PaX9/pub?output=csv'
+  const { data } = await axios.get(URL_RABO)
+  const csv = parseCsv(data)
+  return groupBy(csv.data, 'link')
+}

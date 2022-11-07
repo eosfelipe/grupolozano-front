@@ -15,9 +15,14 @@ import Icon from './Icon'
 import FormNewsletter from './FormNewsletter'
 import ChakraNextImage from './ChakraNextImage'
 import BrainHub from 'public/img/brainhub2.jpg'
-import { linkRabobank } from './ReportsList'
+import { useQuery } from 'react-query'
+import { getRabobankLink } from 'api'
 
 const Footer = () => {
+  const { data, isSuccess } = useQuery(['rabobank'], getRabobankLink, {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60
+  })
   return (
     <Box px={useBreakpointValue({ base: 10, md: 20 })} bg={'dark'} color={'light'}>
       <Container as={Stack} py={10} maxW={'100%'} mx={0}>
@@ -99,16 +104,18 @@ const Footer = () => {
                 Milk Production
               </Link>
             </NextLink>
-            <Link
-              fontWeight={'light'}
-              href={linkRabobank}
-              isExternal
-              _hover={{
-                textDecoration: 'none'
-              }}
-            >
-              Rabobank
-            </Link>
+            {isSuccess && (
+              <Link
+                fontWeight={'light'}
+                href={data[0].data[0].link}
+                isExternal
+                _hover={{
+                  textDecoration: 'none'
+                }}
+              >
+                Rabobank
+              </Link>
+            )}
           </Stack>
           <Stack align={'flex-start'}>
             <Text fontWeight={'normal'} fontSize={'lg'} mb={2}>
