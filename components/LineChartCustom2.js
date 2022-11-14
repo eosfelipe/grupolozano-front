@@ -39,9 +39,9 @@ const LineChartCustom2 = ({ data }) => {
   for (let i = yearNow; i > yearNow - data.length; i--) {
     years.push(i)
   }
-
   // labels for 5 years actual month
-  const labels5 = years.map(year => `${getCurrentMonth('long')} ${year}`)
+  // const labels5 = years.map(year => `${getCurrentMonth('long')} ${year}`)
+  const labels5 = years.map(year => `${data[0]?.data[0]?.month} ${year}`)
 
   const getValuesxYear = year => {
     return data.map(element =>

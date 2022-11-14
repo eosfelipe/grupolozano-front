@@ -113,6 +113,6 @@ export function calcPercentage(data1, data2) {
 // opt: long or short
 export function getCurrentMonth(opt) {
   const d = new Date()
-  d.setMonth(d.getMonth() - 1)
+  d.setMonth(d.getMonth())
   return d.toLocaleString('default', { month: opt })
 }

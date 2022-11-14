@@ -201,7 +201,7 @@ const Graphics = () => {
                 as={'a'}
                 variant={'primary'}
                 cursor={'pointer'}
-                href={'https://grupolozano.com.mx/pdf/market-situation-jun22.pdf'}
+                href={'https://grupolozano.com.mx/pdf/market-situation.pdf'}
                 target="_blank"
               >
                 Download market report
