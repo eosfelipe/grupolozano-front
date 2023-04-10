@@ -4,7 +4,7 @@ import { Bar } from 'react-chartjs-2'
 const BarCustom = ({ name, values, text }) => {
   const values1 = values[0].map(item => item.value)
   const values2 = values[1].map(item => item.value)
-  const year = new Date().getFullYear()
+  const year = text !== 0 ? +new Date().getFullYear() : +new Date().getFullYear() - 1
   const data = {
     labels: [
       'Enero',
@@ -55,7 +55,7 @@ const BarCustom = ({ name, values, text }) => {
       </Text>
       <Bar data={data} options={options} />
       <Text fontSize={'sm'} py={5}>
-        {text}
+        {''}
       </Text>
     </Box>
   )

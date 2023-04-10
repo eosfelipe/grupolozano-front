@@ -30,10 +30,21 @@ const ReportImports = () => {
     cacheTime: 1000 * 60
   })
 
-  const filteredProducts = isSuccess
-    ? data.dataset2.filter(o => o.year === new Date().getFullYear()).map(e => e.name)
-    : []
-  const products = [...new Set(filteredProducts)]
+  const yearNow = new Date().getFullYear()
+  let isEmpty = null
+  const filteredProducts = () => {
+    if (isSuccess) {
+      isEmpty = data.dataset3.length
+      if (isEmpty !== 0) {
+        return data?.dataset3.filter(o => o.year === yearNow).map(e => e.name)
+      } else {
+        return data?.dataset2.filter(o => o.year === yearNow - 1).map(e => e.name)
+      }
+    } else {
+      return []
+    }
+  }
+  const products = [...new Set(filteredProducts())]
 
   if (error) {
     return (
@@ -82,7 +93,7 @@ const ReportImports = () => {
             {products.map((product, i) => {
               const p1 = data.dataset1.filter(item => item.name === product)
               const p2 = data.dataset2.filter(item => item.name === product)
-              return <BarCustom key={i} name={product} values={[p1, p2]} text="" />
+              return <BarCustom key={i} name={product} values={[p1, p2]} text={isEmpty} />
             })}
           </SimpleGrid>
           <Box>

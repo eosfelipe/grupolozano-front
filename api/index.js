@@ -4,7 +4,7 @@ import { groupBy, parseCsv } from '../utils'
 export const getProducts = async () => {
   const URL_PRODUCTS = 'https://grupolozano.com.mx/dashboard/public/api/products/search/'
   const year = new Date().getFullYear()
-  const years = [year - 1, year]
+  const years = [year - 2, year - 1, year]
   const promises = []
   years.forEach(year => {
     promises.push(axios.get(`${URL_PRODUCTS}${year}`))
@@ -13,7 +13,8 @@ export const getProducts = async () => {
     .then(result => {
       return {
         dataset1: result[0].data?.data,
-        dataset2: result[1].data?.data
+        dataset2: result[1].data?.data,
+        dataset3: result[2].data?.data
       }
     })
     .catch(error => console.log(error))
