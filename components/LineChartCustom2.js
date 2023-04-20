@@ -90,7 +90,8 @@ const LineChartCustom2 = ({ data }) => {
   }
 
   // render total cows milk collected
-  if (data.length === 3) {
+  // excel data at most 4 years if it already has 5 remove the oldest
+  if (data.length === 3 || data.length === 4) {
     return (
       <Box>
         <Line options={options} data={data2} />

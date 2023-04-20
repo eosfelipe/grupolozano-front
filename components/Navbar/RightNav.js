@@ -20,11 +20,11 @@ const links = [
     name: 'Productos y Servicios',
     href: '/products-services'
   },
-  // {
-  //   id: 4,
-  //   name: 'Noticias',
-  //   href: '/news'
-  // },
+  {
+    id: 4,
+    name: 'Noticias',
+    href: '/news'
+  },
   {
     id: 5,
     name: 'Contacto',

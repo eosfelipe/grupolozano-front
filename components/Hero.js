@@ -1,6 +1,7 @@
 import NextLink from 'next/link'
 import { Button, Flex, Heading, Image, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
 import CountryCard from './CountryCard'
+import { useEffect } from 'react'
 
 const countries = [
   {
@@ -26,6 +27,10 @@ const countries = [
 ]
 
 const Hero = () => {
+  useEffect(() => {
+    window.localStorage.removeItem('posts')
+  }, [])
+
   return (
     <Stack
       h={{ base: '100%', md: '600px' }}

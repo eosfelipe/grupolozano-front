@@ -47,6 +47,35 @@ export const getLastEventGDT = async () => {
   return data.latestEvent
 }
 
+export const getNews = async resource => {
+  const NEWS_URL = `https://grupolozano.com.mx/api/news/wp-json/wp/v2/${resource}/?per_page=10&timestamp=${new Date().getTime()}`
+  const { data } = await axios.get(NEWS_URL)
+  return data
+}
+
+export const getTokenWP = async () => {
+  const { data } = await axios.post(
+    'https://grupolozano.com.mx/api/news//wp-json/jwt-auth/v1/token',
+    {
+      username: 'api',
+      password: '36y$&mP7SDkxUVK31H37uB#)'
+    },
+    { headers: { 'Content-Type': 'application/json' } }
+  )
+  return data
+}
+
+// export const getNewsImage = async (id, token) => {
+//   const NEWS_URL = `https://grupolozano.com.mx/api/news/wp-json/wp/v2/media/${i}`
+//   const { data } = await axios.get(NEWS_URL, {
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${token}`
+//     }
+//   })
+//   return data
+// }
+
 export const getEventsGDT = async urls => {
   const requests = urls.map(url => axios.get(url))
   return Promise.all(requests)
