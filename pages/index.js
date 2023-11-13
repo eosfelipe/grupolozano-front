@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <>
       <Navbar color={0} />
-      <ModalInit />
+      {/* <ModalInit /> */}
       <Hero />
       {/* <SectionText text={'Te ayudamos a materializar tus sueños'} /> */}
       <Heading color={'dark'} my={5} py={5} textAlign={'center'}>

@@ -39,7 +39,7 @@ const Navbar = ({ color }) => {
         </div>
         <Burger />
       </Nav>
-      {showButton && <FloatButton />}
+      {/* {showButton && <FloatButton />} */}
     </>
   )
 }

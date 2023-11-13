@@ -36,9 +36,10 @@ const ReportImports = () => {
     if (isSuccess) {
       isEmpty = data.dataset3.length
       if (isEmpty !== 0) {
-        return data?.dataset3.filter(o => o.year === yearNow).map(e => e.name)
+        const res = data?.dataset3.filter(o => +o.year === yearNow).map(e => e.name)
+        return res
       } else {
-        return data?.dataset2.filter(o => o.year === yearNow - 1).map(e => e.name)
+        return data?.dataset2.filter(o => +o.year === yearNow - 1).map(e => e.name)
       }
     } else {
       return []
@@ -90,11 +91,12 @@ const ReportImports = () => {
           </Breadcrumb>
           <Heading py={5}>Acumulativo mensual de importaciones {isFetching && <Spinner />}</Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
-            {products.map((product, i) => {
-              const p1 = data.dataset1.filter(item => item.name === product)
-              const p2 = data.dataset2.filter(item => item.name === product)
-              return <BarCustom key={i} name={product} values={[p1, p2]} text={isEmpty} />
-            })}
+            {products &&
+              products.map((product, i) => {
+                const p1 = data.dataset1.filter(item => item.name === product)
+                const p2 = data.dataset2.filter(item => item.name === product)
+                return <BarCustom key={i} name={product} values={[p1, p2]} text={isEmpty} />
+              })}
           </SimpleGrid>
           <Box>
             <Text fontSize={'sm'}>
