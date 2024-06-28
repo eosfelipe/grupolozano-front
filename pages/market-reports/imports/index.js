@@ -93,8 +93,8 @@ const ReportImports = () => {
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
             {products &&
               products.map((product, i) => {
-                const p1 = data.dataset1.filter(item => item.name === product)
-                const p2 = data.dataset2.filter(item => item.name === product)
+                const p1 = data.dataset2.filter(item => item.name === product)
+                const p2 = data.dataset3.filter(item => item.name === product)
                 return <BarCustom key={i} name={product} values={[p1, p2]} text={isEmpty} />
               })}
           </SimpleGrid>
