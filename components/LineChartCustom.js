@@ -39,7 +39,7 @@ const LineChartCustom = ({ data: { data: datasets } }) => {
   const getValuesxYear = year => {
     return datasets
       .flat()
-      .map(element => element.year === year && element.value)
+      .map(element => +element.year === +year && element.value)
       .filter(Boolean)
   }
 
